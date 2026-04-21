@@ -6,7 +6,7 @@ const styleModes = [
 ];
 
 const savedStyle = localStorage.getItem("sharpSitesStyle");
-const initialStyle = styleModes.some((mode) => mode.id === savedStyle) ? savedStyle : "pop";
+const initialStyle = styleModes.some((mode) => mode.id === savedStyle) ? savedStyle : "southwest";
 
 function applyStyle(modeId) {
   const mode = styleModes.find((item) => item.id === modeId) || styleModes[0];
