@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>True Page Web Design - Client Portal</title>
+    <meta
+      name="description"
+      content="Client homepage for True Page Web Design plan details, work tickets, and account information."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="client-portal.js" defer></script>
+  </head>
+  <body class="client-page client-dashboard-page" data-client-view="dashboard">
+    <header class="client-shell-header">
+      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+        <span>True Page Web Design</span>
+      </a>
+      <nav class="client-shell-nav" aria-label="Client dashboard navigation">
+        <a href="#plan">Plan</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#profile">Profile</a>
+        <button type="button" data-client-logout>Logout</button>
+      </nav>
+    </header>
+
+    <main class="client-dashboard">
+      <section class="client-dashboard-hero" aria-labelledby="client-dashboard-title">
+        <div>
+          <p class="client-eyebrow">Client home</p>
+          <h1 id="client-dashboard-title">Welcome back, <span data-client-name>client</span>.</h1>
+          <p data-client-business>True Page client workspace</p>
+        </div>
+        <aside class="client-plan-snapshot" id="plan" aria-label="Current plan">
+          <span data-plan-status>Plan status</span>
+          <h2 data-plan-title>Choose a plan</h2>
+          <p data-plan-description>Select a plan to unlock work tickets.</p>
+          <p class="client-plan-price" data-plan-price>Pricing available after plan selection.</p>
+          <ul class="client-plan-meta">
+            <li>
+              <span>Member since</span>
+              <strong data-plan-member-since>Not enrolled</strong>
+            </li>
+            <li>
+              <span>Next billing</span>
+              <strong data-plan-next-billing>Not scheduled</strong>
+            </li>
+            <li>
+              <span>Ticket coverage</span>
+              <strong data-plan-ticket-coverage>Plan required</strong>
+            </li>
+            <li>
+              <span>Open tickets</span>
+              <strong data-plan-open-tickets>0</strong>
+            </li>
+          </ul>
+          <button class="client-button client-button-secondary" type="button" data-plan-details-open>
+            View plan details
+          </button>
+        </aside>
+      </section>
+
+      <section class="client-alert is-hidden" data-no-plan-panel>
+        <div>
+          <p class="client-eyebrow">Plan needed</p>
+          <h2>Choose a support path before submitting work.</h2>
+          <p>
+            Ticket requests are available once a plan is active. You can request a plan below and
+            I will follow up to confirm the details.
+          </p>
+        </div>
+        <div class="client-plan-choice-grid">
+          <button type="button" data-plan-request="local-launch">Request Local Launch</button>
+          <button type="button" data-plan-request="growth-website">Request Growth Website</button>
+          <button type="button" data-plan-request="care-plan">Request Care Plan</button>
+        </div>
+      </section>
+
+      <section class="client-dashboard-grid">
+        <article class="client-panel client-ticket-panel" id="tickets">
+          <div class="client-panel-heading">
+            <div>
+              <p class="client-eyebrow">Work tickets</p>
+              <h2>Submit a website request.</h2>
+            </div>
+            <span class="client-pill" data-ticket-access>Plan required</span>
+          </div>
+          <form class="client-form" data-ticket-form>
+            <div class="client-ticket-charge-notice is-hidden" data-paid-ticket-notice>
+              <div>
+                <strong>Care Plan not active</strong>
+                <span>
+                  Ticket requests are reviewed, and an additional charge will be requested for
+                  each approved ticket.
+                </span>
+              </div>
+              <button type="button" data-ticket-charge-open>More details</button>
+            </div>
+            <label>
+              Request title
+              <input type="text" name="title" placeholder="Example: Update homepage photos" required />
+            </label>
+            <div class="client-form-grid">
+              <label>
+                Type
+                <select name="type">
+                  <option>Content update</option>
+                  <option>Design change</option>
+                  <option>Bug or broken link</option>
+                  <option>New page or section</option>
+                  <option>Strategy question</option>
+                </select>
+              </label>
+              <label>
+                Priority
+                <select name="priority">
+                  <option>Normal</option>
+                  <option>High</option>
+                  <option>Low</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Details
+              <textarea
+                name="details"
+                rows="5"
+                placeholder="Please be as detailed as possible..."
+                required
+              ></textarea>
+            </label>
+            <label>
+              Screenshot
+              <input type="file" name="screenshot" accept="image/*" />
+              <span class="client-field-hint">Attach a screenshot if it helps explain the request.</span>
+            </label>
+            <button class="client-button client-button-primary" type="submit" data-ticket-submit>
+              Submit ticket
+            </button>
+          </form>
+          <div class="client-ticket-list" data-ticket-list></div>
+        </article>
+
+        <aside class="client-panel client-plan-panel">
+          <div class="client-panel-heading">
+            <div>
+              <p class="client-eyebrow">Plan actions</p>
+              <h2>Change or cancel service.</h2>
+            </div>
+          </div>
+          <form class="client-form" data-plan-change-form>
+            <label>
+              Plan request
+              <select name="plan" required>
+                <option value="">Choose a plan</option>
+                <option value="local-launch">Local Launch</option>
+                <option value="growth-website">Growth Website</option>
+                <option value="care-plan">Care Plan</option>
+              </select>
+            </label>
+            <label>
+              Notes
+              <textarea name="notes" rows="4" placeholder="Tell me what changed."></textarea>
+            </label>
+            <button class="client-button client-button-secondary" type="submit">
+              Contact me to change plan
+            </button>
+          </form>
+          <button class="client-danger-link" type="button" data-cancel-open>
+            Cancel current plan
+          </button>
+          <p class="client-form-message" role="status" data-dashboard-message></p>
+        </aside>
+
+        <article class="client-panel" id="profile">
+          <div class="client-panel-heading">
+            <div>
+              <p class="client-eyebrow">Personal information</p>
+              <h2>Keep contact details current.</h2>
+            </div>
+          </div>
+          <ul class="client-profile-list">
+            <li>
+              <span>Name</span>
+              <strong data-profile-name>Not provided</strong>
+            </li>
+            <li>
+              <span>Business</span>
+              <strong data-profile-business>Not provided</strong>
+            </li>
+            <li>
+              <span>Email</span>
+              <strong data-profile-email>Not provided</strong>
+            </li>
+            <li>
+              <span>Phone</span>
+              <strong data-profile-phone>Not provided</strong>
+            </li>
+            <li>
+              <span>Billing or business address</span>
+              <strong data-profile-address>Not provided</strong>
+            </li>
+          </ul>
+          <button class="client-button client-button-primary" type="button" data-profile-edit-open>
+            Edit personal information
+          </button>
+        </article>
+
+        <aside class="client-panel client-side-panel">
+          <div class="client-panel-heading">
+            <div>
+              <p class="client-eyebrow">Useful extras</p>
+              <h2>Account notes.</h2>
+            </div>
+          </div>
+          <ul class="client-note-list">
+            <li>
+              <strong>Preferred response</strong>
+              <span data-preferred-response>Within 1 business day</span>
+            </li>
+            <li>
+              <strong>Open tickets</strong>
+              <span data-open-ticket-count>0</span>
+            </li>
+            <li>
+              <strong>Last saved</strong>
+              <span data-last-saved>Not saved yet</span>
+            </li>
+          </ul>
+          <a class="client-button client-button-secondary" href="mailto:services@truepagewebdesign.com">
+            Email directly
+          </a>
+        </aside>
+      </section>
+    </main>
+
+    <dialog class="client-confirm-dialog" data-plan-details-dialog aria-labelledby="plan-details-title">
+      <div class="client-confirm-panel">
+        <button class="client-dialog-close" type="button" aria-label="Close plan details" data-plan-details-close>
+          &times;
+        </button>
+        <p class="client-eyebrow">Current plan</p>
+        <h2 id="plan-details-title" data-plan-details-title>Choose a plan</h2>
+        <p class="client-plan-dialog-price" data-plan-details-price>Pricing available after plan selection.</p>
+        <p data-plan-details-description>
+          Select a plan to see pricing, included services, and expected response details.
+        </p>
+        <ul class="client-detail-list" data-plan-details-list>
+          <li>Ticket access begins after a plan is active.</li>
+        </ul>
+        <div class="client-dialog-actions">
+          <button class="client-button client-button-primary" type="button" data-plan-details-close>
+            Done
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="client-confirm-dialog" data-profile-dialog aria-labelledby="profile-edit-title">
+      <div class="client-confirm-panel">
+        <button class="client-dialog-close" type="button" aria-label="Close profile editor" data-profile-edit-close>
+          &times;
+        </button>
+        <p class="client-eyebrow">Edit profile</p>
+        <h2 id="profile-edit-title">Update personal information.</h2>
+        <form class="client-form" data-profile-form>
+          <div class="client-form-grid">
+            <label>
+              First name
+              <input type="text" name="firstName" autocomplete="given-name" required />
+            </label>
+            <label>
+              Last name
+              <input type="text" name="lastName" autocomplete="family-name" required />
+            </label>
+          </div>
+          <label>
+            Business
+            <input type="text" name="business" autocomplete="organization" />
+          </label>
+          <div class="client-form-grid">
+            <label>
+              Email
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Phone
+              <input type="tel" name="phone" autocomplete="tel" />
+            </label>
+          </div>
+          <label>
+            Billing or business address
+            <input type="text" name="address" autocomplete="street-address" />
+          </label>
+          <div class="client-dialog-actions">
+            <button class="client-button client-button-secondary" type="button" data-profile-edit-close>
+              Cancel
+            </button>
+            <button class="client-button client-button-primary" type="submit">Save information</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+
+    <dialog class="client-confirm-dialog" data-ticket-charge-dialog aria-labelledby="ticket-charge-title">
+      <div class="client-confirm-panel">
+        <button class="client-dialog-close" type="button" aria-label="Close ticket charge details" data-ticket-charge-close>
+          &times;
+        </button>
+        <p class="client-eyebrow">Ticket pricing</p>
+        <h2 id="ticket-charge-title">Tickets outside the Care Plan are quoted by effort.</h2>
+        <p>
+          Some website changes are quick text edits, while others require design work, debugging,
+          testing, layout changes, or new code. Each request is reviewed first so the charge can be
+          tied directly to the estimated man-hours needed.
+        </p>
+        <ul class="client-detail-list">
+          <li>Each ticket has a minimum charge of $29.99.</li>
+          <li>You will receive a requested charge before paid work begins.</li>
+          <li>Care Plan clients can submit covered support tickets without this per-ticket review charge.</li>
+        </ul>
+        <div class="client-dialog-actions">
+          <button class="client-button client-button-primary" type="button" data-ticket-charge-close>
+            Got it
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="client-confirm-dialog" data-cancel-dialog aria-labelledby="cancel-plan-title">
+      <div class="client-confirm-panel">
+        <button class="client-dialog-close" type="button" aria-label="Close cancel plan dialog" data-cancel-close>
+          &times;
+        </button>
+        <p class="client-eyebrow">Confirm cancellation</p>
+        <h2 id="cancel-plan-title">Services will stop when this plan is cancelled.</h2>
+        <p>
+          Cancelling removes ticket access and pauses ongoing updates, monitoring, priority support,
+          and scheduled care plan work. Existing completed work stays yours.
+        </p>
+        <label class="client-check-row">
+          <input type="checkbox" data-cancel-confirm />
+          I understand services and ticket access will stop.
+        </label>
+        <div class="client-dialog-actions">
+          <button class="client-button client-button-secondary" type="button" data-cancel-close>
+            Keep plan
+          </button>
+          <button class="client-button client-button-danger" type="button" data-cancel-confirm-button disabled>
+            Cancel plan
+          </button>
+        </div>
+      </div>
+    </dialog>
+  </body>
+</html>

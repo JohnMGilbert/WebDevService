@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owner Dashboard | True Page Web Design</title>
+    <meta
+      name="description"
+      content="Owner dashboard prototype for True Page Web Design clients, tickets, plans, and payments."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="admin-portal.js" defer></script>
+  </head>
+  <body class="client-page admin-page admin-dashboard-page" data-admin-view="dashboard">
+    <header class="client-shell-header">
+      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+        <span>True Page Admin</span>
+      </a>
+      <nav class="client-shell-nav" aria-label="Owner dashboard navigation">
+        <a href="#clients">Clients</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#payments">Payments</a>
+        <button type="button" data-admin-logout>Logout</button>
+      </nav>
+    </header>
+
+    <main class="admin-dashboard">
+      <section class="admin-hero" aria-labelledby="admin-dashboard-title">
+        <div>
+          <p class="client-eyebrow">Owner dashboard</p>
+          <h1 id="admin-dashboard-title">Client operations</h1>
+          <p>
+            Review local prototype accounts, active plans, incoming work tickets, payment status,
+            and internal follow-up notes.
+          </p>
+        </div>
+        <aside class="admin-privacy-note">
+          <strong>Privacy reminder</strong>
+          <span>
+            This prototype uses browser storage. Real client data should move to server-side auth,
+            role checks, encrypted storage, and private file uploads.
+          </span>
+        </aside>
+      </section>
+
+      <section class="admin-stat-grid" aria-label="Admin overview">
+        <article>
+          <span>Total clients</span>
+          <strong data-admin-total-clients>0</strong>
+        </article>
+        <article>
+          <span>Open tickets</span>
+          <strong data-admin-open-tickets>0</strong>
+        </article>
+        <article>
+          <span>Care plans</span>
+          <strong data-admin-care-plans>0</strong>
+        </article>
+        <article>
+          <span>Payment follow-up</span>
+          <strong data-admin-payment-followups>0</strong>
+        </article>
+      </section>
+
+      <section class="admin-grid">
+        <article class="admin-panel admin-client-panel" id="clients">
+          <div class="admin-panel-heading">
+            <div>
+              <p class="client-eyebrow">Clients</p>
+              <h2>Client directory.</h2>
+            </div>
+          </div>
+          <div class="admin-filter-row">
+            <label>
+              Search
+              <input type="search" name="search" placeholder="Name, business, email" data-admin-client-search />
+            </label>
+            <label>
+              Plan
+              <select data-admin-plan-filter>
+                <option value="all">All plans</option>
+                <option value="care-plan">Care Plan</option>
+                <option value="growth-website">Growth Website</option>
+                <option value="local-launch">Local Launch</option>
+                <option value="none">No plan</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </label>
+          </div>
+          <div class="admin-client-list" data-admin-client-list></div>
+        </article>
+
+        <article class="admin-panel admin-ticket-panel" id="tickets">
+          <div class="admin-panel-heading">
+            <div>
+              <p class="client-eyebrow">Tickets</p>
+              <h2>Work queue.</h2>
+            </div>
+            <div class="admin-ticket-filter-group">
+              <label class="admin-compact-filter">
+                Client
+                <select data-admin-ticket-client-filter>
+                  <option value="all">All clients</option>
+                </select>
+              </label>
+              <label class="admin-compact-filter">
+                Status
+                <select data-admin-ticket-filter>
+                  <option value="open">Open</option>
+                  <option value="all">All</option>
+                  <option value="paid-review">Needs paid review</option>
+                  <option value="closed">Closed</option>
+                </select>
+              </label>
+            </div>
+          </div>
+          <div class="admin-ticket-list" data-admin-ticket-list></div>
+        </article>
+
+        <aside class="admin-panel admin-detail-panel">
+          <div class="admin-panel-heading">
+            <div>
+              <p class="client-eyebrow">Selected client</p>
+              <h2 data-admin-selected-name>Select a client.</h2>
+            </div>
+          </div>
+          <div class="admin-selected-client" data-admin-selected-client>
+            <p class="client-empty-state">Choose a client to review personal information, plan status, payments, tickets, and notes.</p>
+          </div>
+        </aside>
+
+        <article class="admin-panel admin-payment-panel" id="payments">
+          <div class="admin-panel-heading">
+            <div>
+              <p class="client-eyebrow">Plans and payments</p>
+              <h2>Payment follow-up.</h2>
+            </div>
+          </div>
+          <div class="admin-payment-list" data-admin-payment-list></div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.104.0"
+  }
+}

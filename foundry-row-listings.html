@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listings | Foundry Row Realty</title>
+    <meta
+      name="description"
+      content="Fictional listings page for Foundry Row Realty, a refined working-class realtor website demo."
+    />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="foundry-row.js" defer></script>
+  </head>
+  <body class="foundry-page foundry-listings">
+    <span class="fr-progress" aria-hidden="true" data-fr-progress>&nbsp;</span>
+    <header class="fr-header">
+      <a class="fr-brand" href="foundry-row-realty.html" aria-label="Foundry Row Realty home">
+        <span class="fr-brand-mark" aria-hidden="true">FR</span>
+        <span>
+          <strong>Foundry Row Realty</strong>
+          <small>Nora Walsh, Realtor</small>
+        </span>
+      </a>
+      <nav class="fr-nav" aria-label="Foundry Row navigation">
+        <a href="foundry-row-realty.html">Home</a>
+        <a href="foundry-row-listings.html" aria-current="page">Listings</a>
+        <a href="foundry-row-showcase.html">Showcase</a>
+        <a href="foundry-row-bio.html">Bio</a>
+      </nav>
+      <a class="fr-phone" href="tel:4125550198">(412) 555-0198</a>
+    </header>
+
+    <main id="top">
+      <section class="fr-hero fr-page-hero" aria-labelledby="fr-listings-title">
+        <img
+          class="fr-hero-image"
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&amp;fit=crop&amp;w=1900&amp;q=80"
+          alt="Bright modest living room with simple furniture"
+        />
+        <div class="fr-hero-shade"></div>
+        <div class="fr-container fr-hero-content" data-flow>
+          <p class="fr-kicker">Current homes</p>
+          <h1 id="fr-listings-title">Listings</h1>
+          <p>
+            A calm look at homes that leave room in the budget for tools, school shoes, savings,
+            repairs, and the rest of life.
+          </p>
+        </div>
+      </section>
+
+      <section class="fr-section fr-listings-panel" aria-labelledby="fr-listing-options">
+        <div class="fr-container">
+          <div class="fr-listing-tools" data-flow>
+            <div>
+              <p class="fr-kicker">Search by comfort</p>
+              <h2 id="fr-listing-options">Useful filters, not guesswork.</h2>
+            </div>
+            <div class="fr-filter-row" aria-label="Listing filter examples">
+              <span>Under $325k</span>
+              <span>Garage or shop</span>
+              <span>Transit nearby</span>
+              <span>Move-in ready</span>
+            </div>
+          </div>
+
+          <div class="fr-listing-grid">
+            <article class="fr-listing-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Brick starter home with tidy front yard"
+              />
+              <div>
+                <span>$284,000</span>
+                <h3>112 Mill Street</h3>
+                <p>3 bed, 1.5 bath, 1,420 sq ft</p>
+                <ul>
+                  <li>Dry basement</li>
+                  <li>Fenced yard</li>
+                  <li>Near the rail line</li>
+                </ul>
+              </div>
+            </article>
+            <article class="fr-listing-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Cape style home with a broad driveway"
+              />
+              <div>
+                <span>$318,500</span>
+                <h3>48 Calder Avenue</h3>
+                <p>4 bed, 2 bath, 1,880 sq ft</p>
+                <ul>
+                  <li>Garage workshop</li>
+                  <li>Updated heat</li>
+                  <li>Quiet block</li>
+                </ul>
+              </div>
+            </article>
+            <article class="fr-listing-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Move-in ready home with porch and driveway"
+              />
+              <div>
+                <span>$366,000</span>
+                <h3>905 Maple Ward Road</h3>
+                <p>3 bed, 2 bath, 1,760 sq ft</p>
+                <ul>
+                  <li>Newer roof</li>
+                  <li>Shaded porch</li>
+                  <li>School nearby</li>
+                </ul>
+              </div>
+            </article>
+            <article class="fr-listing-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Small dining area with natural light"
+              />
+              <div>
+                <span>$241,000</span>
+                <h3>27 Union Court</h3>
+                <p>2 bed, 1 bath, 1,060 sq ft</p>
+                <ul>
+                  <li>Low taxes</li>
+                  <li>Fresh kitchen</li>
+                  <li>Walkable errands</li>
+                </ul>
+              </div>
+            </article>
+            <article class="fr-listing-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Clean home exterior with driveway and lawn"
+              />
+              <div>
+                <span>$397,500</span>
+                <h3>6 Orchard Foundry Lane</h3>
+                <p>4 bed, 2.5 bath, 2,040 sq ft</p>
+                <ul>
+                  <li>Corner lot</li>
+                  <li>Basement storage</li>
+                  <li>Two-car garage</li>
+                </ul>
+              </div>
+            </article>
+            <article class="fr-listing-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Traditional home exterior with front steps"
+              />
+              <div>
+                <span>$299,000</span>
+                <h3>74 Boiler House Way</h3>
+                <p>3 bed, 2 bath, 1,510 sq ft</p>
+                <ul>
+                  <li>Covered entry</li>
+                  <li>Updated baths</li>
+                  <li>Room for a garden</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="fr-section fr-neighborhoods" aria-labelledby="fr-neighborhood-title">
+        <div class="fr-container fr-split">
+          <div data-flow>
+            <p class="fr-kicker">Neighborhood notes</p>
+            <h2 id="fr-neighborhood-title">The practical details matter.</h2>
+          </div>
+          <div class="fr-neighborhood-grid" data-flow>
+            <article>
+              <strong>Mill Street</strong>
+              <span>Transit, union hall, small groceries, older brick homes.</span>
+            </article>
+            <article>
+              <strong>Maple Ward</strong>
+              <span>Porches, schools, shade trees, steady resale history.</span>
+            </article>
+            <article>
+              <strong>Calder Hill</strong>
+              <span>Garages, wider lots, tool storage, quiet evenings.</span>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="fr-footer">
+      <div>
+        <strong>Foundry Row Realty</strong>
+        <span>Fictional realtor website demo by True Page Web Design.</span>
+      </div>
+      <nav aria-label="Foundry Row footer navigation">
+        <a href="foundry-row-realty.html">Home</a>
+        <a href="foundry-row-showcase.html">Showcase</a>
+        <a href="foundry-row-bio.html">Bio</a>
+      </nav>
+    </footer>
+  </body>
+</html>

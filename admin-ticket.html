@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Details | True Page Web Design</title>
+    <meta
+      name="description"
+      content="Owner ticket detail prototype for True Page Web Design client requests."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="admin-portal.js" defer></script>
+  </head>
+  <body class="client-page admin-page admin-ticket-page" data-admin-view="ticket">
+    <header class="client-shell-header">
+      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+        <span>True Page Admin</span>
+      </a>
+      <nav class="client-shell-nav" aria-label="Owner ticket navigation">
+        <a href="admin-dashboard.html#clients">Clients</a>
+        <a href="admin-dashboard.html#tickets">Tickets</a>
+        <a href="admin-dashboard.html#payments">Payments</a>
+        <button type="button" data-admin-logout>Logout</button>
+      </nav>
+    </header>
+
+    <main class="admin-dashboard">
+      <section class="admin-hero admin-ticket-hero" aria-labelledby="admin-ticket-title">
+        <div>
+          <p class="client-eyebrow">Ticket detail</p>
+          <h1 id="admin-ticket-title" data-admin-ticket-title>Ticket details</h1>
+          <p>
+            Review the full client request, any uploaded screenshot, plan coverage, and current work status.
+          </p>
+        </div>
+        <aside class="admin-privacy-note">
+          <strong>Attached files</strong>
+          <span>
+            Screenshot previews are stored locally in this prototype. A real version should use private,
+            authenticated file storage.
+          </span>
+        </aside>
+      </section>
+
+      <div class="admin-ticket-detail-grid" data-admin-ticket-detail></div>
+    </main>
+  </body>
+</html>
