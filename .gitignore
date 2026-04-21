@@ -1,5 +1,7 @@
-# Local Supabase/browser config with real project keys.
-supabase-config.js
+# Browser-safe Supabase config can be committed when it only contains the
+# public project URL and anon/publishable key. Keep private variants ignored.
+supabase-config.local.js
+supabase-config.secret.js
 
 # Node dependencies and package manager output.
 node_modules/
