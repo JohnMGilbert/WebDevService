@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesa Flats Realty Website Demo</title>
+    <meta
+      name="description"
+      content="Standalone website demo for a refreshed Mesa Flats Realty homepage concept."
+    />
+    <link rel="preconnect" href="https://mesaflatsrealty.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="mesa-carousel.js" defer></script>
+  </head>
+  <body class="mesa-site-page">
+    <main>
+      <section class="mesa-concept" id="top" aria-labelledby="mesa-title">
+        <div class="mesa-shell">
+          <div class="mesa-topbar">
+            <a class="mesa-logo" href="https://mesaflatsrealty.com/" target="_blank" rel="noreferrer">
+              <img
+                src="https://mesaflatsrealty.com/wp-content/uploads/2023/01/Mesa-Flats-Realty-Logo-Horizontal.png"
+                alt="Mesa Flats Realty"
+              />
+            </a>
+            <nav class="mesa-nav" aria-label="Mesa Flats demo navigation">
+              <a href="#mesa-search">Search</a>
+              <a href="#mesa-listings">Listings</a>
+              <a href="#mesa-communities">Communities</a>
+              <a href="#mesa-contact">Contact</a>
+            </nav>
+            <a class="mesa-call" href="tel:5752242295">(575) 224-2295</a>
+          </div>
+
+          <section class="mesa-hero" aria-labelledby="mesa-title">
+            <img
+              class="mesa-hero-photo"
+              src="https://mesaflatsrealty.com/wp-content/uploads/2023/01/Downtown-Las-Cruces-Hero-Image.jpg"
+              alt="Las Cruces, New Mexico neighborhood and mountain view"
+            />
+            <div class="mesa-hero-panel">
+              <p class="mesa-kicker">Las Cruces, Deming, Silver City, T or C</p>
+              <h1 id="mesa-title">Find your next move in Southern New Mexico.</h1>
+              <p>
+                Data-driven guidance for buyers, sellers, investors, and families looking across
+                desert neighborhoods, mountain views, farms, land, and commercial spaces.
+              </p>
+              <div class="mesa-actions">
+                <a class="mesa-button mesa-button-main" href="https://mesaflatsrealty.com/listings/" target="_blank" rel="noreferrer">Browse listings</a>
+                <a class="mesa-button" href="https://mesaflatsrealty.com/contact-us/" target="_blank" rel="noreferrer">Talk with an agent</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="mesa-search" id="mesa-search" aria-label="Home search concept">
+            <div>
+              <span>Location</span>
+              <strong>Las Cruces or Southern NM</strong>
+            </div>
+            <div>
+              <span>Property type</span>
+              <strong>Residential, land, commercial</strong>
+            </div>
+            <div>
+              <span>Budget</span>
+              <strong>Set your range</strong>
+            </div>
+            <a href="https://mesaflatsrealty.com/listings/" target="_blank" rel="noreferrer">Search homes</a>
+          </section>
+
+          <section class="mesa-data-stats" aria-labelledby="mesa-data-title">
+            <div class="mesa-data-copy">
+              <p class="mesa-kicker">Data-driven brokerage</p>
+              <h2 id="mesa-data-title">Market decisions backed by numbers.</h2>
+              <p>
+                Based on the last 12 months, this snapshot turns local market movement into a
+                clearer picture for buyers, sellers, and investors.
+              </p>
+            </div>
+            <div class="mesa-stat-grid">
+              <article>
+                <span>Market average days on market</span>
+                <strong><span data-mesa-stat data-stat-target="52">0</span></strong>
+                <small>Days</small>
+              </article>
+              <article>
+                <span>Our listings average days on market</span>
+                <strong><span data-mesa-stat data-stat-target="31">0</span></strong>
+                <small>Days</small>
+              </article>
+              <article>
+                <span>Our buyers paid compared to list price</span>
+                <strong><span data-mesa-stat data-stat-target="97" data-stat-suffix="%">0</span></strong>
+                <small>Average</small>
+              </article>
+              <article>
+                <span>Our sellers netted compared to list price</span>
+                <strong><span data-mesa-stat data-stat-target="101" data-stat-suffix="%">0</span></strong>
+                <small>Average</small>
+              </article>
+            </div>
+          </section>
+
+          <section class="mesa-listing-carousel" aria-labelledby="mesa-carousel-title" data-mesa-carousel>
+            <div class="mesa-carousel-copy">
+              <p class="mesa-kicker">Featured listings</p>
+              <h2 id="mesa-carousel-title">See what is on the market now.</h2>
+              <p>
+                Browse homes, land, and commercial opportunities around Southern New Mexico before
+                opening the full listing search.
+              </p>
+            </div>
+            <div class="mesa-carousel-stage">
+              <button class="mesa-carousel-control mesa-carousel-prev" type="button" aria-label="Show previous listing" data-carousel-prev>&lsaquo;</button>
+              <div class="mesa-carousel-slides" aria-live="polite">
+                <article class="mesa-carousel-slide is-active" data-carousel-slide>
+                  <img
+                    src="https://mesaflatsrealty.com/wp-content/uploads/2026/03/CabrilloWeb-.jpg"
+                    alt="Southwestern home exterior in Southern New Mexico"
+                  />
+                  <div class="mesa-carousel-caption">
+                    <span>Homes for sale</span>
+                    <h3>Southwestern homes with practical next steps</h3>
+                    <p>Photos, property type, and details stay close to the search path.</p>
+                    <a href="https://mesaflatsrealty.com/listings/" target="_blank" rel="noreferrer">View listing search</a>
+                  </div>
+                </article>
+                <article class="mesa-carousel-slide" data-carousel-slide>
+                  <img
+                    src="https://mesaflatsrealty.com/wp-content/uploads/2025/10/5-6-DJI_0281Boundary.jpg"
+                    alt="Aerial property boundary view in Southern New Mexico"
+                  />
+                  <div class="mesa-carousel-caption">
+                    <span>Land and acreage</span>
+                    <h3>Wide-open parcels with room to plan</h3>
+                    <p>Acreage, location, and boundary context at a glance.</p>
+                    <a href="https://mesaflatsrealty.com/listings/" target="_blank" rel="noreferrer">View listing search</a>
+                  </div>
+                </article>
+                <article class="mesa-carousel-slide" data-carousel-slide>
+                  <img
+                    src="https://mesaflatsrealty.com/wp-content/uploads/2025/08/Sunshine-GroceryPRINT-1024x683.jpg"
+                    alt="Commercial property exterior in Southern New Mexico"
+                  />
+                  <div class="mesa-carousel-caption">
+                    <span>Commercial</span>
+                    <h3>Spaces with investment potential</h3>
+                    <p>Review exterior views and property context before contacting the brokerage.</p>
+                    <a href="https://mesaflatsrealty.com/listings/" target="_blank" rel="noreferrer">View listing search</a>
+                  </div>
+                </article>
+              </div>
+              <button class="mesa-carousel-control mesa-carousel-next" type="button" aria-label="Show next listing" data-carousel-next>&rsaquo;</button>
+            </div>
+          </section>
+
+          <section class="mesa-proof" aria-label="Mesa Flats proof points">
+            <article>
+              <strong>Local MLS search</strong>
+              <span>Fresh listing paths for residential, land, commercial, and multi-family.</span>
+            </article>
+            <article>
+              <strong>Market perspective</strong>
+              <span>Recent blog updates and neighborhood guidance help visitors make sense of the area.</span>
+            </article>
+            <article>
+              <strong>Easy contact</strong>
+              <span>Phone, email, forms, and office hours stay visible when a buyer is ready.</span>
+            </article>
+          </section>
+
+          <section class="mesa-listings" id="mesa-listings" aria-labelledby="mesa-listings-title">
+            <div class="mesa-section-heading">
+              <p class="mesa-kicker">Featured listings</p>
+              <h2 id="mesa-listings-title">Make the homes easier to scan.</h2>
+              <p>Large photos, concise details, and direct actions keep the property path moving.</p>
+            </div>
+            <div class="mesa-listing-grid">
+              <article class="mesa-listing-card">
+                <img
+                  src="https://mesaflatsrealty.com/wp-content/uploads/2025/10/5-6-DJI_0281Boundary.jpg"
+                  alt="Aerial property boundary view in Southern New Mexico"
+                />
+                <div>
+                  <span>Land and acreage</span>
+                  <h3>Wide-open parcels with room to plan</h3>
+                  <p>Better visual hierarchy for boundary maps, acreage, location, and next steps.</p>
+                </div>
+              </article>
+              <article class="mesa-listing-card">
+                <img
+                  src="https://mesaflatsrealty.com/wp-content/uploads/2026/03/CabrilloWeb-.jpg"
+                  alt="Southwestern home exterior"
+                />
+                <div>
+                  <span>Homes for sale</span>
+                  <h3>Warm photos, clear stats, simple inquiry</h3>
+                  <p>Bedrooms, baths, square footage, and price belong in one quick glance.</p>
+                </div>
+              </article>
+              <article class="mesa-listing-card">
+                <img
+                  src="https://mesaflatsrealty.com/wp-content/uploads/2025/08/Sunshine-GroceryPRINT-1024x683.jpg"
+                  alt="Commercial building exterior"
+                />
+                <div>
+                  <span>Commercial</span>
+                  <h3>Investment pages with cleaner context</h3>
+                  <p>Commercial buyers need location, use case, photos, and broker contact fast.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="mesa-communities" id="mesa-communities" aria-labelledby="mesa-communities-title">
+            <div class="mesa-section-heading">
+              <p class="mesa-kicker">Communities</p>
+              <h2 id="mesa-communities-title">Turn neighborhood browsing into a guided path.</h2>
+              <p>People new to the area can compare lifestyles before they compare addresses.</p>
+            </div>
+            <div class="mesa-community-grid">
+              <a href="https://mesaflatsrealty.com/properties/8893-/" target="_blank" rel="noreferrer">Sonoma Ranch</a>
+              <a href="https://mesaflatsrealty.com/properties/9388-/" target="_blank" rel="noreferrer">Metro Verde</a>
+              <a href="https://mesaflatsrealty.com/properties/8879-/" target="_blank" rel="noreferrer">Talavera</a>
+              <a href="https://mesaflatsrealty.com/properties/9629-/" target="_blank" rel="noreferrer">Picacho Hills</a>
+            </div>
+          </section>
+
+          <section class="mesa-agents" aria-labelledby="mesa-agents-title">
+            <img
+              src="https://mesaflatsrealty.com/wp-content/uploads/2025/06/Cindy-869x1024.jpg"
+              alt="Mesa Flats Realty agent Cindy Sutherin"
+            />
+            <div>
+              <p class="mesa-kicker">Agent spotlight</p>
+              <h2 id="mesa-agents-title">Make the team feel approachable.</h2>
+              <p>
+                Agent cards should pair professional photography with specialties, contact links,
+                and a short reason to reach out today.
+              </p>
+              <a class="mesa-button mesa-button-main" href="https://mesaflatsrealty.com/agents/" target="_blank" rel="noreferrer">Meet the agents</a>
+            </div>
+          </section>
+
+          <section class="mesa-contact" id="mesa-contact" aria-label="Mesa Flats contact concept">
+            <div>
+              <p class="mesa-kicker">Ready to move?</p>
+              <h2>Keep contact simple and visible.</h2>
+              <p>Business hours, phone, email, and a short form give every visitor a clear next step.</p>
+            </div>
+            <div class="mesa-contact-actions">
+              <a href="tel:5752242295">(575) 224-2295</a>
+              <a href="mailto:info@mesaflatsrealty.com">info@mesaflatsrealty.com</a>
+              <span>Mon-Fri 8 am-7 pm</span>
+              <span>Sat-Sun 9 am-5 pm</span>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
