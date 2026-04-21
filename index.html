@@ -3,51 +3,55 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>John Gilbert Web Development</title>
+    <title>True Page Web Design</title>
     <meta
       name="description"
-      content="Freelance web development for small businesses, service brands, and founders who need fast, polished websites that are easy to manage."
+      content="Custom website design and builds for small businesses, service brands, and founders who need fast, polished websites that are easy to manage."
     />
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="style-switcher.js" defer></script>
+    <script src="plan-modals.js" defer></script>
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="John Gilbert Web Development home">
-        <span class="brand-mark">JG</span>
-        <span>John Gilbert Web Development</span>
+      <a class="brand" href="#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+        <span>True Page Web Design</span>
       </a>
       <nav class="nav" aria-label="Main navigation">
         <a href="#services">Services</a>
+        <a href="#plans">Plans</a>
         <a href="#work">Work</a>
         <a href="#process">Process</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button class="style-switcher" type="button" data-style-switcher>Style: Pop</button>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <img
           class="hero-image"
-          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=80"
+          src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"
           alt="Developer workspace with code on a laptop"
         />
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <p class="eyebrow">Freelance web developer</p>
-          <h1 id="hero-title">Websites that make your business look sharp and work harder.</h1>
+          <p class="eyebrow">Custom website builder</p>
+          <h1 id="hero-title">Websites that work for you.</h1>
           <p>
             I design and build fast, mobile-friendly websites for businesses that need a polished
             online presence without agency sprawl.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#contact">Start a project</a>
-            <a class="button secondary" href="#services">See what I build</a>
+            <a class="button secondary" href="examples.html">See what I build</a>
           </div>
         </div>
       </section>
 
-      <section class="stats-section" aria-label="Business highlights">
+      <!-- <section class="stats-section" aria-label="Business highlights">
         <div class="stat">
           <strong>2-4 weeks</strong>
           <span>Typical launch window</span>
@@ -60,7 +64,7 @@
           <strong>SEO ready</strong>
           <span>Structured for discovery</span>
         </div>
-      </section>
+      </section> -->
 
       <section class="split-section" id="services">
         <div class="section-copy">
@@ -70,6 +74,7 @@
             From first sketch to launch day, I keep the work focused on the pieces that actually
             help customers trust you, understand you, and take the next step.
           </p>
+          <a class="button primary services-plan-link" href="#plans">See service plans</a>
         </div>
         <div class="services-grid">
           <article class="service-card">
@@ -94,7 +99,7 @@
       <section class="feature-band" id="work">
         <div class="feature-media">
           <img
-            src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1400&q=80"
+            src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
             alt="Team reviewing a website design on a laptop"
           />
         </div>
@@ -146,17 +151,174 @@
 
       <section class="testimonial-section">
         <img
-          src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1600&q=80"
+          src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
           alt="Bright meeting table with laptops and notebooks"
         />
         <blockquote>
           <p>
-            “John took our scattered ideas and turned them into a site we are proud to send people
-            to. The whole process felt clear, quick, and surprisingly easy.”
+            “Our scattered ideas became a site we are proud to send people to. The whole process
+            felt clear, quick, and surprisingly easy.”
           </p>
-          <cite>Local service business owner</cite>
+          <cite>D & J Realty</cite>
         </blockquote>
       </section>
+
+      <section class="plans-section" id="plans" aria-labelledby="plans-list-title">
+        <div class="section-heading plans-heading">
+          <p class="eyebrow">Plans</p>
+          <h2 id="plans-list-title">Simple options, no mystery scope.</h2>
+          <p>
+            Each plan includes mobile-friendly design, practical SEO setup, launch support, and a
+            site structure built around calls, quote requests, appointments, or inquiries.
+          </p>
+        </div>
+
+        <div class="plans-grid">
+          <article class="plan-card">
+            <span class="plan-label">Starter</span>
+            <h3>Local Launch</h3>
+            <p class="plan-price">Starting at $750</p>
+            <p>For a new business or solo operator that needs a professional web presence fast.</p>
+            <ul>
+              <li>One polished homepage</li>
+              <li>Contact section and call buttons</li>
+              <li>Basic local SEO setup</li>
+              <li>Mobile-first layout</li>
+              <li>Launch checklist</li>
+            </ul>
+            <button class="button primary" type="button" data-plan-modal-open="local-launch">View local launch details</button>
+          </article>
+
+          <article class="plan-card featured-plan">
+            <span class="plan-label">Most useful</span>
+            <h3>Growth Website</h3>
+            <p class="plan-price">Starting at $1,400</p>
+            <p>For service businesses that need more than a brochure and want a stronger path to leads.</p>
+            <ul>
+              <li>Five core pages</li>
+              <li>Services, about, contact, and proof sections</li>
+              <li>Lead form and click-to-call actions</li>
+              <li>Review and project highlights</li>
+              <li>Google-ready page titles and descriptions</li>
+            </ul>
+            <button class="button primary" type="button" data-plan-modal-open="growth-website">View growth site details</button>
+          </article>
+
+          <article class="plan-card">
+            <span class="plan-label">Ongoing</span>
+            <h3>Care Plan</h3>
+            <p class="plan-price">From $62.50/mo</p>
+            <p>For businesses that want updates, small improvements, and someone keeping an eye on the site.</p>
+            <ul>
+              <li>Content updates</li>
+              <li>Basic performance checks</li>
+              <li>Broken-link review</li>
+              <li>Small design edits</li>
+              <li>Priority support</li>
+            </ul>
+            <button class="button primary" type="button" data-plan-modal-open="care-plan">View care plan details</button>
+          </article>
+        </div>
+      </section>
+
+      <dialog class="plan-modal" id="local-launch" aria-labelledby="local-launch-title">
+        <div class="plan-modal-panel">
+          <button class="plan-modal-close" type="button" aria-label="Close local launch details" data-plan-modal-close>&times;</button>
+          <p class="eyebrow">Starter plan</p>
+          <h2 id="local-launch-title">Local Launch</h2>
+          <p class="plan-modal-price">Starting at $750</p>
+          <p>
+            A focused one-page website for a business that needs to look legitimate, explain the
+            offer clearly, and give visitors a fast way to call, email, or request a quote.
+          </p>
+          <div class="plan-modal-grid">
+            <div>
+              <h3>Best fit</h3>
+              <ul>
+                <li>New businesses that need a polished first site</li>
+                <li>Solo service providers or small local teams</li>
+                <li>Simple offers that can be explained on one page</li>
+              </ul>
+            </div>
+            <div>
+              <h3>What is included</h3>
+              <ul>
+                <li>Homepage strategy, layout, and mobile design</li>
+                <li>Hero, services, proof, and contact sections</li>
+                <li>Basic local SEO title and description setup</li>
+                <li>Launch checklist and handoff notes</li>
+              </ul>
+            </div>
+          </div>
+          <button class="button primary" type="button" data-plan-contact>Talk about this plan</button>
+        </div>
+      </dialog>
+
+      <dialog class="plan-modal" id="growth-website" aria-labelledby="growth-website-title">
+        <div class="plan-modal-panel">
+          <button class="plan-modal-close" type="button" aria-label="Close growth website details" data-plan-modal-close>&times;</button>
+          <p class="eyebrow">Most useful</p>
+          <h2 id="growth-website-title">Growth Website</h2>
+          <p class="plan-modal-price">Starting at $1,400</p>
+          <p>
+            A stronger multi-page website for service businesses that need clear service pages,
+            trust-building proof, and a better path from first impression to lead.
+          </p>
+          <div class="plan-modal-grid">
+            <div>
+              <h3>Best fit</h3>
+              <ul>
+                <li>Contractors, realtors, consultants, and service teams</li>
+                <li>Businesses with multiple services or audiences</li>
+                <li>Owners who want more leads from search and referrals</li>
+              </ul>
+            </div>
+            <div>
+              <h3>What is included</h3>
+              <ul>
+                <li>Up to five core pages with conversion-focused structure</li>
+                <li>Service, about, proof, FAQ, and contact content blocks</li>
+                <li>Lead form, click-to-call actions, and testimonial placement</li>
+                <li>SEO-ready page titles, descriptions, and heading structure</li>
+              </ul>
+            </div>
+          </div>
+          <button class="button primary" type="button" data-plan-contact>Talk about this plan</button>
+        </div>
+      </dialog>
+
+      <dialog class="plan-modal" id="care-plan" aria-labelledby="care-plan-title">
+        <div class="plan-modal-panel">
+          <button class="plan-modal-close" type="button" aria-label="Close care plan details" data-plan-modal-close>&times;</button>
+          <p class="eyebrow">Ongoing support</p>
+          <h2 id="care-plan-title">Care Plan</h2>
+          <p class="plan-modal-price">From $62.50/mo</p>
+          <p>
+            Ongoing support for businesses that want their site to stay current without having to
+            remember every small update, broken link, and improvement opportunity.
+          </p>
+          <div class="plan-modal-grid">
+            <div>
+              <h3>Best fit</h3>
+              <ul>
+                <li>Businesses that update offers, photos, or service details often</li>
+                <li>Sites that need small improvements after launch</li>
+                <li>Owners who want a reliable person to keep watch</li>
+              </ul>
+            </div>
+            <div>
+              <h3>What is included</h3>
+              <ul>
+                <li>Monthly content updates and small page edits</li>
+                <li>Basic performance, link, and form checks</li>
+                <li>Minor design improvements as the business changes</li>
+                <li>Priority support for quick fixes and questions</li>
+              </ul>
+            </div>
+          </div>
+          <button class="button primary" type="button" data-plan-contact>Talk about this plan</button>
+        </div>
+      </dialog>
 
       <section class="contact-section" id="contact">
         <div>
@@ -167,7 +329,7 @@
             your current site. I will reply with a practical next step.
           </p>
         </div>
-        <form class="contact-form" action="mailto:hello@example.com" method="post" enctype="text/plain">
+        <form class="contact-form" action="mailto:hello@truepageweb.com" method="post" enctype="text/plain">
           <label>
             Name
             <input type="text" name="name" autocomplete="name" required />
@@ -186,8 +348,8 @@
     </main>
 
     <footer class="site-footer">
-      <p>John Gilbert Web Development</p>
-      <a href="mailto:hello@example.com">hello@example.com</a>
+      <p>True Page Web Design</p>
+      <a href="mailto:hello@truepageweb.com">hello@truepageweb.com</a>
     </footer>
   </body>
 </html>
