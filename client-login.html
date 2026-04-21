@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Login | True Page Web Design</title>
+    <meta
+      name="description"
+      content="Client login and account creation for True Page Web Design clients."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="client-portal.js" defer></script>
+  </head>
+  <body class="client-page client-auth-page" data-client-view="auth">
+    <header class="client-shell-header">
+      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+        <span>True Page Web Design</span>
+      </a>
+      <nav class="client-shell-nav" aria-label="Client navigation">
+        <a href="index.html#plans">Plans</a>
+        <a href="examples.html">Examples</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="client-auth-main">
+      <section class="client-auth-panel" aria-labelledby="client-login-title">
+        <div class="client-auth-copy">
+          <p class="client-eyebrow">Client portal</p>
+          <h1 id="client-login-title">Manage requests without the email hunt.</h1>
+          <p>
+            Sign in to view your plan, submit website work tickets, update contact details, and
+            send plan changes from one place.
+          </p>
+          <div class="client-auth-note">
+            <strong>Prototype mode</strong>
+            <span>Accounts are saved in this browser until the database is connected.</span>
+          </div>
+        </div>
+
+        <div class="client-auth-card">
+          <div class="client-auth-tabs" role="tablist" aria-label="Client account forms">
+            <button
+              class="is-active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="client-login-form"
+              data-auth-tab="login"
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="client-create-form"
+              data-auth-tab="create"
+            >
+              Create account
+            </button>
+          </div>
+
+          <form class="client-form" id="client-login-form" data-auth-form="login">
+            <label>
+              Email
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" autocomplete="current-password" required />
+            </label>
+            <button class="client-button client-button-primary" type="submit">Login</button>
+            <button class="client-button client-button-secondary" type="button" data-demo-login>
+              Use demo client
+            </button>
+          </form>
+
+          <form class="client-form is-hidden" id="client-create-form" data-auth-form="create">
+            <div class="client-form-grid">
+              <label>
+                First name
+                <input type="text" name="firstName" autocomplete="given-name" required />
+              </label>
+              <label>
+                Last name
+                <input type="text" name="lastName" autocomplete="family-name" required />
+              </label>
+            </div>
+            <label>
+              Business
+              <input type="text" name="business" autocomplete="organization" required />
+            </label>
+            <div class="client-form-grid">
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label>
+                Current plan
+                <select name="plan">
+                  <option value="">I need help choosing</option>
+                  <option value="local-launch">Local Launch</option>
+                  <option value="growth-website">Growth Website</option>
+                  <option value="care-plan">Care Plan</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              Password
+              <input type="password" name="password" autocomplete="new-password" required />
+            </label>
+            <label>
+              Confirm password
+              <input type="password" name="confirmPassword" autocomplete="new-password" required />
+            </label>
+            <p class="client-password-hint">
+              Use at least 9 characters, including a letter or number and a special character.
+            </p>
+            <button class="client-button client-button-primary" type="submit">Create account</button>
+          </form>
+
+          <p class="client-form-message" role="status" data-auth-message></p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Desert Yards Landscaping Website Demo</title>
+    <meta
+      name="description"
+      content="A southwestern website demo for Desert Yards Landscaping, a fake water-wise landscaping company."
+    />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="desert-yards.js" defer></script>
+  </head>
+  <body class="desert-yards-page">
+    <header class="dy-header">
+      <a class="dy-brand" href="#top" aria-label="Desert Yards Landscaping home">
+        <span class="dy-brand-mark" aria-hidden="true">DY</span>
+        <span>Desert Yards</span>
+      </a>
+      <nav class="dy-nav" aria-label="Desert Yards navigation">
+        <a href="#work">Work</a>
+        <a href="#bio">Bio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="dy-call" href="tel:5205550186">(520) 555-0186</a>
+    </header>
+
+    <main id="top">
+      <section class="dy-hero" aria-labelledby="dy-title">
+        <img
+          class="dy-hero-image"
+          src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&amp;fit=crop&amp;w=1900&amp;q=80"
+          alt="Warm modern desert home with landscaped outdoor living space"
+        />
+        <div class="dy-hero-shade"></div>
+        <div class="dy-hero-content">
+          <p class="dy-kicker">Tucson water-wise landscape studio</p>
+          <h1 id="dy-title">Desert Yards Landscaping</h1>
+          <p>
+            Elegant, low-water landscapes for homes that need shade, structure, texture, and a
+            little bit of desert drama without the high-maintenance lawn.
+          </p>
+          <div class="dy-actions">
+            <a class="dy-button dy-button-primary" href="#work">View transformations</a>
+            <a class="dy-button" href="#contact">Request a visit</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="dy-quick-strip" aria-label="Service highlights">
+        <article>
+          <span>01</span>
+          <strong>Xeriscape design</strong>
+        </article>
+        <article>
+          <span>02</span>
+          <strong>Stone patios</strong>
+        </article>
+        <article>
+          <span>03</span>
+          <strong>Native planting</strong>
+        </article>
+        <article>
+          <span>04</span>
+          <strong>Drip irrigation</strong>
+        </article>
+      </section>
+
+      <section class="dy-intro" aria-labelledby="dy-intro-title">
+        <div>
+          <p class="dy-kicker">Short description</p>
+          <h2 id="dy-intro-title">Southwestern yards with restraint, rhythm, and real shade.</h2>
+        </div>
+        <p>
+          Desert Yards Landscaping is a fictional boutique crew that reworks tired gravel lots,
+          thirsty turf, and awkward side yards into calm outdoor rooms. The look is regional and
+          practical: decomposed granite, sculptural agave, handmade tile, steel edging, pavers,
+          mesquite shade, and lighting that makes the yard useful after sunset.
+        </p>
+      </section>
+
+      <section class="dy-work" id="work" aria-labelledby="dy-work-title" data-dy-carousel>
+        <div class="dy-section-heading">
+          <p class="dy-kicker">Before and after</p>
+          <h2 id="dy-work-title">Three yard transformations, one slider.</h2>
+          <p>
+            Drag the handle across each project image, then move through the carousel to compare
+            how texture, shade, and planting change the feel of the property.
+          </p>
+        </div>
+
+        <div class="dy-carousel">
+          <button class="dy-carousel-button" type="button" aria-label="Previous project" data-dy-prev>
+            <span aria-hidden="true">&larr;</span>
+          </button>
+
+          <div class="dy-slides" aria-live="polite">
+            <article class="dy-slide is-active" data-dy-slide>
+              <div class="dy-compare" style="--split: 54%" data-dy-compare>
+                <img
+                  class="dy-compare-image"
+                  src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&amp;fit=crop&amp;w=1300&amp;q=80"
+                  alt="Sparse desert lot before landscape improvements"
+                />
+                <img
+                  class="dy-compare-image dy-compare-after"
+                  src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&amp;fit=crop&amp;w=1300&amp;q=80"
+                  alt="Finished desert courtyard with clean hardscape and planting"
+                />
+                <span class="dy-compare-label dy-compare-label-before">Before</span>
+                <span class="dy-compare-label dy-compare-label-after">After</span>
+                <input
+                  class="dy-compare-range"
+                  type="range"
+                  min="18"
+                  max="82"
+                  value="54"
+                  aria-label="Reveal the after image for the adobe courtyard project"
+                  data-dy-range
+                />
+                <div class="dy-compare-handle" aria-hidden="true"></div>
+              </div>
+              <div class="dy-slide-copy">
+                <span class="dy-project-number">Project 01</span>
+                <h3>Adobe Courtyard Reset</h3>
+                <p>
+                  A dusty front approach becomes a quiet arrival sequence with pavers, sculptural
+                  agave, gravel texture, and a small seating edge for evening shade.
+                </p>
+                <ul class="dy-meta-list">
+                  <li>
+                    <span>Palette</span>
+                    <strong>clay, sage, cream, black steel</strong>
+                  </li>
+                  <li>
+                    <span>Focus</span>
+                    <strong>entry path and curb appeal</strong>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="dy-slide" data-dy-slide>
+              <div class="dy-compare" style="--split: 50%" data-dy-compare>
+                <img
+                  class="dy-compare-image"
+                  src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&amp;fit=crop&amp;w=1300&amp;q=80"
+                  alt="Open sandy backyard before shade and planting are added"
+                />
+                <img
+                  class="dy-compare-image dy-compare-after"
+                  src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&amp;fit=crop&amp;w=1300&amp;q=80"
+                  alt="Textured garden path with dense desert planting"
+                />
+                <span class="dy-compare-label dy-compare-label-before">Before</span>
+                <span class="dy-compare-label dy-compare-label-after">After</span>
+                <input
+                  class="dy-compare-range"
+                  type="range"
+                  min="18"
+                  max="82"
+                  value="50"
+                  aria-label="Reveal the after image for the mesquite shade walk project"
+                  data-dy-range
+                />
+                <div class="dy-compare-handle" aria-hidden="true"></div>
+              </div>
+              <div class="dy-slide-copy">
+                <span class="dy-project-number">Project 02</span>
+                <h3>Mesquite Shade Walk</h3>
+                <p>
+                  A blank side yard gets a cooler daily route with compacted gravel, native
+                  grasses, barrel cactus, and drip zones planned around afternoon sun.
+                </p>
+                <ul class="dy-meta-list">
+                  <li>
+                    <span>Palette</span>
+                    <strong>sand, olive, copper, turquoise</strong>
+                  </li>
+                  <li>
+                    <span>Focus</span>
+                    <strong>circulation and shade</strong>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="dy-slide" data-dy-slide>
+              <div class="dy-compare" style="--split: 58%" data-dy-compare>
+                <img
+                  class="dy-compare-image"
+                  src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&amp;fit=crop&amp;w=1300&amp;q=80"
+                  alt="Plain patio area before a southwestern outdoor room renovation"
+                />
+                <img
+                  class="dy-compare-image dy-compare-after"
+                  src="https://images.unsplash.com/photo-1598902108854-10e335adac99?auto=format&amp;fit=crop&amp;w=1300&amp;q=80"
+                  alt="Finished outdoor room with warm seating, planted beds, and stone detail"
+                />
+                <span class="dy-compare-label dy-compare-label-before">Before</span>
+                <span class="dy-compare-label dy-compare-label-after">After</span>
+                <input
+                  class="dy-compare-range"
+                  type="range"
+                  min="18"
+                  max="82"
+                  value="58"
+                  aria-label="Reveal the after image for the sunset patio room project"
+                  data-dy-range
+                />
+                <div class="dy-compare-handle" aria-hidden="true"></div>
+              </div>
+              <div class="dy-slide-copy">
+                <span class="dy-project-number">Project 03</span>
+                <h3>Sunset Patio Room</h3>
+                <p>
+                  The backyard becomes a low-profile gathering space with warm stone, built-in
+                  planters, night lighting, and a restrained planting plan.
+                </p>
+                <ul class="dy-meta-list">
+                  <li>
+                    <span>Palette</span>
+                    <strong>terracotta, charcoal, gold, yucca green</strong>
+                  </li>
+                  <li>
+                    <span>Focus</span>
+                    <strong>outdoor dining and evening light</strong>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </div>
+
+          <button class="dy-carousel-button" type="button" aria-label="Next project" data-dy-next>
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+
+        <div class="dy-dots" aria-label="Choose transformation">
+          <button type="button" aria-label="Show project 1" aria-pressed="true" data-dy-dot>
+            <span class="dy-visually-hidden">Show project 1</span>
+          </button>
+          <button type="button" aria-label="Show project 2" aria-pressed="false" data-dy-dot>
+            <span class="dy-visually-hidden">Show project 2</span>
+          </button>
+          <button type="button" aria-label="Show project 3" aria-pressed="false" data-dy-dot>
+            <span class="dy-visually-hidden">Show project 3</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="dy-bio" id="bio" aria-labelledby="dy-bio-title">
+        <img
+          src="https://images.unsplash.com/photo-1544717305-996b815c338c?auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+          alt="Portrait of fictional Desert Yards founder Marisol Vega"
+        />
+        <div>
+          <p class="dy-kicker">Fake bio</p>
+          <h2 id="dy-bio-title">Marisol Vega, founder and lead designer.</h2>
+          <p>
+            Marisol is a fictional landscape designer raised between Tucson and Las Cruces. After
+            years of replacing thirsty lawns with shade-forward xeriscapes, she started Desert
+            Yards to make practical desert planting feel composed, personal, and quietly refined.
+          </p>
+          <p>
+            Her crew keeps the process direct: walk the site, map the sun, simplify the irrigation,
+            choose plants that belong here, and build a yard that looks better as it settles in.
+          </p>
+        </div>
+      </section>
+
+      <section class="dy-contact" id="contact" aria-labelledby="dy-contact-title">
+        <div>
+          <p class="dy-kicker">Fake contact info</p>
+          <h2 id="dy-contact-title">Book a no-pressure yard walk.</h2>
+          <p>
+            Send the address, a few photos, and the problem areas. Desert Yards will reply with a
+            simple next step and a rough visit window.
+          </p>
+        </div>
+        <address class="dy-contact-list">
+          <span>Desert Yards Landscaping</span>
+          <span>2146 Sunset Mesa Loop, Tucson, AZ 85745</span>
+          <a href="tel:5205550186">(520) 555-0186</a>
+          <a href="mailto:hello@desertyards.example">hello@desertyards.example</a>
+          <span>Mon-Fri, 7:00 AM-4:30 PM</span>
+        </address>
+      </section>
+    </main>
+  </body>
+</html>

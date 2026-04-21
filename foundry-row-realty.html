@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundry Row Realty Website Demo</title>
+    <meta
+      name="description"
+      content="A fictional four-page realtor website demo for Foundry Row Realty, led by Nora Walsh."
+    />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="foundry-row.js" defer></script>
+  </head>
+  <body class="foundry-page foundry-home">
+    <span class="fr-progress" aria-hidden="true" data-fr-progress>&nbsp;</span>
+    <header class="fr-header">
+      <a class="fr-brand" href="foundry-row-realty.html" aria-label="Foundry Row Realty home">
+        <span class="fr-brand-mark" aria-hidden="true">FR</span>
+        <span>
+          <strong>Foundry Row Realty</strong>
+          <small>Nora Walsh, Realtor</small>
+        </span>
+      </a>
+      <nav class="fr-nav" aria-label="Foundry Row navigation">
+        <a href="foundry-row-realty.html" aria-current="page">Home</a>
+        <a href="foundry-row-listings.html">Listings</a>
+        <a href="foundry-row-showcase.html">Showcase</a>
+        <a href="foundry-row-bio.html">Bio</a>
+      </nav>
+      <a class="fr-phone" href="tel:4125550198">(412) 555-0198</a>
+    </header>
+
+    <main id="top">
+      <section class="fr-hero fr-home-hero" aria-labelledby="fr-home-title">
+        <img
+          class="fr-hero-image"
+          src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&amp;fit=crop&amp;w=1900&amp;q=80"
+          alt="A modest neighborhood home with a welcoming front porch"
+        />
+        <div class="fr-hero-shade"></div>
+        <div class="fr-container fr-hero-content" data-flow>
+          <p class="fr-kicker">River County homes and steady guidance</p>
+          <h1 id="fr-home-title">Foundry Row Realty</h1>
+          <p>
+            Real estate help for teachers, tradespeople, nurses, mechanics, shop owners, and
+            families who want straight answers before they make a life-sized decision.
+          </p>
+          <div class="fr-actions">
+            <a class="fr-button fr-button-primary" href="foundry-row-listings.html">Browse listings</a>
+            <a class="fr-button" href="foundry-row-bio.html">Meet Nora</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="fr-proof-strip" aria-label="Foundry Row highlights">
+        <article data-flow>
+          <span>01</span>
+          <strong>Clear numbers first</strong>
+          <p>Monthly payment ranges, seller net sheets, and repair priorities before the tour.</p>
+        </article>
+        <article data-flow>
+          <span>02</span>
+          <strong>Showings around real shifts</strong>
+          <p>Early, late, and weekend appointments for people whose calendar is not flexible.</p>
+        </article>
+        <article data-flow>
+          <span>03</span>
+          <strong>Calm through closing</strong>
+          <p>Inspection, appraisal, lender, and title updates translated into plain next steps.</p>
+        </article>
+      </section>
+
+      <section class="fr-section fr-intro" aria-labelledby="fr-intro-title">
+        <div class="fr-container fr-split">
+          <div data-flow>
+            <p class="fr-kicker">A quieter kind of real estate office</p>
+            <h2 id="fr-intro-title">Professional without feeling polished out of reach.</h2>
+          </div>
+          <div class="fr-copy-stack" data-flow>
+            <p>
+              Foundry Row is built around useful restraint: clean paperwork, practical property
+              advice, honest pricing conversations, and no pressure to make a home fit when it
+              does not. The experience is refined, but the work is grounded.
+            </p>
+            <ul class="fr-check-list">
+              <li>First-time buyer planning with payment comfort at the center</li>
+              <li>Seller prep that protects equity without over-improving</li>
+              <li>Neighborhood guidance for commutes, schools, yards, garages, and upkeep</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="fr-section fr-featured" aria-labelledby="fr-featured-title">
+        <div class="fr-container">
+          <div class="fr-section-heading" data-flow>
+            <p class="fr-kicker">Featured paths</p>
+            <h2 id="fr-featured-title">Homes with room for regular life.</h2>
+            <a href="foundry-row-listings.html">View all listings</a>
+          </div>
+          <div class="fr-card-grid">
+            <article class="fr-property-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Brick starter home with a front lawn"
+              />
+              <div>
+                <span>$284,000</span>
+                <h3>Brick starter near the rail line</h3>
+                <p>3 bed, 1.5 bath, fenced yard, dry basement, six-minute walk to transit.</p>
+              </div>
+            </article>
+            <article class="fr-property-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Comfortable family home with a wide driveway"
+              />
+              <div>
+                <span>$318,500</span>
+                <h3>Cape with a garage workshop</h3>
+                <p>4 bed, 2 bath, double garage, updated mechanicals, quiet side street.</p>
+              </div>
+            </article>
+            <article class="fr-property-card" data-flow>
+              <img
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+                alt="Clean move-in ready home exterior"
+              />
+              <div>
+                <span>$366,000</span>
+                <h3>Move-in ready on Maple Ward</h3>
+                <p>3 bed, 2 bath, newer roof, shaded porch, close to the elementary school.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="fr-section fr-comfort-band" aria-labelledby="fr-comfort-title">
+        <div class="fr-container fr-split">
+          <div data-flow>
+            <p class="fr-kicker">The rhythm</p>
+            <h2 id="fr-comfort-title">A process that lets people breathe.</h2>
+          </div>
+          <div class="fr-rhythm-list" data-flow>
+            <article>
+              <span>Plan</span>
+              <p>Build a payment range, timeline, and must-have list before touring.</p>
+            </article>
+            <article>
+              <span>Walk</span>
+              <p>Review condition, upkeep, commute, resale, and repair questions in the home.</p>
+            </article>
+            <article>
+              <span>Close</span>
+              <p>Keep every deadline visible and every document explained in plain language.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="fr-footer">
+      <div>
+        <strong>Foundry Row Realty</strong>
+        <span>Fictional realtor website demo by True Page Web Design.</span>
+      </div>
+      <nav aria-label="Foundry Row footer navigation">
+        <a href="foundry-row-listings.html">Listings</a>
+        <a href="foundry-row-showcase.html">Showcase</a>
+        <a href="foundry-row-bio.html">Bio</a>
+      </nav>
+    </footer>
+  </body>
+</html>

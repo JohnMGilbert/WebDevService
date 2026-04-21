@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Owner Login | True Page Web Design</title>
+    <meta
+      name="description"
+      content="Owner login for the True Page Web Design admin dashboard prototype."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="supabase-config.js" defer></script>
+    <script src="supabase-client.js" defer></script>
+    <script src="admin-portal.js" defer></script>
+  </head>
+  <body class="client-page admin-page admin-auth-page" data-admin-view="auth">
+    <header class="client-shell-header">
+      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+        <span>True Page Web Design</span>
+      </a>
+      <nav class="client-shell-nav" aria-label="Owner navigation">
+        <a href="client-login.html">Client Portal</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="client-auth-main">
+      <section class="client-auth-panel" aria-labelledby="admin-login-title">
+        <div class="client-auth-copy">
+          <p class="client-eyebrow">Owner portal</p>
+          <h1 id="admin-login-title">Review clients, tickets, plans, and payments.</h1>
+          <p>
+            This local admin prototype is separate from the public website and client area. It is
+            designed as a private owner workspace for operational follow-up.
+          </p>
+          <div class="client-auth-note">
+            <strong>Prototype credentials</strong>
+            <span>Use the demo owner button, or log in with owner@truepageweb.com / Admin-demo!9.</span>
+          </div>
+        </div>
+
+        <div class="client-auth-card">
+          <form class="client-form" data-admin-login-form>
+            <label>
+              Owner email
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="password" autocomplete="current-password" required />
+            </label>
+            <button class="client-button client-button-primary" type="submit">Login</button>
+            <button class="client-button client-button-secondary" type="button" data-admin-demo-login>
+              Use demo owner
+            </button>
+          </form>
+          <p class="client-form-message" role="status" data-admin-auth-message></p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
