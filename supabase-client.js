@@ -433,6 +433,42 @@
       return data;
     },
 
+    async fulfillPlanRequest({ clientId, requestId, plan }) {
+      const supabaseClient = requireClient();
+      const paymentStatus = plan === "care-plan" ? "Monthly active" : "Paid/current";
+      const nextBilling = plan === "care-plan" ? "Monthly" : "Project billing";
+      const { data: currentPlan, error: planError } = await supabaseClient
+        .from("client_plans")
+        .insert({
+          client_id: clientId,
+          plan,
+          status: "active",
+          member_since: new Date().toISOString().slice(0, 10),
+          next_billing: nextBilling,
+          payment_status: paymentStatus,
+          last_payment_update: new Date().toISOString(),
+        })
+        .select()
+        .single();
+
+      if (planError) {
+        throw planError;
+      }
+
+      const { data: request, error: requestError } = await supabaseClient
+        .from("plan_requests")
+        .update({ status: "Fulfilled" })
+        .eq("id", requestId)
+        .select()
+        .single();
+
+      if (requestError) {
+        throw requestError;
+      }
+
+      return { currentPlan, request };
+    },
+
     mapClientWorkspace(workspace) {
       if (!workspace?.profile) {
         return null;

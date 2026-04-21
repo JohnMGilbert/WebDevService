@@ -4642,8 +4642,34 @@ body.foundry-page::before {
     linear-gradient(0deg, rgba(32, 39, 35, 0.16), transparent 46%);
 }
 
-.fr-bio-hero .fr-hero-image {
+.fr-bio-hero {
+  min-height: auto;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(81, 111, 97, 0.08) 1px, transparent 1px) 0 0 / 68px 68px,
+    linear-gradient(0deg, rgba(155, 95, 72, 0.06) 1px, transparent 1px) 0 0 / 68px 68px,
+    var(--fr-mist);
+}
+
+.fr-bio-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.7fr);
+  gap: clamp(34px, 6vw, 84px);
+  align-items: center;
+}
+
+.fr-bio-hero .fr-hero-content {
+  max-width: 680px;
+}
+
+.fr-bio-portrait {
+  width: 100%;
+  min-height: clamp(420px, 58vw, 620px);
+  height: 100%;
+  object-fit: cover;
   object-position: center 38%;
+  border-radius: 8px;
+  box-shadow: 0 24px 70px rgba(32, 39, 35, 0.18);
 }
 
 .fr-nora-portrait {
@@ -5164,6 +5190,7 @@ body.foundry-page::before {
 
   .fr-proof-strip,
   .fr-split,
+  .fr-bio-hero-grid,
   .fr-media-split,
   .fr-listing-tools,
   .fr-neighborhood-grid {

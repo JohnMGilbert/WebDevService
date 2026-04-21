@@ -133,6 +133,27 @@
     };
   };
 
+  const fulfillLocalPlanRequest = (client, requestId) => {
+    const request = (client.planRequests || []).find((item) => item.id === requestId);
+
+    if (!request) {
+      return client;
+    }
+
+    return {
+      ...client,
+      plan: request.plan,
+      planStatus: "active",
+      planEnrolledAt: today(),
+      nextPayment: request.plan === "care-plan" ? "Monthly" : "Project billing",
+      paymentStatus: request.plan === "care-plan" ? "Monthly active" : "Paid/current",
+      lastPaymentUpdate: today(),
+      planRequests: (client.planRequests || []).map((item) =>
+        item.id === requestId ? { ...item, status: "Fulfilled" } : item
+      ),
+    };
+  };
+
   const seedAdminDemoClients = () => {
     const clients = readClients();
     const existingEmails = new Set(clients.map((client) => client.email));
@@ -547,7 +568,18 @@
             ${
               planRequests.length
                 ? `<ul class="admin-mini-list">${planRequests
-                    .map((request) => `<li>${escapeHtml(plans[request.plan]?.title || request.plan)} · ${escapeHtml(request.status)} · ${escapeHtml(request.createdAt)}</li>`)
+                    .map(
+                      (request) => `
+                        <li>
+                          <span>${escapeHtml(plans[request.plan]?.title || request.plan)} · ${escapeHtml(request.status)} · ${escapeHtml(request.createdAt)}</span>
+                          ${
+                            request.status === "Requested"
+                              ? `<button type="button" data-admin-fulfill-plan="${escapeHtml(client.id)}::${escapeHtml(request.id)}">Fulfill</button>`
+                              : ""
+                          }
+                        </li>
+                      `
+                    )
                     .join("")}</ul>`
                 : '<p class="client-empty-state">No plan requests.</p>'
             }
@@ -616,6 +648,7 @@
     document.addEventListener("click", async (event) => {
       const selectButton = event.target.closest("[data-admin-select-client]");
       const paidButton = event.target.closest("[data-admin-mark-paid]");
+      const fulfillButton = event.target.closest("[data-admin-fulfill-plan]");
       const undoButton = event.target.closest("[data-admin-undo-close]");
 
       if (selectButton) {
@@ -644,6 +677,27 @@
 
         selectedClientId = client.id;
         saveClient(markClientPaidCurrent(client));
+      }
+
+      if (fulfillButton) {
+        const [clientId, requestId] = fulfillButton.dataset.adminFulfillPlan.split("::");
+        const client = clients.find((item) => item.id === clientId);
+        const request = client?.planRequests?.find((item) => item.id === requestId);
+
+        if (!client || !request) {
+          return;
+        }
+
+        if (useDatabase) {
+          await database.fulfillPlanRequest({ clientId, requestId, plan: request.plan });
+          selectedClientId = clientId;
+          await loadDatabaseClients();
+          render();
+          return;
+        }
+
+        selectedClientId = clientId;
+        saveClient(fulfillLocalPlanRequest(client, requestId));
       }
 
       if (undoButton) {
