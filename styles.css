@@ -5644,22 +5644,6 @@ body.foundry-page::before {
   background: var(--client-gold);
 }
 
-.client-auth-note {
-  display: grid;
-  gap: 4px;
-  max-width: 470px;
-  margin-top: 26px;
-  padding: 16px;
-  color: var(--client-ink);
-  background: rgba(255, 209, 102, 0.2);
-  border: 1px solid rgba(23, 32, 42, 0.16);
-  border-radius: 8px;
-}
-
-.client-auth-note span {
-  color: var(--client-soft-ink);
-}
-
 .client-auth-card,
 .client-panel,
 .client-plan-snapshot,
