@@ -4647,7 +4647,7 @@ body.foundry-page::before {
 }
 
 .fr-nora-portrait {
-  object-position: center 34%;
+  object-position: 62% 34%;
 }
 
 .fr-home-hero .fr-hero-content {
@@ -4855,12 +4855,17 @@ body.foundry-page::before {
 .fr-property-card {
   display: grid;
   grid-template-rows: 260px minmax(220px, auto);
+  box-shadow: 0 18px 44px rgba(32, 39, 35, 0.08);
 }
 
 .fr-property-card img,
 .fr-listing-card img {
   height: 100%;
   object-fit: cover;
+}
+
+.fr-property-card img {
+  filter: brightness(0.88) saturate(0.92);
 }
 
 .fr-property-card > div,
@@ -4872,9 +4877,19 @@ body.foundry-page::before {
   padding: 24px;
 }
 
+.fr-property-card > div {
+  position: relative;
+  margin-top: -34px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), var(--fr-white) 42%),
+    var(--fr-white);
+  border-top: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 -18px 30px rgba(32, 39, 35, 0.18);
+}
+
 .fr-property-card span,
 .fr-listing-card span {
-  color: var(--fr-sage);
+  color: #365c4a;
   font-weight: 900;
 }
 
