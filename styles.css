@@ -4424,6 +4424,17 @@ body.tomlen-site-page::before {
   background: #516f61;
 }
 
+.mesa-flats-summary {
+  background:
+    linear-gradient(135deg, rgba(113, 159, 159, 0.24), transparent 58%),
+    #f5f8e4;
+}
+
+.mesa-flats-summary span {
+  color: #f5f8e4;
+  background: #2f6f73;
+}
+
 body.foundry-page {
   --fr-ink: #202723;
   --fr-soft-ink: #44504a;
