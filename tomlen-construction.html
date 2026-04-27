@@ -3,29 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tomlen Construction Website Demo</title>
+    <title>Tomlen Construction | Las Cruces Remodels, Roof Coatings &amp; Stucco Repair</title>
     <meta
       name="description"
-      content="Standalone redesign concept for Tomlen Construction, a Southern New Mexico construction company."
+      content="Tomlen Construction helps Las Cruces homeowners protect, repair, and improve their spaces with remodels, roof coatings, stucco repair, and careful project planning."
     />
+    <meta
+      name="keywords"
+      content="Las Cruces contractor, Las Cruces remodels, roof coatings Las Cruces, stucco repair Las Cruces, New Mexico contractor"
+    />
+    <meta property="og:title" content="Tomlen Construction | Las Cruces Contractor" />
+    <meta
+      property="og:description"
+      content="Remodels, roof coatings, stucco repair, and exterior improvements shaped around lasting value in the Las Cruces area."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/tomlen/hero.jpg" />
+    <meta name="theme-color" content="#111715" />
     <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "GeneralContractor",
+        "name": "Tomlen Construction",
+        "image": "assets/tomlen/hero.jpg",
+        "telephone": "+1-575-000-0000",
+        "email": "quotes@example.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Las Cruces",
+          "addressRegion": "NM",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          "Las Cruces, NM",
+          "Mesilla, NM",
+          "Dona Ana County, NM"
+        ],
+        "serviceType": [
+          "Home remodeling",
+          "Roof coatings",
+          "Stucco repair",
+          "Exterior restoration"
+        ],
+        "priceRange": "$$"
+      }
+    </script>
   </head>
   <body class="tomlen-site-page">
     <header class="tomlen-header">
       <a class="tomlen-logo" href="#top" aria-label="Tomlen Construction home">
-        <img
-          src="assets/tomlen/logo-white.png"
-          alt="Tomlen Construction"
-        />
+        <img src="assets/tomlen/logo-white.png" alt="Tomlen Construction" />
       </a>
-      <nav class="tomlen-nav" aria-label="Tomlen demo navigation">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#crew">Crew</a>
-        <a href="#contact">Contact</a>
+      <nav class="tomlen-nav" aria-label="Tomlen Construction navigation">
+        <a href="#services">Expertise</a>
+        <a href="#work">Projects</a>
+        <a href="#process">How we work</a>
+        <a href="#proof">Strengths</a>
+        <a href="#faq">FAQ</a>
+        <a href="#quote">Contact</a>
       </nav>
-      <a class="tomlen-estimate" href="#contact">Start a project</a>
+      <a class="tomlen-estimate" href="#quote">Request a quote</a>
     </header>
 
     <main id="top">
@@ -33,176 +71,358 @@
         <img
           class="tomlen-hero-image"
           src="assets/tomlen/hero.jpg"
-          alt="Tomlen construction project exterior"
+          alt="Completed Tomlen Construction exterior project in Southern New Mexico"
         />
-        <div class="tomlen-motion-grid" aria-hidden="true"></div>
+        <div class="tomlen-hero-type" aria-hidden="true">
+          <span>Purpose</span>
+          <span>in every</span>
+          <span>layer</span>
+        </div>
+        <div class="tomlen-hero-index" aria-hidden="true">
+          <span>01</span>
+          <span>Las Cruces</span>
+        </div>
         <div class="tomlen-hero-content">
-          <p class="tomlen-kicker">Southern New Mexico Construction</p>
-          <h1 id="tomlen-title">Built clean from plan to punch list.</h1>
+          <p class="tomlen-kicker">Construction with purpose in Las Cruces</p>
+          <h1 id="tomlen-title">Make the home stronger, cleaner, and ready for what comes next.</h1>
           <p>
-            Residential, commercial, industrial, roof coating, and restoration work led with
-            steady communication, practical planning, and crews who know the jobsite.
+            Tomlen Construction brings practical planning, careful construction, and durable
+            exterior work to remodels, roof coatings, stucco repair, and property improvements
+            across Southern New Mexico.
           </p>
-          <div class="tomlen-actions">
-            <a class="tomlen-button tomlen-button-main" href="#services">See services</a>
-            <a class="tomlen-button" href="#work">View recent work</a>
+          <div class="tomlen-actions" aria-label="Primary actions">
+            <a class="tomlen-button tomlen-button-main" href="#quote">Request a quote</a>
+            <a class="tomlen-button" href="#services">See expertise</a>
           </div>
         </div>
-        <div class="tomlen-hero-panel" aria-label="Company highlights">
-          <span>10+ years</span>
-          <span>Residential</span>
-          <span>Commercial</span>
-          <span>Industrial</span>
+        <div class="tomlen-hero-panel" aria-label="Core service highlights">
+          <span>Home remodels</span>
+          <span>Roof coatings</span>
+          <span>Stucco repair</span>
+          <span>Las Cruces, NM</span>
         </div>
       </section>
 
       <section class="tomlen-intro" aria-labelledby="tomlen-intro-title">
         <div>
-          <p class="tomlen-kicker">About Tomlen</p>
-          <h2 id="tomlen-intro-title">Quality craftsmanship with jobsite discipline.</h2>
+          <p class="tomlen-kicker">Built with the long view</p>
+          <h2 id="tomlen-intro-title">Every project should answer the home, the structure, and the owner.</h2>
         </div>
         <p>
-          Tomlen Construction serves Southern New Mexico with dependable building work, practical
-          project management, and a hands-on approach from the first walkthrough through the final
-          detail.
+          The right work does more than make a place look finished. It protects surfaces, improves
+          daily use, and gives homeowners a clearer path from first walkthrough to final handoff.
         </p>
       </section>
 
-      <section class="tomlen-work" id="work" aria-labelledby="tomlen-work-title">
-        <div class="tomlen-section-heading">
-          <p class="tomlen-kicker">Selected work</p>
-          <h2 id="tomlen-work-title">A look at the work before the phone call.</h2>
+      <section class="tomlen-statement" aria-label="Tomlen Construction project focus">
+        <div>
+          <span>3</span>
+          <p>Focused specialties</p>
         </div>
-        <div class="tomlen-project-grid">
-          <article>
-            <img
-              src="assets/tomlen/front-exterior.jpg"
-              alt="Finished residential exterior construction project"
-            />
-            <div>
-              <span>Residential</span>
-              <h3>Exterior upgrades and finish work</h3>
-            </div>
-          </article>
-          <article>
-            <img
-              src="assets/tomlen/roof-coating.jpg"
-              alt="Commercial roof coating project"
-            />
-            <div>
-              <span>Roof Coatings</span>
-              <h3>Durable protection for New Mexico weather</h3>
-            </div>
-          </article>
-          <article>
-            <img
-              src="assets/tomlen/restoration.jpg"
-              alt="Historic restoration construction detail"
-            />
-            <div>
-              <span>Restoration</span>
-              <h3>Preserve the structure, improve the standard</h3>
-            </div>
-          </article>
+        <div>
+          <span>LC</span>
+          <p>Built around the property’s actual needs</p>
+        </div>
+        <div>
+          <span>01</span>
+          <p>Clear path from quote to final pass</p>
         </div>
       </section>
 
       <section class="tomlen-services" id="services" aria-labelledby="tomlen-services-title">
         <div class="tomlen-section-heading">
-          <p class="tomlen-kicker">Services</p>
-          <h2 id="tomlen-services-title">Construction services for homes, businesses, and sites.</h2>
+          <div class="tomlen-section-type" aria-hidden="true">
+            <span>Expertise</span>
+            <span>matched</span>
+          </div>
+          <p class="tomlen-kicker">Our expertise</p>
+          <h2 id="tomlen-services-title">Construction strengths matched to the work your property needs.</h2>
+          <p>
+            From targeted repairs to larger remodels, Tomlen approaches each job with a clear scope,
+            the right materials, and the patience to prepare the surface before finishing it.
+          </p>
         </div>
         <div class="tomlen-service-list">
           <article>
             <span>01</span>
-            <h3>Project Management</h3>
-            <p>Planning, coordination, scheduling, and jobsite communication from start to finish.</p>
+            <h3>Home Remodels</h3>
+            <p>
+              Interior and exterior improvements planned around the way the home is used today and
+              the value it should hold tomorrow.
+            </p>
           </article>
           <article>
             <span>02</span>
-            <h3>Residential Construction</h3>
-            <p>Custom homes, additions, repairs, upgrades, and detailed finish work.</p>
+            <h3>Roof Coatings</h3>
+            <p>
+              Protective coating systems for flat and low-slope roofs, built around cleaning,
+              patching, drainage, penetrations, and long-term performance.
+            </p>
           </article>
           <article>
             <span>03</span>
-            <h3>Commercial and Industrial</h3>
-            <p>Tenant improvements, facility work, site upgrades, and large-scale build support.</p>
+            <h3>Stucco Repair</h3>
+            <p>
+              Crack repair, patching, texture matching, and surface correction that help the
+              exterior look cared for and perform better.
+            </p>
           </article>
           <article>
             <span>04</span>
-            <h3>Roof Coatings</h3>
-            <p>Elastomeric roof coating systems built for waterproofing, durability, and efficiency.</p>
+            <h3>Exterior Restoration</h3>
+            <p>
+              Thoughtful repairs for aging surfaces, worn details, and exterior areas that need
+              renewed strength before the next phase of work.
+            </p>
           </article>
           <article>
             <span>05</span>
-            <h3>Historic Restoration</h3>
-            <p>Careful restoration that respects original character while improving performance.</p>
+            <h3>Project Planning</h3>
+            <p>
+              Walkthroughs, priorities, product guidance, sequencing, and expectations set before
+              the project begins.
+            </p>
           </article>
           <article>
             <span>06</span>
-            <h3>General Construction</h3>
-            <p>Ground-up work, repairs, remodels, and problem solving for real jobsite conditions.</p>
+            <h3>Property Improvements</h3>
+            <p>
+              Practical upgrades for homes, rentals, and small properties where stronger surfaces
+              and clearer communication matter.
+            </p>
           </article>
         </div>
       </section>
 
-      <section class="tomlen-split" id="process">
+      <section class="tomlen-work" id="work" aria-labelledby="tomlen-work-title">
+        <div class="tomlen-section-heading">
+          <div class="tomlen-section-type" aria-hidden="true">
+            <span>Made</span>
+            <span>to hold</span>
+          </div>
+          <p class="tomlen-kicker">Projects with staying power</p>
+          <h2 id="tomlen-work-title">Spaces improved with purpose, care, and a sharper finish.</h2>
+          <p>
+            Real project photos help show the standard: exterior upgrades that feel complete, roof
+            systems that are prepared correctly, and repairs that respect the existing home.
+          </p>
+        </div>
+        <div class="tomlen-project-grid">
+          <article>
+            <img
+              src="assets/tomlen/front-exterior.jpg"
+              alt="Finished Las Cruces exterior improvement by Tomlen Construction"
+            />
+            <div>
+              <span>Remodels</span>
+              <h3>Exterior upgrades made to feel resolved</h3>
+            </div>
+          </article>
+          <article>
+            <img src="assets/tomlen/roof-coating.jpg" alt="Roof coating project in progress" />
+            <div>
+              <span>Roof Coatings</span>
+              <h3>Protection planned around prep, drainage, and wear</h3>
+            </div>
+          </article>
+          <article>
+            <img
+              src="assets/tomlen/restoration.jpg"
+              alt="Exterior restoration and stucco detail work"
+            />
+            <div>
+              <span>Stucco Repair</span>
+              <h3>Repair the surface before the finish goes on</h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="tomlen-split" id="process" aria-labelledby="tomlen-process-title">
         <img
           src="assets/tomlen/window-install.jpg"
-          alt="Window installation on a Tomlen Construction project"
+          alt="Window installation and remodel work by Tomlen Construction"
         />
         <div>
-          <p class="tomlen-kicker">Built around momentum</p>
-          <h2>From first walkthrough to final punch list.</h2>
+          <p class="tomlen-kicker">How we work</p>
+          <h2 id="tomlen-process-title">A steady process from first look to final pass.</h2>
           <ul>
-            <li>Scope the work before the first swing</li>
-            <li>Set expectations around timing and materials</li>
-            <li>Keep the owner informed as the site changes</li>
-            <li>Finish with details that hold up after handoff</li>
+            <li>Understand the property, the problem, and the owner’s goals</li>
+            <li>Separate urgent repairs from long-term improvements</li>
+            <li>Choose materials that fit the scope and existing structure</li>
+            <li>Keep the work moving with practical communication</li>
+            <li>Close the job with a final review and care guidance</li>
           </ul>
         </div>
       </section>
 
-      <section class="tomlen-crew" id="crew" aria-labelledby="tomlen-crew-title">
+      <section class="tomlen-proof" id="proof" aria-labelledby="tomlen-proof-title">
         <div class="tomlen-section-heading">
-          <p class="tomlen-kicker">The crew</p>
-          <h2 id="tomlen-crew-title">Put real people behind the build.</h2>
+          <div class="tomlen-section-type" aria-hidden="true">
+            <span>Prepared</span>
+            <span>to last</span>
+          </div>
+          <p class="tomlen-kicker">Strengths behind the work</p>
+          <h2 id="tomlen-proof-title">The value is in the parts of the job you see and the ones you do not.</h2>
+          <p>
+            Better construction starts with the decisions that happen before the finish coat,
+            fixture, or final walkthrough.
+          </p>
+        </div>
+        <div class="tomlen-proof-grid">
+          <article>
+            <h3>Purposeful Scope</h3>
+            <p>
+              Each quote should make the work understandable: what is included, what is not, and
+              what could change once the surface is opened up.
+            </p>
+          </article>
+          <article>
+            <h3>Durable Prep</h3>
+            <p>
+              Roof coatings and stucco repairs rely on cleaning, patching, sealing, and product
+              choices that make the finished work last longer.
+            </p>
+          </article>
+          <article>
+            <h3>Local Judgment</h3>
+            <p>
+              Las Cruces homes need work shaped around existing materials, site conditions, owner
+              priorities, and long-term maintenance.
+            </p>
+          </article>
+          <article>
+            <h3>Human Approach</h3>
+            <p>
+              Occupied homes, older materials, pets, landscaping, and neighbors all matter when the
+              crew is working around your space.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="tomlen-crew" aria-labelledby="tomlen-crew-title">
+        <div class="tomlen-section-heading">
+          <p class="tomlen-kicker">People behind the project</p>
+          <h2 id="tomlen-crew-title">Construction is easier to trust when you know who is involved.</h2>
+          <p>
+            A project is not only materials and schedule. It is also the people who walk the site,
+            explain the scope, and show up to do the work.
+          </p>
         </div>
         <div class="tomlen-crew-grid">
           <article>
-            <img
-              src="assets/tomlen/tommy-stetina.jpg"
-              alt="Tommy Stetina from Tomlen Construction"
-            />
+            <img src="assets/tomlen/tommy-stetina.jpg" alt="Tommy Stetina from Tomlen Construction" />
             <div>
               <span>Owner</span>
               <h3>Tommy Stetina</h3>
+              <p>Walkthroughs, project priorities, planning, and customer communication.</p>
             </div>
           </article>
           <article>
-            <img
-              src="assets/tomlen/ceferino.jpg"
-              alt="Ceferino from Tomlen Construction"
-            />
+            <img src="assets/tomlen/ceferino.jpg" alt="Ceferino from Tomlen Construction" />
             <div>
               <span>Crew</span>
               <h3>Ceferino</h3>
+              <p>Field work, repair execution, preparation, and jobsite follow-through.</p>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="tomlen-contact" id="contact" aria-labelledby="tomlen-contact-title">
+      <section class="tomlen-faq" id="faq" aria-labelledby="tomlen-faq-title">
         <div>
-          <p class="tomlen-kicker">Ready to build?</p>
-          <h2 id="tomlen-contact-title">Start with the project and the site.</h2>
-          <p>
-            Bring the scope, the address, the timeline, and the questions. Tomlen can help turn the
-            first walkthrough into a clear next step.
-          </p>
+          <p class="tomlen-kicker">Las Cruces contractor FAQ</p>
+          <h2 id="tomlen-faq-title">Start with the questions that shape the work.</h2>
         </div>
-        <a class="tomlen-button tomlen-button-main" href="http://tomlenconstruction.com" target="_blank" rel="noreferrer">Visit current site</a>
+        <div class="tomlen-faq-list">
+          <details>
+            <summary>Do you work across the Las Cruces area?</summary>
+            <p>
+              Yes. The service area includes Las Cruces, Mesilla, Dona Ana County, and nearby
+              Southern New Mexico communities.
+            </p>
+          </details>
+          <details>
+            <summary>What should I include when I request a quote?</summary>
+            <p>
+              Share the project type, address or neighborhood, photos if available, timing goals,
+              known concerns, and the best way to reach you.
+            </p>
+          </details>
+          <details>
+            <summary>Can stucco repairs be matched to the existing finish?</summary>
+            <p>
+              Texture and color matching are part of the planning conversation. The goal is to repair
+              the underlying issue and blend the finished surface as cleanly as possible.
+            </p>
+          </details>
+          <details>
+            <summary>When should I consider a roof coating?</summary>
+            <p>
+              A properly prepared coating system can help protect flat and low-slope roofs when the
+              existing surface, drainage, seams, and penetrations are good candidates for coating.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="tomlen-contact" id="quote" aria-labelledby="tomlen-contact-title">
+        <div class="tomlen-contact-copy">
+          <p class="tomlen-kicker">Request a quote</p>
+          <h2 id="tomlen-contact-title">Tell Tomlen what your property needs next.</h2>
+          <p>
+            Send the project type, location, timeline, and the problem areas you already know about.
+            Placeholder contact details are shown until the final contact information is ready.
+          </p>
+          <div class="tomlen-contact-details" aria-label="Placeholder contact information">
+            <span>Phone: (575) 000-0000</span>
+            <span>Email: quotes@example.com</span>
+            <span>Service area: Las Cruces, NM</span>
+            <span>License: NM license placeholder</span>
+          </div>
+        </div>
+        <form class="tomlen-quote-form" action="#" method="post">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" placeholder="Your name" />
+          </label>
+          <label>
+            Phone or email
+            <input type="text" name="contact" autocomplete="email" placeholder="Best way to reach you" />
+          </label>
+          <label>
+            Project address
+            <input type="text" name="address" autocomplete="street-address" placeholder="Las Cruces, NM" />
+          </label>
+          <label>
+            Project type
+            <select name="project-type">
+              <option>Remodel</option>
+              <option>Roof coating</option>
+              <option>Stucco repair</option>
+              <option>Exterior restoration</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label class="tomlen-form-wide">
+            Project notes
+            <textarea
+              name="project-notes"
+              rows="5"
+              placeholder="Tell us what needs attention, what you want improved, and your ideal timeline."
+            ></textarea>
+          </label>
+          <button class="tomlen-button tomlen-button-main tomlen-form-wide" type="submit">
+            Request a quote
+          </button>
+        </form>
       </section>
     </main>
+
+    <footer class="tomlen-footer">
+      <p>Tomlen Construction serves Las Cruces, Mesilla, Dona Ana County, and Southern New Mexico.</p>
+      <a href="#top">Back to top</a>
+    </footer>
   </body>
 </html>
