@@ -5,11 +5,11 @@ This repo now has the starter files needed to move the client portal from browse
 ## Files Added
 
 - `supabase/schema.sql` creates the database tables, RLS policies, admin role helper, and private screenshot bucket.
-- `supabase-config.example.js` is the browser config template.
-- `supabase-client.js` contains reusable auth, profile, ticket, screenshot, and admin helper functions.
+- `/config/supabase-config.example.js` is the browser config template.
+- `/config/supabase-client.js` contains reusable auth, profile, ticket, screenshot, and admin helper functions.
 - `utils/supabase/server.ts`, `utils/supabase/client.ts`, `utils/supabase/middleware.ts`, `middleware.ts`, and `app/page.tsx` are the Supabase-provided Next helper setup.
 - `.env.local.example` documents the required Next environment variables.
-- `.gitignore` ignores `supabase-config.js`, `.env.local`, and other local secret files so project keys do not get committed.
+- `.gitignore` ignores `.env.local` and private/local secret variants. The browser-safe `/config/supabase-config.js` can stay committed when it only contains the public project URL and publishable key.
 
 ## Manual Steps
 
@@ -20,7 +20,7 @@ This repo now has the starter files needed to move the client portal from browse
 5. Copy your project URL.
 6. Copy your anon/publishable key. Do not use the `service_role` key in browser code.
 7. Confirm `.env.local` contains your `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
-8. Confirm `supabase-config.js` contains the same project URL and publishable key for the current static HTML portal.
+8. Confirm `/config/supabase-config.js` contains the same project URL and publishable key for the current static HTML portal.
 
 ```js
 window.truePageSupabaseConfig = {
@@ -49,15 +49,15 @@ These have been added before the existing portal scripts on the client and admin
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase-config.js"></script>
-<script src="supabase-client.js"></script>
+<script src="/config/supabase-config.js"></script>
+<script src="/config/supabase-client.js"></script>
 ```
 
 The current static HTML portal uses these browser scripts. The `utils/supabase/*.ts` files are for a Next.js version of the site.
 
 ## Current Integration
 
-The client and admin portal scripts now use Supabase when `supabase-config.js` is present and configured. The old `localStorage` path remains as a fallback if Supabase is not configured.
+The client and admin portal scripts now use Supabase when `/config/supabase-config.js` is present and configured. The old `localStorage` path remains as a fallback if Supabase is not configured.
 
 Currently wired to Supabase:
 

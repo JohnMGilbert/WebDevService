@@ -252,7 +252,7 @@
       const demoClient = seedDemoClient().find((client) => client.email === "demo@truepageweb.com");
 
       setSession(demoClient.id);
-      window.location.href = "client-portal.html";
+      window.location.href = "/client/portal.html";
     });
 
     document.querySelector('[data-auth-form="login"]')?.addEventListener("submit", async (event) => {
@@ -265,7 +265,7 @@
       if (useDatabase) {
         try {
           await database.signIn(email, password);
-          window.location.href = "client-portal.html";
+          window.location.href = "/client/portal.html";
         } catch (error) {
           setMessage(message, friendlyAuthError(error, "Email or password did not match a Supabase account."), "error");
         }
@@ -281,7 +281,7 @@
       }
 
       setSession(client.id);
-      window.location.href = "client-portal.html";
+      window.location.href = "/client/portal.html";
     });
 
     document.querySelector('[data-auth-form="create"]')?.addEventListener("submit", async (event) => {
@@ -330,7 +330,7 @@
             return;
           }
 
-          window.location.href = "client-portal.html";
+          window.location.href = "/client/portal.html";
         } catch (error) {
           setMessage(message, friendlyAuthError(error, "The account could not be created in Supabase."), "error");
         }
@@ -360,7 +360,7 @@
 
       writeClients([...clients, client]);
       setSession(client.id);
-      window.location.href = "client-portal.html";
+      window.location.href = "/client/portal.html";
     });
   };
 
@@ -373,14 +373,14 @@
         client = database.mapClientWorkspace(workspace);
       } catch {
         await database.signOut().catch(() => {});
-        window.location.href = "client-login.html";
+        window.location.href = "/client/login.html";
         return;
       }
     }
 
     if (!client) {
       localStorage.removeItem(sessionKey);
-      window.location.href = "client-login.html";
+      window.location.href = "/client/login.html";
       return;
     }
 
@@ -523,7 +523,7 @@
       }
 
       localStorage.removeItem(sessionKey);
-      window.location.href = "client-login.html";
+      window.location.href = "/client/login.html";
     });
 
     document.querySelector("[data-plan-details-open]")?.addEventListener("click", () => {

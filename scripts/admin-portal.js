@@ -71,7 +71,7 @@
       : { label: "Ticket not covered", className: "is-not-covered" };
 
   const ticketDetailUrl = (clientId, ticketId) =>
-    `admin-ticket.html?client=${encodeURIComponent(clientId)}&ticket=${encodeURIComponent(ticketId)}`;
+    `/admin/ticket.html?client=${encodeURIComponent(clientId)}&ticket=${encodeURIComponent(ticketId)}`;
 
   const findTicketRecord = (clients, clientId, ticketId) => {
     const client = clients.find((item) => item.id === clientId);
@@ -272,7 +272,7 @@
     const session = localStorage.getItem(adminSessionKey);
 
     if (session !== "active") {
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
       return false;
     }
 
@@ -290,7 +290,7 @@
       if (profile.role !== "admin") {
         await database.signOut().catch(() => {});
         localStorage.removeItem(adminSessionKey);
-        window.location.href = "admin-login.html";
+        window.location.href = "/admin/login.html";
         return false;
       }
 
@@ -298,7 +298,7 @@
       return true;
     } catch {
       localStorage.removeItem(adminSessionKey);
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
       return false;
     }
   };
@@ -317,7 +317,7 @@
       }
 
       localStorage.setItem(adminSessionKey, "active");
-      window.location.href = "admin-dashboard.html";
+      window.location.href = "/admin/dashboard.html";
     });
 
     document.querySelector("[data-admin-login-form]")?.addEventListener("submit", async (event) => {
@@ -339,7 +339,7 @@
           }
 
           localStorage.setItem(adminSessionKey, "active");
-          window.location.href = "admin-dashboard.html";
+          window.location.href = "/admin/dashboard.html";
         } catch (error) {
           setMessage(message, error.message || "Owner email or password did not match Supabase.", "error");
         }
@@ -353,7 +353,7 @@
       }
 
       localStorage.setItem(adminSessionKey, "active");
-      window.location.href = "admin-dashboard.html";
+      window.location.href = "/admin/dashboard.html";
     });
   };
 
@@ -637,7 +637,7 @@
       }
 
       localStorage.removeItem(adminSessionKey);
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
     });
 
     searchInput.addEventListener("input", renderClients);
@@ -856,7 +856,7 @@
         content.innerHTML = `
           <section class="admin-panel">
             <p class="client-empty-state">This ticket could not be found in local storage.</p>
-            <a class="admin-back-link" href="admin-dashboard.html#tickets">Back to tickets</a>
+            <a class="admin-back-link" href="/admin/dashboard.html#tickets">Back to tickets</a>
           </section>
         `;
         return;
@@ -873,7 +873,7 @@
               <p class="client-eyebrow">${escapeHtml(ticket.id)} · ${escapeHtml(ticket.priority || "Normal")}</p>
               <h2>${escapeHtml(ticket.title || "Untitled ticket")}</h2>
             </div>
-            <a class="admin-back-link" href="admin-dashboard.html#tickets">Back to tickets</a>
+            <a class="admin-back-link" href="/admin/dashboard.html#tickets">Back to tickets</a>
           </div>
           <p class="client-ticket-billing ${coverage.className}">${escapeHtml(coverage.label)}</p>
           ${isClosing ? `<p class="admin-ticket-closing-note">Closed. This ticket leaves the active queue in about ${closedMinutesRemaining(ticket)} minutes. You can undo it until then.</p>` : ""}
@@ -948,7 +948,7 @@
       }
 
       localStorage.removeItem(adminSessionKey);
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
     });
 
     document.addEventListener("change", async (event) => {

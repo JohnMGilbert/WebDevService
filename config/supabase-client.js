@@ -21,7 +21,7 @@
 
   const requireClient = () => {
     if (!client) {
-      throw new Error("Supabase is not configured. Copy supabase-config.example.js to supabase-config.js and fill in your project values.");
+      throw new Error("Supabase is not configured. Copy /config/supabase-config.example.js to /config/supabase-config.js and fill in your project values.");
     }
 
     return client;
