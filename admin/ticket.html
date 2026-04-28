@@ -8,22 +8,22 @@
       name="description"
       content="Owner ticket detail prototype for True Page Web Design client requests."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    <script src="supabase-config.js" defer></script>
-    <script src="supabase-client.js" defer></script>
-    <script src="admin-portal.js" defer></script>
+    <script src="/config/supabase-config.js" defer></script>
+    <script src="/config/supabase-client.js" defer></script>
+    <script src="/scripts/admin-portal.js" defer></script>
   </head>
   <body class="client-page admin-page admin-ticket-page" data-admin-view="ticket">
     <header class="client-shell-header">
-      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
-        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+      <a class="client-brand" href="/index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="/assets/true-page-logo.svg" alt="" /></span>
         <span>True Page Admin</span>
       </a>
       <nav class="client-shell-nav" aria-label="Owner ticket navigation">
-        <a href="admin-dashboard.html#clients">Clients</a>
-        <a href="admin-dashboard.html#tickets">Tickets</a>
-        <a href="admin-dashboard.html#payments">Payments</a>
+        <a href="/admin/dashboard.html#clients">Clients</a>
+        <a href="/admin/dashboard.html#tickets">Tickets</a>
+        <a href="/admin/dashboard.html#payments">Payments</a>
         <button type="button" data-admin-logout>Logout</button>
       </nav>
     </header>

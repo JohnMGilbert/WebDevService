@@ -8,10 +8,13 @@
   const useDatabase = Boolean(database?.isConfigured);
 
   const plans = {
-    "local-launch": { title: "Local Launch", price: "Starting at $750" },
-    "growth-website": { title: "Growth Website", price: "Starting at $1,400" },
-    "care-plan": { title: "Care Plan", price: "From $62.50/mo" },
+    "local-launch": { title: "Local Launch", price: "Starting at $1,500" },
+    "growth-website": { title: "Growth Website", price: "Starting at $2,800" },
+    "care-plan": { title: "Care Plan", price: "From $125/mo" },
+    "website-partner": { title: "Website Partner Plan", price: "$0 down, $200/mo for 24 months" },
   };
+
+  const isMonthlySupportPlan = (planId) => ["care-plan", "website-partner"].includes(planId);
 
   const today = () => new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
   const now = () => Date.now();
@@ -62,16 +65,16 @@
       return "Plan needed";
     }
 
-    return client.paymentStatus || (client.plan === "care-plan" ? "Monthly active" : "Project billing");
+    return client.paymentStatus || (isMonthlySupportPlan(client.plan) ? "Monthly active" : "Project billing");
   };
 
   const ticketCoverage = (client) =>
-    client.plan === "care-plan" && client.planStatus === "active"
-      ? { label: "Ticket covered by Care Plan", className: "is-covered" }
+    isMonthlySupportPlan(client.plan) && client.planStatus === "active"
+      ? { label: `Ticket covered by ${plans[client.plan]?.title || "active support plan"}`, className: "is-covered" }
       : { label: "Ticket not covered", className: "is-not-covered" };
 
   const ticketDetailUrl = (clientId, ticketId) =>
-    `admin-ticket.html?client=${encodeURIComponent(clientId)}&ticket=${encodeURIComponent(ticketId)}`;
+    `/admin/ticket.html?client=${encodeURIComponent(clientId)}&ticket=${encodeURIComponent(ticketId)}`;
 
   const findTicketRecord = (clients, clientId, ticketId) => {
     const client = clients.find((item) => item.id === clientId);
@@ -127,8 +130,8 @@
 
     return {
       ...client,
-      paymentStatus: client.plan === "care-plan" ? "Monthly active" : "Paid/current",
-      nextPayment: client.plan === "care-plan" ? client.nextPayment || "Next monthly billing cycle" : "No balance due",
+      paymentStatus: isMonthlySupportPlan(client.plan) ? "Monthly active" : "Paid/current",
+      nextPayment: isMonthlySupportPlan(client.plan) ? client.nextPayment || "Next monthly billing cycle" : "No balance due",
       lastPaymentUpdate: today(),
     };
   };
@@ -145,8 +148,8 @@
       plan: request.plan,
       planStatus: "active",
       planEnrolledAt: today(),
-      nextPayment: request.plan === "care-plan" ? "Monthly" : "Project billing",
-      paymentStatus: request.plan === "care-plan" ? "Monthly active" : "Paid/current",
+      nextPayment: isMonthlySupportPlan(request.plan) ? "Monthly" : "Project billing",
+      paymentStatus: isMonthlySupportPlan(request.plan) ? "Monthly active" : "Paid/current",
       lastPaymentUpdate: today(),
       planRequests: (client.planRequests || []).map((item) =>
         item.id === requestId ? { ...item, status: "Fulfilled" } : item
@@ -272,7 +275,7 @@
     const session = localStorage.getItem(adminSessionKey);
 
     if (session !== "active") {
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
       return false;
     }
 
@@ -290,7 +293,7 @@
       if (profile.role !== "admin") {
         await database.signOut().catch(() => {});
         localStorage.removeItem(adminSessionKey);
-        window.location.href = "admin-login.html";
+        window.location.href = "/admin/login.html";
         return false;
       }
 
@@ -298,7 +301,7 @@
       return true;
     } catch {
       localStorage.removeItem(adminSessionKey);
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
       return false;
     }
   };
@@ -317,7 +320,7 @@
       }
 
       localStorage.setItem(adminSessionKey, "active");
-      window.location.href = "admin-dashboard.html";
+      window.location.href = "/admin/dashboard.html";
     });
 
     document.querySelector("[data-admin-login-form]")?.addEventListener("submit", async (event) => {
@@ -339,7 +342,7 @@
           }
 
           localStorage.setItem(adminSessionKey, "active");
-          window.location.href = "admin-dashboard.html";
+          window.location.href = "/admin/dashboard.html";
         } catch (error) {
           setMessage(message, error.message || "Owner email or password did not match Supabase.", "error");
         }
@@ -353,7 +356,7 @@
       }
 
       localStorage.setItem(adminSessionKey, "active");
-      window.location.href = "admin-dashboard.html";
+      window.location.href = "/admin/dashboard.html";
     });
   };
 
@@ -637,7 +640,7 @@
       }
 
       localStorage.removeItem(adminSessionKey);
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
     });
 
     searchInput.addEventListener("input", renderClients);
@@ -668,7 +671,7 @@
             return;
           }
 
-          await database.markPlanPaidCurrent(client.planId, client.plan === "care-plan" ? "Monthly active" : "Paid/current");
+          await database.markPlanPaidCurrent(client.planId, isMonthlySupportPlan(client.plan) ? "Monthly active" : "Paid/current");
           selectedClientId = client.id;
           await loadDatabaseClients();
           render();
@@ -856,7 +859,7 @@
         content.innerHTML = `
           <section class="admin-panel">
             <p class="client-empty-state">This ticket could not be found in local storage.</p>
-            <a class="admin-back-link" href="admin-dashboard.html#tickets">Back to tickets</a>
+            <a class="admin-back-link" href="/admin/dashboard.html#tickets">Back to tickets</a>
           </section>
         `;
         return;
@@ -873,7 +876,7 @@
               <p class="client-eyebrow">${escapeHtml(ticket.id)} · ${escapeHtml(ticket.priority || "Normal")}</p>
               <h2>${escapeHtml(ticket.title || "Untitled ticket")}</h2>
             </div>
-            <a class="admin-back-link" href="admin-dashboard.html#tickets">Back to tickets</a>
+            <a class="admin-back-link" href="/admin/dashboard.html#tickets">Back to tickets</a>
           </div>
           <p class="client-ticket-billing ${coverage.className}">${escapeHtml(coverage.label)}</p>
           ${isClosing ? `<p class="admin-ticket-closing-note">Closed. This ticket leaves the active queue in about ${closedMinutesRemaining(ticket)} minutes. You can undo it until then.</p>` : ""}
@@ -948,7 +951,7 @@
       }
 
       localStorage.removeItem(adminSessionKey);
-      window.location.href = "admin-login.html";
+      window.location.href = "/admin/login.html";
     });
 
     document.addEventListener("change", async (event) => {
@@ -992,7 +995,7 @@
               return;
             }
 
-            await database.markPlanPaidCurrent(client.planId, client.plan === "care-plan" ? "Monthly active" : "Paid/current");
+            await database.markPlanPaidCurrent(client.planId, isMonthlySupportPlan(client.plan) ? "Monthly active" : "Paid/current");
             await loadDatabaseClients();
             render();
             return;

@@ -23,7 +23,7 @@ alter table public.profiles add column if not exists internal_notes text not nul
 create table if not exists public.client_plans (
   id uuid primary key default gen_random_uuid(),
   client_id uuid not null references public.profiles(id) on delete cascade,
-  plan text not null check (plan in ('local-launch', 'growth-website', 'care-plan')),
+  plan text not null check (plan in ('local-launch', 'growth-website', 'care-plan', 'website-partner')),
   status text not null default 'active' check (status in ('active', 'cancelled', 'none')),
   member_since date not null default current_date,
   next_billing text not null default '',
@@ -51,12 +51,22 @@ create table if not exists public.tickets (
 create table if not exists public.plan_requests (
   id uuid primary key default gen_random_uuid(),
   client_id uuid not null references public.profiles(id) on delete cascade,
-  requested_plan text not null check (requested_plan in ('local-launch', 'growth-website', 'care-plan')),
+  requested_plan text not null check (requested_plan in ('local-launch', 'growth-website', 'care-plan', 'website-partner')),
   notes text not null default '',
   status text not null default 'Requested',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.client_plans drop constraint if exists client_plans_plan_check;
+alter table public.client_plans
+  add constraint client_plans_plan_check
+  check (plan in ('local-launch', 'growth-website', 'care-plan', 'website-partner'));
+
+alter table public.plan_requests drop constraint if exists plan_requests_requested_plan_check;
+alter table public.plan_requests
+  add constraint plan_requests_requested_plan_check
+  check (requested_plan in ('local-launch', 'growth-website', 'care-plan', 'website-partner'));
 
 create or replace function public.set_updated_at()
 returns trigger

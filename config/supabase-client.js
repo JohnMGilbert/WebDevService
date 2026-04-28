@@ -21,7 +21,7 @@
 
   const requireClient = () => {
     if (!client) {
-      throw new Error("Supabase is not configured. Copy supabase-config.example.js to supabase-config.js and fill in your project values.");
+      throw new Error("Supabase is not configured. Copy /config/supabase-config.example.js to /config/supabase-config.js and fill in your project values.");
     }
 
     return client;
@@ -45,6 +45,7 @@
 
     return new Date(value).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
   };
+  const isMonthlySupportPlan = (planId) => ["care-plan", "website-partner"].includes(planId);
 
   const upsertProfile = async (profile) => {
     const supabaseClient = requireClient();
@@ -130,8 +131,8 @@
             plan,
             status: "active",
             member_since: new Date().toISOString().slice(0, 10),
-            next_billing: plan === "care-plan" ? "Monthly" : "Project billing",
-            payment_status: plan === "care-plan" ? "Monthly active" : "Project billing",
+            next_billing: isMonthlySupportPlan(plan) ? "Monthly" : "Project billing",
+            payment_status: isMonthlySupportPlan(plan) ? "Monthly active" : "Project billing",
           });
         }
       }
@@ -225,8 +226,8 @@
           plan: user.user_metadata.initial_plan,
           status: "active",
           member_since: new Date().toISOString().slice(0, 10),
-          next_billing: user.user_metadata.initial_plan === "care-plan" ? "Monthly" : "Project billing",
-          payment_status: user.user_metadata.initial_plan === "care-plan" ? "Monthly active" : "Project billing",
+          next_billing: isMonthlySupportPlan(user.user_metadata.initial_plan) ? "Monthly" : "Project billing",
+          payment_status: isMonthlySupportPlan(user.user_metadata.initial_plan) ? "Monthly active" : "Project billing",
         });
       }
 
@@ -435,8 +436,8 @@
 
     async fulfillPlanRequest({ clientId, requestId, plan }) {
       const supabaseClient = requireClient();
-      const paymentStatus = plan === "care-plan" ? "Monthly active" : "Paid/current";
-      const nextBilling = plan === "care-plan" ? "Monthly" : "Project billing";
+      const paymentStatus = isMonthlySupportPlan(plan) ? "Monthly active" : "Paid/current";
+      const nextBilling = isMonthlySupportPlan(plan) ? "Monthly" : "Project billing";
       const { data: currentPlan, error: planError } = await supabaseClient
         .from("client_plans")
         .insert({

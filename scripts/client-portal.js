@@ -7,7 +7,7 @@
   const plans = {
     "local-launch": {
       title: "Local Launch",
-      price: "Starting at $750",
+      price: "Starting at $1,500",
       shortDescription: "A focused one-page website for a clean, credible local launch.",
       description: "Starter website build with launch support and basic local SEO setup.",
       response: "Project responses are handled during the active build window.",
@@ -19,7 +19,7 @@
     },
     "growth-website": {
       title: "Growth Website",
-      price: "Starting at $1,400",
+      price: "Starting at $2,800",
       shortDescription: "A stronger multi-page website built around leads and trust.",
       description: "Multi-page website build with lead paths, service structure, and proof sections.",
       response: "Project responses are handled during the active build window.",
@@ -31,7 +31,7 @@
     },
     "care-plan": {
       title: "Care Plan",
-      price: "From $62.50/mo",
+      price: "From $125/mo",
       shortDescription: "Ongoing support for updates, fixes, checks, and small improvements.",
       description: "Ongoing support for updates, checks, small edits, and priority help.",
       response: "Within 1 business day",
@@ -41,7 +41,21 @@
         "Best for businesses that want their website maintained without chasing every small task.",
       ],
     },
+    "website-partner": {
+      title: "Website Partner Plan",
+      price: "$0 down, $200/mo for 24 months",
+      shortDescription: "A full website build with no upfront payment and unlimited ongoing updates.",
+      description: "Any type of website with zero down, monthly billing, unlimited updates, and a 2-year service agreement.",
+      response: "Within 1 business day",
+      details: [
+        "Zero down to get the project started, then $200 per month for 24 months.",
+        "Flexible website scope built around the business, whether the site is simple or more involved.",
+        "Unlimited website updates during the active 2-year agreement.",
+      ],
+    },
   };
+
+  const isMonthlySupportPlan = (planId) => ["care-plan", "website-partner"].includes(planId);
 
   const fallbackId = () => `client-${Date.now()}-${Math.random().toString(16).slice(2)}`;
   const makeId = () => (window.crypto?.randomUUID ? window.crypto.randomUUID() : fallbackId());
@@ -252,7 +266,7 @@
       const demoClient = seedDemoClient().find((client) => client.email === "demo@truepageweb.com");
 
       setSession(demoClient.id);
-      window.location.href = "client-portal.html";
+      window.location.href = "/client/portal.html";
     });
 
     document.querySelector('[data-auth-form="login"]')?.addEventListener("submit", async (event) => {
@@ -265,7 +279,7 @@
       if (useDatabase) {
         try {
           await database.signIn(email, password);
-          window.location.href = "client-portal.html";
+          window.location.href = "/client/portal.html";
         } catch (error) {
           setMessage(message, friendlyAuthError(error, "Email or password did not match a Supabase account."), "error");
         }
@@ -281,7 +295,7 @@
       }
 
       setSession(client.id);
-      window.location.href = "client-portal.html";
+      window.location.href = "/client/portal.html";
     });
 
     document.querySelector('[data-auth-form="create"]')?.addEventListener("submit", async (event) => {
@@ -330,7 +344,7 @@
             return;
           }
 
-          window.location.href = "client-portal.html";
+          window.location.href = "/client/portal.html";
         } catch (error) {
           setMessage(message, friendlyAuthError(error, "The account could not be created in Supabase."), "error");
         }
@@ -351,7 +365,7 @@
         plan: selectedPlan,
         planStatus: selectedPlan ? "active" : "none",
         planEnrolledAt: selectedPlan ? today() : "",
-        nextBilling: selectedPlan === "care-plan" ? "Monthly" : selectedPlan ? "Project billing" : "",
+        nextBilling: isMonthlySupportPlan(selectedPlan) ? "Monthly" : selectedPlan ? "Project billing" : "",
         tickets: [],
         planRequests: [],
         createdAt: today(),
@@ -360,7 +374,7 @@
 
       writeClients([...clients, client]);
       setSession(client.id);
-      window.location.href = "client-portal.html";
+      window.location.href = "/client/portal.html";
     });
   };
 
@@ -373,14 +387,14 @@
         client = database.mapClientWorkspace(workspace);
       } catch {
         await database.signOut().catch(() => {});
-        window.location.href = "client-login.html";
+        window.location.href = "/client/login.html";
         return;
       }
     }
 
     if (!client) {
       localStorage.removeItem(sessionKey);
-      window.location.href = "client-login.html";
+      window.location.href = "/client/login.html";
       return;
     }
 
@@ -401,8 +415,8 @@
       const ticketList = document.querySelector("[data-ticket-list]");
       const tickets = client.tickets || [];
       const openTicketCount = tickets.filter((ticket) => ticket.status !== "Closed").length;
-      const ticketCoverage = client.plan === "care-plan" && client.planStatus === "active"
-        ? { label: "Ticket covered by Care Plan", className: "is-covered" }
+      const ticketCoverage = isMonthlySupportPlan(client.plan) && client.planStatus === "active"
+        ? { label: `Ticket covered by ${plans[client.plan]?.title || "active support plan"}`, className: "is-covered" }
         : { label: "Ticket not covered", className: "is-not-covered" };
 
       document.querySelector("[data-open-ticket-count]").textContent = String(openTicketCount);
@@ -441,7 +455,7 @@
     const render = () => {
       const plan = plans[client.plan];
       const activePlan = hasActivePlan();
-      const isCarePlan = activePlan && client.plan === "care-plan";
+      const hasIncludedUpdates = activePlan && isMonthlySupportPlan(client.plan);
 
       document.querySelector("[data-client-name]").textContent = client.name || "client";
       document.querySelector("[data-client-business]").textContent =
@@ -459,14 +473,14 @@
       document.querySelector("[data-plan-member-since]").textContent =
         activePlan ? client.planEnrolledAt || client.createdAt || "Not recorded" : "Not enrolled";
       document.querySelector("[data-plan-next-billing]").textContent =
-        activePlan ? client.nextBilling || (isCarePlan ? "Monthly" : "Project billing") : "Not scheduled";
+        activePlan ? client.nextBilling || (hasIncludedUpdates ? "Monthly" : "Project billing") : "Not scheduled";
       document.querySelector("[data-plan-ticket-coverage]").textContent =
-        activePlan && isCarePlan ? "Included with Care Plan" : activePlan ? "Quoted per ticket" : "Plan required";
+        activePlan && hasIncludedUpdates ? `Included with ${plan?.title || "active support plan"}` : activePlan ? "Quoted per ticket" : "Plan required";
       document.querySelector("[data-plan-open-tickets]").textContent = String(
         (client.tickets || []).filter((ticket) => ticket.status !== "Closed").length
       );
       document.querySelector("[data-ticket-access]").textContent = activePlan ? "Tickets open" : "Plan required";
-      document.querySelector("[data-paid-ticket-notice]").classList.toggle("is-hidden", !activePlan || isCarePlan);
+      document.querySelector("[data-paid-ticket-notice]").classList.toggle("is-hidden", !activePlan || hasIncludedUpdates);
       document.querySelector("[data-preferred-response]").textContent = activePlan && plan ? plan.response : "After plan setup";
       document.querySelector("[data-last-saved]").textContent = client.updatedAt || "Not saved yet";
       document.querySelector("[data-no-plan-panel]").classList.toggle("is-hidden", activePlan);
@@ -523,7 +537,7 @@
       }
 
       localStorage.removeItem(sessionKey);
-      window.location.href = "client-login.html";
+      window.location.href = "/client/login.html";
     });
 
     document.querySelector("[data-plan-details-open]")?.addEventListener("click", () => {
@@ -572,8 +586,8 @@
 
       if (useDatabase) {
         const billingNotice =
-          client.plan === "care-plan"
-            ? "Ticket covered by Care Plan"
+          isMonthlySupportPlan(client.plan)
+            ? "Ticket covered by active support plan"
             : "Ticket not covered";
 
         try {
@@ -589,9 +603,9 @@
           form.reset();
           setMessage(
             dashboardMessage,
-            client.plan === "care-plan"
+            isMonthlySupportPlan(client.plan)
               ? "Ticket submitted."
-              : "Ticket submitted. Because you do not have the Care Plan, this request will be reviewed and an additional charge will be requested before paid work begins.",
+              : "Ticket submitted. Because you do not have an unlimited support plan, this request will be reviewed and an additional charge will be requested before paid work begins.",
             "success"
           );
         } catch (error) {
@@ -616,8 +630,8 @@
         details: form.details.value.trim(),
         screenshot,
         billingNotice:
-          client.plan === "care-plan"
-            ? "Ticket covered by Care Plan"
+          isMonthlySupportPlan(client.plan)
+            ? "Ticket covered by active support plan"
             : "Ticket not covered",
         status: "Open",
         createdAt: today(),
@@ -627,9 +641,9 @@
       form.reset();
       setMessage(
         dashboardMessage,
-        client.plan === "care-plan"
+        isMonthlySupportPlan(client.plan)
           ? "Ticket submitted locally."
-          : "Ticket submitted locally. Because you do not have the Care Plan, this request will be reviewed and an additional charge will be requested before paid work begins.",
+          : "Ticket submitted locally. Because you do not have an unlimited support plan, this request will be reviewed and an additional charge will be requested before paid work begins.",
         "success"
       );
     });
@@ -714,7 +728,7 @@
         plan: request.plan,
         planStatus: "active",
         planEnrolledAt: client.planEnrolledAt || today(),
-        nextBilling: request.plan === "care-plan" ? "Monthly" : "Project billing",
+        nextBilling: isMonthlySupportPlan(request.plan) ? "Monthly" : "Project billing",
       });
       form.reset();
       setMessage(dashboardMessage, `Plan request saved for ${plans[request.plan].title}.`, "success");
@@ -741,7 +755,7 @@
           plan: planId,
           planStatus: "active",
           planEnrolledAt: client.planEnrolledAt || today(),
-          nextBilling: planId === "care-plan" ? "Monthly" : "Project billing",
+          nextBilling: isMonthlySupportPlan(planId) ? "Monthly" : "Project billing",
           planRequests: [
             ...(client.planRequests || []),
             { id: makeId(), plan: planId, notes: "Requested from client home.", createdAt: today(), status: "Requested" },

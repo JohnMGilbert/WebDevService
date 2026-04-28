@@ -8,22 +8,22 @@
       name="description"
       content="Client login and account creation for True Page Web Design clients."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    <script src="supabase-config.js" defer></script>
-    <script src="supabase-client.js" defer></script>
-    <script src="client-portal.js" defer></script>
+    <script src="/config/supabase-config.js" defer></script>
+    <script src="/config/supabase-client.js" defer></script>
+    <script src="/scripts/client-portal.js" defer></script>
   </head>
   <body class="client-page client-auth-page" data-client-view="auth">
     <header class="client-shell-header">
-      <a class="client-brand" href="index.html#top" aria-label="True Page Web Design home">
-        <span class="brand-mark"><img src="true-page-logo.svg" alt="" /></span>
+      <a class="client-brand" href="/index.html#top" aria-label="True Page Web Design home">
+        <span class="brand-mark"><img src="/assets/true-page-logo.svg" alt="" /></span>
         <span>True Page Web Design</span>
       </a>
       <nav class="client-shell-nav" aria-label="Client navigation">
-        <a href="index.html#plans">Plans</a>
-        <a href="examples.html">Examples</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="/index.html#plans">Plans</a>
+        <a href="/examples/index.html">Examples</a>
+        <a href="/index.html#contact">Contact</a>
       </nav>
     </header>
 
@@ -103,6 +103,7 @@
                   <option value="local-launch">Local Launch</option>
                   <option value="growth-website">Growth Website</option>
                   <option value="care-plan">Care Plan</option>
+                  <option value="website-partner">Website Partner Plan</option>
                 </select>
               </label>
             </div>

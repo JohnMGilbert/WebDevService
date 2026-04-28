@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paper Garden Blog Demo</title>
+    <meta
+      name="description"
+      content="A fictional personal website and blog demo with a minimal, writerly, slightly old-web feel."
+    />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <script src="/scripts/paper-garden-style-toggle.js" defer></script>
+  </head>
+  <body class="paper-garden-page" data-paper-garden-style="paper">
+    <div class="paper-garden-shell">
+      <header class="paper-garden-header">
+        <a class="paper-garden-brand" href="#top" aria-label="Paper Garden home">
+          <span class="paper-garden-mark">notebook</span>
+          <strong>Paper Garden</strong>
+          <span>Notes, links, and things worth keeping.</span>
+        </a>
+
+        <div class="paper-garden-controls">
+          <nav class="paper-garden-nav" aria-label="Paper Garden navigation">
+            <a href="#posts">Posts</a>
+            <a href="#notes">Notes</a>
+            <a href="#about">About</a>
+            <a href="#links">Links</a>
+          </nav>
+          <button
+            class="paper-garden-style-toggle"
+            type="button"
+            data-paper-garden-style-toggle
+            aria-label="Switch website style"
+          >
+            Style: Paper
+          </button>
+        </div>
+      </header>
+
+      <main class="paper-garden-main" id="top">
+        <section class="paper-garden-section paper-garden-hero" aria-labelledby="paper-garden-title">
+          <span class="paper-garden-mark">schemes &amp; plots</span>
+          <h1 id="paper-garden-title">A personal site for writing and collecting.</h1>
+          <p class="paper-garden-lead">
+            This demo is meant to show the kind of minimal personal website or blog included in the
+            $249 package: a clear homepage, room for featured writing, a few favorite links, and a
+            structure simple enough to keep updating without much fuss.
+          </p>
+          <div class="paper-garden-actions">
+            <a class="paper-garden-button paper-garden-button-primary" href="#posts">Read featured posts</a>
+            <a class="paper-garden-button" href="/index.html#plans">View the plan</a>
+          </div>
+          <div class="paper-garden-quote">
+            <p>"A nice corner of the web is still a nice thing to have."</p>
+            <cite>Fictional site owner, probably</cite>
+          </div>
+        </section>
+
+        <section class="paper-garden-section" id="about" aria-labelledby="paper-garden-about-title">
+          <p class="paper-garden-mini-title">About</p>
+          <h2 id="paper-garden-about-title">A small, memorable home page.</h2>
+          <p>
+            The tone here takes inspiration from old personal sites and modern digital gardens:
+            warm, text-forward, a little playful, and comfortable without feeling messy.
+          </p>
+          <p>
+            It works well for writers, freelancers, designers, developers, researchers, and anyone
+            who wants a web presence that feels more human than a profile page.
+          </p>
+        </section>
+
+        <section class="paper-garden-section" id="posts" aria-labelledby="paper-garden-posts-title">
+          <h2 id="paper-garden-posts-title">Featured posts</h2>
+          <ul class="paper-garden-posts">
+            <li>
+              <span class="paper-garden-date">March 2026</span>
+              <a href="#top">Why a small website still beats shouting into every app at once</a>
+              <p>A short essay about owning your home on the web and making it easy to revisit.</p>
+            </li>
+            <li>
+              <span class="paper-garden-date">February 2026</span>
+              <a href="#top">A homepage can be a garden instead of a funnel</a>
+              <p>Notes on making room for personality, not just optimization.</p>
+            </li>
+            <li>
+              <span class="paper-garden-date">January 2026</span>
+              <a href="#top">What belongs on a personal site when you are not a brand</a>
+              <p>Bio, work, writing, links, and exactly enough context to feel like a person.</p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="paper-garden-section" id="notes" aria-labelledby="paper-garden-notes-title">
+          <h2 id="paper-garden-notes-title">Small notes</h2>
+          <div class="paper-garden-note-grid">
+            <article>
+              <h3>Minimal by design</h3>
+              <p>No giant buildout, no maze of pages. Just the pieces a personal site actually needs.</p>
+            </article>
+            <article>
+              <h3>Easy to update</h3>
+              <p>The package includes basic instructions so the owner can swap text, links, and featured entries.</p>
+            </article>
+            <article>
+              <h3>Domain included in the setup</h3>
+              <p>Part of the service is helping acquire the domain and get the registrar settings organized.</p>
+            </article>
+            <article>
+              <h3>Expandable later</h3>
+              <p>This style of site can stay simple or grow into a fuller blog, portfolio, or writing archive.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="paper-garden-section" id="links" aria-labelledby="paper-garden-links-title">
+          <p class="paper-garden-mini-title">Elsewhere</p>
+          <h2 id="paper-garden-links-title">Useful links</h2>
+          <ul class="paper-garden-link-list">
+            <li>
+              <strong>Notebook</strong>
+              <a href="#posts">A running archive of short posts and longer essays.</a>
+            </li>
+            <li>
+              <strong>Projects</strong>
+              <a href="#notes">Experiments, half-finished ideas, and things still in progress.</a>
+            </li>
+            <li>
+              <strong>Contact</strong>
+              <a href="mailto:hello@example.com">hello@example.com</a>
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <footer class="paper-garden-footer">
+        <span>Paper Garden is a fictional demo for True Page Web Design.</span>
+        <a href="/examples/index.html">Back to examples</a>
+      </footer>
+    </div>
+  </body>
+</html>
