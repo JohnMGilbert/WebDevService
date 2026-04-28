@@ -1,28 +1,10 @@
-const styleModes = [
-  { id: "pop", label: "Pop" },
-  { id: "studio", label: "Studio" },
-  { id: "night", label: "Night" },
-  { id: "southwest", label: "Southwest" },
-];
+const lockedStyle = "slate";
 
-const savedStyle = localStorage.getItem("sharpSitesStyle");
-const initialStyle = styleModes.some((mode) => mode.id === savedStyle) ? savedStyle : "southwest";
-
-function applyStyle(modeId) {
-  const mode = styleModes.find((item) => item.id === modeId) || styleModes[0];
-  document.documentElement.dataset.siteStyle = mode.id;
-  localStorage.setItem("sharpSitesStyle", mode.id);
-
-  document.querySelectorAll("[data-style-switcher]").forEach((button) => {
-    button.textContent = `Style: ${mode.label}`;
-    button.setAttribute("aria-label", `Current style is ${mode.label}. Switch website style.`);
-  });
-}
-
-document.documentElement.dataset.siteStyle = initialStyle;
+document.documentElement.dataset.siteStyle = lockedStyle;
 
 window.addEventListener("DOMContentLoaded", () => {
-  applyStyle(initialStyle);
+  document.documentElement.dataset.siteStyle = lockedStyle;
+  localStorage.setItem("sharpSitesStyle", lockedStyle);
 
   document.querySelectorAll("[data-nav-toggle]").forEach((button) => {
     const header = button.closest(".site-header");
@@ -45,16 +27,6 @@ window.addEventListener("DOMContentLoaded", () => {
         button.setAttribute("aria-expanded", "false");
         button.setAttribute("aria-label", "Open navigation menu");
       });
-    });
-  });
-
-  document.querySelectorAll("[data-style-switcher]").forEach((button) => {
-    button.addEventListener("click", () => {
-      const currentIndex = styleModes.findIndex(
-        (mode) => mode.id === document.documentElement.dataset.siteStyle
-      );
-      const nextMode = styleModes[(currentIndex + 1) % styleModes.length];
-      applyStyle(nextMode.id);
     });
   });
 });
