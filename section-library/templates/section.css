@@ -1,0 +1,13 @@
+.section-library-block {
+  padding: 4rem 1.5rem;
+}
+
+.section-library-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.section-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}

@@ -1,0 +1,9 @@
+{
+  "name": "section-name",
+  "category": "heroes",
+  "businessTypes": ["contractor"],
+  "pageTypes": ["home"],
+  "tone": ["confident", "local"],
+  "features": ["headline", "cta"],
+  "notes": "Starter manifest template for searchable section metadata."
+}
