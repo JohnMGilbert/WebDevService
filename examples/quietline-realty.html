@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quietline Realty Website Demo</title>
+    <meta
+      name="description"
+      content="Quietline Realty is a fictional minimalist realtor website demo built around cinematic scroll transitions, neighborhood curation, and calm buyer-seller guidance."
+    />
+    <script src="/scripts/quietline-realty.js" defer></script>
+    <style>
+      :root {
+        --ql-bg: #050816;
+        --ql-bg-soft: #0d1531;
+        --ql-panel: rgba(10, 16, 35, 0.6);
+        --ql-panel-strong: rgba(9, 14, 30, 0.88);
+        --ql-line: rgba(255, 255, 255, 0.12);
+        --ql-line-strong: rgba(255, 255, 255, 0.22);
+        --ql-text: #f4efe7;
+        --ql-muted: rgba(244, 239, 231, 0.72);
+        --ql-soft: rgba(244, 239, 231, 0.48);
+        --ql-accent: #d6a56b;
+        --ql-accent-cool: #89d8ff;
+        --ql-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ql-text);
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(137, 216, 255, 0.08), transparent 24%),
+          radial-gradient(circle at 82% 16%, rgba(214, 165, 107, 0.12), transparent 20%),
+          linear-gradient(180deg, #050816 0%, #091022 42%, #050816 100%);
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -2;
+      }
+
+      body::before {
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 100% 92px, 92px 100%;
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.85), transparent 92%);
+      }
+
+      body::after {
+        background:
+          radial-gradient(circle at center, transparent 0 54%, rgba(5, 8, 22, 0.58) 100%),
+          linear-gradient(180deg, rgba(5, 8, 22, 0.08), rgba(5, 8, 22, 0.66));
+        z-index: -1;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .ql-skip {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 40;
+        padding: 0.65rem 0.9rem;
+        background: rgba(244, 239, 231, 0.96);
+        color: #050816;
+        border-radius: 999px;
+        transform: translateY(-140%);
+        transition: transform 180ms ease;
+      }
+
+      .ql-skip:focus {
+        transform: translateY(0);
+      }
+
+      .ql-story {
+        position: relative;
+      }
+
+      .ql-stage {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .ql-canvas,
+      .ql-glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .ql-canvas {
+        width: 100%;
+        height: 100%;
+        opacity: 0.95;
+      }
+
+      .ql-glow {
+        background:
+          radial-gradient(circle at 25% 34%, rgba(137, 216, 255, 0.12), transparent 26%),
+          radial-gradient(circle at 80% 66%, rgba(214, 165, 107, 0.18), transparent 28%),
+          linear-gradient(120deg, rgba(255, 255, 255, 0.03), transparent 40%, rgba(255, 255, 255, 0.04) 82%, transparent);
+        mix-blend-mode: screen;
+        opacity: 0.78;
+      }
+
+      .ql-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 1.2rem;
+        background: linear-gradient(180deg, rgba(5, 8, 22, 0.74), rgba(5, 8, 22, 0));
+        backdrop-filter: blur(14px);
+      }
+
+      .ql-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }
+
+      .ql-brand-mark {
+        display: grid;
+        place-items: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border: 1px solid var(--ql-line-strong);
+        border-radius: 50%;
+        color: var(--ql-accent);
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-size: 0.92rem;
+        letter-spacing: 0;
+      }
+
+      .ql-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.45rem;
+      }
+
+      .ql-nav a,
+      .ql-header-cta {
+        border: 1px solid transparent;
+        border-radius: 999px;
+        padding: 0.62rem 0.82rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ql-soft);
+        transition:
+          color 220ms ease,
+          border-color 220ms ease,
+          background-color 220ms ease,
+          transform 220ms ease;
+      }
+
+      .ql-nav a:hover,
+      .ql-nav a:focus-visible,
+      .ql-header-cta:hover,
+      .ql-header-cta:focus-visible {
+        color: var(--ql-text);
+        border-color: var(--ql-line);
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-1px);
+      }
+
+      .ql-nav a[aria-current="true"] {
+        color: var(--ql-text);
+        border-color: rgba(137, 216, 255, 0.26);
+        background: rgba(137, 216, 255, 0.1);
+      }
+
+      .ql-header-cta {
+        color: #050816;
+        background: var(--ql-text);
+      }
+
+      .ql-progress {
+        position: fixed;
+        top: 50%;
+        right: 1rem;
+        z-index: 28;
+        width: 2px;
+        height: min(34vh, 240px);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateY(-50%);
+        overflow: hidden;
+      }
+
+      .ql-progress span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(180deg, var(--ql-accent-cool), var(--ql-accent));
+        transform-origin: top center;
+        transform: scaleY(0.001);
+      }
+
+      .ql-scenes {
+        position: relative;
+        z-index: 1;
+      }
+
+      .ql-scene {
+        position: relative;
+        display: grid;
+        align-items: center;
+        min-height: 100vh;
+        padding: 7rem 1.25rem 2rem;
+      }
+
+      .ql-scene::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 22%, transparent 78%, rgba(255, 255, 255, 0.025));
+        pointer-events: none;
+      }
+
+      .ql-scene-shell {
+        position: relative;
+        z-index: 1;
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(300px, 0.96fr);
+        gap: 1.2rem;
+        align-items: center;
+      }
+
+      .ql-copy,
+      .ql-visual {
+        border: 1px solid var(--ql-line);
+        border-radius: 2rem;
+        background: var(--ql-panel);
+        backdrop-filter: blur(18px);
+        box-shadow: var(--ql-shadow);
+      }
+
+      .ql-copy {
+        padding: clamp(1.5rem, 3vw, 3rem);
+      }
+
+      .ql-visual {
+        position: relative;
+        min-height: min(72vh, 640px);
+        padding: clamp(1rem, 2vw, 1.7rem);
+        overflow: hidden;
+      }
+
+      .ql-visual::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(5, 8, 22, 0), rgba(5, 8, 22, 0.9) 70%);
+        transform-origin: right center;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .ql-eyebrow,
+      .ql-mini-title {
+        margin: 0 0 1rem;
+        color: var(--ql-accent-cool);
+        font-size: 0.76rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .ql-mini-title {
+        color: var(--ql-accent);
+      }
+
+      .ql-copy h1,
+      .ql-copy h2,
+      .ql-copy h3 {
+        margin: 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-weight: 400;
+        line-height: 0.92;
+        letter-spacing: -0.04em;
+      }
+
+      .ql-copy h1 {
+        max-width: 11ch;
+        font-size: clamp(3.1rem, 10vw, 7.4rem);
+      }
+
+      .ql-copy h2 {
+        max-width: 12ch;
+        font-size: clamp(2.6rem, 6vw, 5rem);
+      }
+
+      .ql-lead {
+        max-width: 34rem;
+        margin: 1.2rem 0 0;
+        color: var(--ql-muted);
+        font-size: clamp(1rem, 2vw, 1.16rem);
+        line-height: 1.72;
+      }
+
+      .ql-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-top: 1.6rem;
+      }
+
+      .ql-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        min-height: 3rem;
+        padding: 0.85rem 1.2rem;
+        border: 1px solid var(--ql-line-strong);
+        border-radius: 999px;
+        color: var(--ql-text);
+        background: rgba(255, 255, 255, 0.04);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+      }
+
+      .ql-button-primary {
+        color: #081223;
+        background: linear-gradient(135deg, #f4efe7, #d6a56b);
+        border-color: transparent;
+      }
+
+      .ql-meta-list,
+      .ql-bullet-list,
+      .ql-inline-data,
+      .ql-contact-list,
+      .ql-agent-notes,
+      .ql-seller-notes {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ql-meta-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .ql-meta-list li,
+      .ql-detail-card,
+      .ql-stat-chip,
+      .ql-home-card,
+      .ql-map-chip,
+      .ql-contact-list a,
+      .ql-agent-notes li,
+      .ql-seller-notes li {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 1.3rem;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .ql-meta-list li {
+        padding: 0.9rem 1rem;
+      }
+
+      .ql-meta-value {
+        display: block;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-size: 1.45rem;
+        color: var(--ql-text);
+      }
+
+      .ql-meta-label {
+        display: block;
+        margin-top: 0.32rem;
+        color: var(--ql-soft);
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+
+      .ql-bullet-list {
+        display: grid;
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+      }
+
+      .ql-bullet-list li {
+        padding-left: 1.4rem;
+        color: var(--ql-muted);
+        position: relative;
+        line-height: 1.6;
+      }
+
+      .ql-bullet-list li::before {
+        content: "";
+        position: absolute;
+        top: 0.68rem;
+        left: 0;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--ql-accent-cool), var(--ql-accent));
+      }
+
+      .ql-hero-visual {
+        display: grid;
+        grid-template-rows: 1fr auto;
+      }
+
+      .ql-house-outline {
+        position: relative;
+        min-height: 100%;
+        border-radius: 1.6rem;
+        background:
+          radial-gradient(circle at 60% 28%, rgba(137, 216, 255, 0.16), transparent 20%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+        overflow: hidden;
+      }
+
+      .ql-house-outline::before,
+      .ql-house-outline::after,
+      .ql-window-grid::before,
+      .ql-window-grid::after {
+        content: "";
+        position: absolute;
+      }
+
+      .ql-house-outline::before {
+        inset: 18% 16% 20%;
+        border: 1px solid rgba(244, 239, 231, 0.46);
+        clip-path: polygon(50% 0, 100% 25%, 100% 100%, 0 100%, 0 25%);
+      }
+
+      .ql-house-outline::after {
+        inset: 27% 24% 20%;
+        border: 1px solid rgba(137, 216, 255, 0.36);
+        clip-path: polygon(50% 0, 100% 27%, 100% 100%, 0 100%, 0 27%);
+      }
+
+      .ql-window-grid {
+        position: absolute;
+        inset: 32% 30% 23%;
+      }
+
+      .ql-window-grid::before {
+        inset: 0;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+        background-size: 100% 24%, 25% 100%;
+      }
+
+      .ql-window-grid::after {
+        inset: auto 0 0;
+        height: 26%;
+        background: linear-gradient(180deg, transparent, rgba(214, 165, 107, 0.18));
+      }
+
+      .ql-orbit,
+      .ql-orbit::before {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .ql-orbit {
+        width: 17rem;
+        height: 17rem;
+        top: -4rem;
+        right: -4rem;
+      }
+
+      .ql-orbit::before {
+        content: "";
+        inset: 1.4rem;
+      }
+
+      .ql-orbit-b {
+        width: 12rem;
+        height: 12rem;
+        inset: auto auto -3rem -3rem;
+      }
+
+      .ql-orbit-b::before {
+        inset: 1rem;
+      }
+
+      .ql-hero-detail {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.7rem;
+      }
+
+      .ql-detail-card {
+        padding: 0.9rem 1rem;
+      }
+
+      .ql-detail-card strong,
+      .ql-home-card strong,
+      .ql-map-chip strong,
+      .ql-agent-note-title {
+        display: block;
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ql-soft);
+      }
+
+      .ql-detail-card span,
+      .ql-map-chip span,
+      .ql-agent-notes li span,
+      .ql-seller-notes li span {
+        display: block;
+        margin-top: 0.42rem;
+        color: var(--ql-text);
+        line-height: 1.5;
+      }
+
+      .ql-lens-visual,
+      .ql-launch-visual,
+      .ql-homes-visual,
+      .ql-map-visual,
+      .ql-agent-visual {
+        display: grid;
+        align-items: stretch;
+      }
+
+      .ql-stack-grid {
+        display: grid;
+        gap: 0.85rem;
+        align-content: center;
+        height: 100%;
+      }
+
+      .ql-detail-card h3,
+      .ql-home-card h3 {
+        margin: 0.42rem 0 0;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-weight: 400;
+        font-size: clamp(1.2rem, 2vw, 1.55rem);
+        line-height: 1.05;
+      }
+
+      .ql-detail-card p,
+      .ql-home-card p,
+      .ql-agent-blurb,
+      .ql-footer p {
+        margin: 0.72rem 0 0;
+        color: var(--ql-muted);
+        line-height: 1.6;
+      }
+
+      .ql-stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .ql-stat-chip {
+        padding: 0.8rem 0.9rem;
+      }
+
+      .ql-stat-chip strong {
+        display: block;
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-size: 1.35rem;
+        color: var(--ql-text);
+      }
+
+      .ql-stat-chip span {
+        display: block;
+        margin-top: 0.32rem;
+        color: var(--ql-soft);
+        font-size: 0.82rem;
+      }
+
+      .ql-home-stack {
+        position: relative;
+        height: 100%;
+        min-height: 30rem;
+      }
+
+      .ql-home-card {
+        position: absolute;
+        inset: auto 0 0;
+        width: min(100%, 25rem);
+        padding: 1rem;
+        backdrop-filter: blur(14px);
+      }
+
+      .ql-home-card:nth-child(1) {
+        top: 10%;
+        left: 10%;
+        transform: rotate(-6deg);
+      }
+
+      .ql-home-card:nth-child(2) {
+        top: 27%;
+        left: 24%;
+        transform: rotate(2deg);
+      }
+
+      .ql-home-card:nth-child(3) {
+        top: 47%;
+        left: 6%;
+        transform: rotate(-2deg);
+      }
+
+      .ql-card-visual {
+        height: 11rem;
+        border-radius: 1rem;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent),
+          radial-gradient(circle at 72% 28%, rgba(255, 244, 211, 0.48), transparent 26%),
+          linear-gradient(180deg, rgba(137, 216, 255, 0.22), rgba(5, 8, 22, 0.12) 46%, rgba(5, 8, 22, 0.82) 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .ql-card-visual::before,
+      .ql-card-visual::after {
+        content: "";
+        position: absolute;
+      }
+
+      .ql-card-visual::before {
+        inset: auto 8% 0;
+        height: 52%;
+        border: 1px solid rgba(244, 239, 231, 0.46);
+        border-bottom: none;
+        clip-path: polygon(50% 0, 100% 24%, 100% 100%, 0 100%, 0 24%);
+      }
+
+      .ql-card-visual::after {
+        inset: auto 18% 12% 18%;
+        height: 28%;
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+        background-size: 100% 33%, 33% 100%;
+      }
+
+      .ql-card-visual-b {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent),
+          radial-gradient(circle at 30% 24%, rgba(214, 165, 107, 0.5), transparent 24%),
+          linear-gradient(180deg, rgba(214, 165, 107, 0.22), rgba(5, 8, 22, 0.1) 38%, rgba(5, 8, 22, 0.82) 100%);
+      }
+
+      .ql-card-visual-c {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent),
+          radial-gradient(circle at 68% 24%, rgba(137, 216, 255, 0.44), transparent 22%),
+          linear-gradient(180deg, rgba(137, 216, 255, 0.2), rgba(5, 8, 22, 0.1) 36%, rgba(5, 8, 22, 0.82) 100%);
+      }
+
+      .ql-inline-data {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 0.85rem;
+      }
+
+      .ql-inline-data li {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        padding: 0.45rem 0.75rem;
+        color: var(--ql-soft);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .ql-map-shell {
+        position: relative;
+        height: 100%;
+        min-height: 30rem;
+        border-radius: 1.5rem;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent),
+          linear-gradient(135deg, rgba(137, 216, 255, 0.08), rgba(214, 165, 107, 0.08));
+        overflow: hidden;
+      }
+
+      .ql-map-shell::before {
+        content: "";
+        position: absolute;
+        inset: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 1.2rem;
+      }
+
+      .ql-map-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .ql-map-svg path {
+        fill: none;
+        stroke-width: 1.5;
+      }
+
+      .ql-map-grid {
+        stroke: rgba(255, 255, 255, 0.08);
+      }
+
+      .ql-map-route {
+        stroke: rgba(137, 216, 255, 0.7);
+      }
+
+      .ql-map-route-b {
+        stroke: rgba(214, 165, 107, 0.7);
+      }
+
+      .ql-map-node {
+        fill: var(--ql-text);
+      }
+
+      .ql-map-chip {
+        position: absolute;
+        padding: 0.75rem 0.9rem;
+        max-width: 12rem;
+        backdrop-filter: blur(16px);
+      }
+
+      .ql-map-chip-a {
+        top: 18%;
+        left: 16%;
+      }
+
+      .ql-map-chip-b {
+        top: 34%;
+        right: 12%;
+      }
+
+      .ql-map-chip-c {
+        bottom: 23%;
+        left: 20%;
+      }
+
+      .ql-map-chip-d {
+        bottom: 16%;
+        right: 20%;
+      }
+
+      .ql-agent-visual {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 0.9rem;
+      }
+
+      .ql-portrait {
+        position: relative;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 50% 18%, rgba(244, 239, 231, 0.16), transparent 18%),
+          linear-gradient(180deg, rgba(214, 165, 107, 0.2), transparent 34%),
+          linear-gradient(180deg, rgba(137, 216, 255, 0.08), rgba(5, 8, 22, 0.34) 52%, rgba(5, 8, 22, 0.82) 100%);
+      }
+
+      .ql-portrait::before,
+      .ql-portrait::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 999px;
+      }
+
+      .ql-portrait::before {
+        top: 17%;
+        width: 9rem;
+        height: 9rem;
+        background: linear-gradient(180deg, rgba(244, 239, 231, 0.9), rgba(214, 165, 107, 0.58));
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+      }
+
+      .ql-portrait::after {
+        bottom: -8%;
+        width: 20rem;
+        height: 23rem;
+        background: linear-gradient(180deg, rgba(244, 239, 231, 0.22), rgba(5, 8, 22, 0.12));
+        clip-path: ellipse(42% 50% at 50% 50%);
+      }
+
+      .ql-signature {
+        position: absolute;
+        right: 1.3rem;
+        bottom: 1.3rem;
+        color: rgba(244, 239, 231, 0.62);
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-size: 1.15rem;
+        letter-spacing: 0.08em;
+      }
+
+      .ql-agent-notes,
+      .ql-seller-notes {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .ql-agent-notes li,
+      .ql-seller-notes li {
+        padding: 0.9rem 1rem;
+      }
+
+      .ql-quote {
+        margin: 1.5rem 0 0;
+        padding: 1.1rem 1.25rem;
+        border-left: 2px solid rgba(137, 216, 255, 0.36);
+        color: var(--ql-text);
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+        font-size: 1.25rem;
+        line-height: 1.45;
+      }
+
+      .ql-contact-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .ql-contact-list a {
+        display: block;
+        padding: 1rem;
+      }
+
+      .ql-contact-label {
+        display: block;
+        color: var(--ql-soft);
+        font-size: 0.76rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .ql-contact-value {
+        display: block;
+        margin-top: 0.42rem;
+        color: var(--ql-text);
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      .ql-track {
+        display: none;
+      }
+
+      .ql-footer {
+        width: min(1120px, calc(100% - 2.5rem));
+        margin: 0 auto;
+        padding: 1.2rem 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        color: var(--ql-soft);
+      }
+
+      .ql-footer a {
+        color: var(--ql-text);
+      }
+
+      body.ql-enhanced .ql-stage {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
+
+      body.ql-enhanced .ql-scenes {
+        height: 100%;
+      }
+
+      body.ql-enhanced .ql-scene {
+        position: absolute;
+        inset: 0;
+        opacity: var(--scene-progress, 0);
+        filter: blur(calc((1 - var(--scene-progress, 0)) * 18px));
+        pointer-events: none;
+        transform: translate3d(0, calc((1 - var(--scene-progress, 0)) * 6vh), 0) scale(calc(0.985 + var(--scene-progress, 0) * 0.015));
+        transition: opacity 160ms linear;
+      }
+
+      body.ql-enhanced .ql-scene.is-active {
+        pointer-events: auto;
+      }
+
+      body.ql-enhanced .ql-copy,
+      body.ql-enhanced .ql-visual {
+        transform: translate3d(0, calc((1 - var(--scene-progress, 0)) * 2.2rem), 0);
+      }
+
+      body.ql-enhanced .ql-copy {
+        opacity: calc(0.22 + var(--scene-progress, 0) * 0.78);
+      }
+
+      body.ql-enhanced .ql-visual {
+        opacity: calc(0.12 + var(--scene-progress, 0) * 0.88);
+      }
+
+      body.ql-enhanced .ql-visual::after {
+        opacity: 1;
+        transform: scaleX(calc(1.0001 - var(--scene-progress, 0)));
+      }
+
+      body.ql-enhanced .ql-home-card:nth-child(1) {
+        transform: translate3d(calc((1 - var(--scene-progress, 0)) * -1rem), calc((1 - var(--scene-progress, 0)) * 1.4rem), 0) rotate(-6deg);
+      }
+
+      body.ql-enhanced .ql-home-card:nth-child(2) {
+        transform: translate3d(0, calc((1 - var(--scene-progress, 0)) * 2.1rem), 0) rotate(2deg);
+      }
+
+      body.ql-enhanced .ql-home-card:nth-child(3) {
+        transform: translate3d(calc((1 - var(--scene-progress, 0)) * 0.8rem), calc((1 - var(--scene-progress, 0)) * 2.8rem), 0) rotate(-2deg);
+      }
+
+      body.ql-enhanced .ql-map-chip-a {
+        transform: translate3d(calc((1 - var(--scene-progress, 0)) * -1rem), calc((1 - var(--scene-progress, 0)) * 0.8rem), 0);
+      }
+
+      body.ql-enhanced .ql-map-chip-b {
+        transform: translate3d(calc((1 - var(--scene-progress, 0)) * 1rem), calc((1 - var(--scene-progress, 0)) * -0.6rem), 0);
+      }
+
+      body.ql-enhanced .ql-map-chip-c {
+        transform: translate3d(calc((1 - var(--scene-progress, 0)) * -0.8rem), calc((1 - var(--scene-progress, 0)) * 1rem), 0);
+      }
+
+      body.ql-enhanced .ql-map-chip-d {
+        transform: translate3d(calc((1 - var(--scene-progress, 0)) * 0.8rem), calc((1 - var(--scene-progress, 0)) * 0.6rem), 0);
+      }
+
+      body.ql-enhanced .ql-track {
+        display: block;
+        position: relative;
+        z-index: -1;
+      }
+
+      body.ql-enhanced .ql-stop {
+        display: block;
+        height: 100vh;
+      }
+
+      @media (max-width: 1040px) {
+        .ql-scene-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .ql-copy h1,
+        .ql-copy h2 {
+          max-width: 14ch;
+        }
+
+        .ql-visual {
+          min-height: 24rem;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .ql-header {
+          align-items: flex-start;
+          flex-direction: column;
+          padding-right: 3rem;
+        }
+
+        .ql-progress {
+          right: 0.65rem;
+          height: 24vh;
+        }
+
+        .ql-meta-list,
+        .ql-hero-detail,
+        .ql-stat-row,
+        .ql-contact-list {
+          grid-template-columns: 1fr;
+        }
+
+        .ql-home-stack {
+          min-height: 34rem;
+        }
+
+        .ql-home-card:nth-child(1) {
+          left: 4%;
+        }
+
+        .ql-home-card:nth-child(2) {
+          left: 10%;
+        }
+
+        .ql-home-card:nth-child(3) {
+          left: 2%;
+        }
+
+        .ql-map-chip {
+          max-width: 10.5rem;
+        }
+
+        .ql-footer {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .ql-skip,
+        .ql-nav a,
+        .ql-header-cta,
+        .ql-button,
+        .ql-canvas,
+        .ql-glow {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="quietline-page">
+    <a class="ql-skip" href="#ql-contact">Skip to contact</a>
+
+    <div class="ql-story" data-ql-story>
+      <div class="ql-stage">
+        <canvas class="ql-canvas" data-ql-canvas aria-hidden="true"></canvas>
+        <div class="ql-glow" aria-hidden="true"></div>
+
+        <header class="ql-header">
+          <a class="ql-brand" href="#scene-home" data-ql-link="0" aria-label="Quietline Realty home">
+            <span class="ql-brand-mark" aria-hidden="true">Q</span>
+            <span>Quietline Realty</span>
+          </a>
+
+          <nav class="ql-nav" aria-label="Quietline story navigation">
+            <a href="#scene-home" data-ql-link="0">Intro</a>
+            <a href="#scene-buy" data-ql-link="1">Buy</a>
+            <a href="#scene-sell" data-ql-link="2">Sell</a>
+            <a href="#scene-homes" data-ql-link="3">Homes</a>
+            <a href="#scene-map" data-ql-link="4">Areas</a>
+            <a href="#scene-agent" data-ql-link="5">Agent</a>
+          </nav>
+
+          <a class="ql-header-cta" href="mailto:elena@quietlinerealty.com">Book consult</a>
+        </header>
+
+        <div class="ql-progress" aria-hidden="true">
+          <span data-ql-progress></span>
+        </div>
+
+        <main class="ql-scenes">
+          <section class="ql-scene" id="scene-home" data-ql-scene>
+            <div class="ql-scene-shell">
+              <div class="ql-copy">
+                <p class="ql-eyebrow">Minneapolis residential advisor</p>
+                <h1>A calmer way to buy and sell without shrinking your standards.</h1>
+                <p class="ql-lead">
+                  Quietline Realty helps design-minded buyers and sellers move through Minneapolis
+                  with less noise, sharper prep, and clean decision-making.
+                </p>
+                <div class="ql-actions">
+                  <a class="ql-button ql-button-primary" href="#scene-buy" data-ql-link="1">See the buyer path</a>
+                  <a class="ql-button" href="#scene-agent" data-ql-link="5">Meet Elena Hart</a>
+                </div>
+                <ul class="ql-meta-list">
+                  <li>
+                    <span class="ql-meta-value">11</span>
+                    <span class="ql-meta-label">Neighborhoods tracked weekly for price movement and new inventory.</span>
+                  </li>
+                  <li>
+                    <span class="ql-meta-value">24h</span>
+                    <span class="ql-meta-label">Typical turnaround for a shortlist or pricing adjustment note.</span>
+                  </li>
+                  <li>
+                    <span class="ql-meta-value">1:1</span>
+                    <span class="ql-meta-label">One advisor throughout the entire deal. No team handoff.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="ql-visual ql-hero-visual">
+                <div class="ql-house-outline">
+                  <div class="ql-window-grid"></div>
+                  <span class="ql-orbit" aria-hidden="true"></span>
+                  <span class="ql-orbit ql-orbit-b" aria-hidden="true"></span>
+                </div>
+                <div class="ql-hero-detail">
+                  <div class="ql-detail-card">
+                    <strong>Current read</strong>
+                    <span>North Loop inventory is thin, but well-prepared sellers are still drawing strong first-week interest.</span>
+                  </div>
+                  <div class="ql-detail-card">
+                    <strong>Search style</strong>
+                    <span>Shortlists stay tight. Only the homes worth touring rise to the surface.</span>
+                  </div>
+                  <div class="ql-detail-card">
+                    <strong>Offer posture</strong>
+                    <span>Calm, prepared, and precise beats rushed more often than buyers think.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="ql-scene" id="scene-buy" data-ql-scene>
+            <div class="ql-scene-shell">
+              <div class="ql-copy">
+                <p class="ql-mini-title">Buyer experience</p>
+                <h2>Buy with a filter, not a frenzy.</h2>
+                <p class="ql-lead">
+                  Search alerts are not the strategy. The goal is a small, informed set of homes
+                  that genuinely match the lifestyle, budget, and timing.
+                </p>
+                <ul class="ql-bullet-list">
+                  <li>Weekly shortlists shaped around how you actually want to live, not only bedroom count.</li>
+                  <li>Tour notes that compare tradeoffs in plain language before the second showing.</li>
+                  <li>Offer planning that protects comfort, cash, and negotiating leverage.</li>
+                </ul>
+              </div>
+
+              <div class="ql-visual ql-lens-visual">
+                <div class="ql-stack-grid">
+                  <article class="ql-detail-card">
+                    <strong>Lens 01</strong>
+                    <h3>Block-by-block fit</h3>
+                    <p>Quiet streets, morning light, walkability, and renovation appetite all matter before the first tour is booked.</p>
+                  </article>
+                  <article class="ql-detail-card">
+                    <strong>Lens 02</strong>
+                    <h3>Decision notes</h3>
+                    <p>After each showing, the notes get sharper: what is promising, what will age poorly, and what to ignore.</p>
+                  </article>
+                  <article class="ql-detail-card">
+                    <strong>Lens 03</strong>
+                    <h3>Offer timing</h3>
+                    <p>When the right home appears, the move feels decisive because the groundwork is already in place.</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="ql-scene" id="scene-sell" data-ql-scene>
+            <div class="ql-scene-shell">
+              <div class="ql-copy">
+                <p class="ql-mini-title">Seller experience</p>
+                <h2>List like a product launch, not a yard sign.</h2>
+                <p class="ql-lead">
+                  Every listing gets a story, a timing plan, and a cleaner presentation standard so
+                  buyers understand the value fast.
+                </p>
+                <div class="ql-stat-row">
+                  <div class="ql-stat-chip">
+                    <strong>Prep week</strong>
+                    <span>Declutter, repair notes, light staging, and photo sequencing.</span>
+                  </div>
+                  <div class="ql-stat-chip">
+                    <strong>Launch week</strong>
+                    <span>Photography, copy, price positioning, and first-week showing flow.</span>
+                  </div>
+                  <div class="ql-stat-chip">
+                    <strong>Offer week</strong>
+                    <span>Buyer read, concession strategy, and exit pacing.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ql-visual ql-launch-visual">
+                <ul class="ql-seller-notes">
+                  <li>
+                    <strong class="ql-agent-note-title">Visual calm</strong>
+                    <span>Rooms are edited until the listing feels breathable, not crowded.</span>
+                  </li>
+                  <li>
+                    <strong class="ql-agent-note-title">Pricing note</strong>
+                    <span>The price point invites action without turning the home into a guessing game.</span>
+                  </li>
+                  <li>
+                    <strong class="ql-agent-note-title">Showing rhythm</strong>
+                    <span>Launch pacing keeps the first wave focused and easier to read.</span>
+                  </li>
+                  <li>
+                    <strong class="ql-agent-note-title">Negotiation frame</strong>
+                    <span>Concessions are weighed against timing, strength, and the seller’s real next move.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="ql-scene" id="scene-homes" data-ql-scene>
+            <div class="ql-scene-shell">
+              <div class="ql-copy">
+                <p class="ql-mini-title">Curated shortlist</p>
+                <h2>Only a few homes should stay in view.</h2>
+                <p class="ql-lead">
+                  The shortlist stays small so every address can be compared properly. Buyers get
+                  less visual clutter and stronger conviction.
+                </p>
+                <ul class="ql-bullet-list">
+                  <li>Each home is weighed against the same personal criteria, not only the photos.</li>
+                  <li>Tradeoffs stay visible: layout, light, resale, block feel, and renovation risk.</li>
+                  <li>When a match is real, the next step becomes simpler instead of louder.</li>
+                </ul>
+              </div>
+
+              <div class="ql-visual ql-homes-visual">
+                <div class="ql-home-stack">
+                  <article class="ql-home-card">
+                    <div class="ql-card-visual"></div>
+                    <strong>North Loop loft</strong>
+                    <h3>721 Washington Ave N</h3>
+                    <p>Clean corners, oversized windows, and a layout that does not waste square footage.</p>
+                    <ul class="ql-inline-data">
+                      <li>$689K</li>
+                      <li>2 bed</li>
+                      <li>Walkable</li>
+                    </ul>
+                  </article>
+                  <article class="ql-home-card">
+                    <div class="ql-card-visual ql-card-visual-b"></div>
+                    <strong>Linden Hills bungalow</strong>
+                    <h3>4423 Drew Ave S</h3>
+                    <p>Better morning light, quieter block feel, and room to grow without immediate renovation stress.</p>
+                    <ul class="ql-inline-data">
+                      <li>$835K</li>
+                      <li>3 bed</li>
+                      <li>Yard</li>
+                    </ul>
+                  </article>
+                  <article class="ql-home-card">
+                    <div class="ql-card-visual ql-card-visual-c"></div>
+                    <strong>Longfellow modernized two-story</strong>
+                    <h3>3619 34th Ave S</h3>
+                    <p>Steadier resale profile, cleaner updates, and a block that feels settled from the first walk-through.</p>
+                    <ul class="ql-inline-data">
+                      <li>$598K</li>
+                      <li>3 bed</li>
+                      <li>Near river</li>
+                    </ul>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="ql-scene" id="scene-map" data-ql-scene>
+            <div class="ql-scene-shell">
+              <div class="ql-copy">
+                <p class="ql-mini-title">Neighborhood reading</p>
+                <h2>The right fit is usually a few blocks wide.</h2>
+                <p class="ql-lead">
+                  Quietline tracks smaller decisions inside the bigger map: where the street calms
+                  down, where light improves, where inventory turns quickly, and where buyers
+                  overpay for a story that does not quite hold up.
+                </p>
+                <ul class="ql-bullet-list">
+                  <li>North Loop for walkable energy and tighter inventory.</li>
+                  <li>Linden Hills for softer pace, lake access, and strong presentation value.</li>
+                  <li>Longfellow for steadier tradeoffs between charm, price, and future flexibility.</li>
+                </ul>
+              </div>
+
+              <div class="ql-visual ql-map-visual">
+                <div class="ql-map-shell">
+                  <svg class="ql-map-svg" viewBox="0 0 100 100" aria-hidden="true">
+                    <path class="ql-map-grid" d="M8 12H92M8 28H92M8 44H92M8 60H92M8 76H92M8 92H92" />
+                    <path class="ql-map-grid" d="M12 8V92M28 8V92M44 8V92M60 8V92M76 8V92M92 8V92" />
+                    <path class="ql-map-route" d="M18 78C30 63 38 54 54 48C67 43 74 29 83 16" />
+                    <path class="ql-map-route-b" d="M22 26C34 33 38 39 44 50C48 58 58 72 76 78" />
+                    <circle class="ql-map-node" cx="23" cy="26" r="1.8" />
+                    <circle class="ql-map-node" cx="54" cy="48" r="1.8" />
+                    <circle class="ql-map-node" cx="76" cy="78" r="1.8" />
+                    <circle class="ql-map-node" cx="83" cy="16" r="1.8" />
+                  </svg>
+
+                  <div class="ql-map-chip ql-map-chip-a">
+                    <strong>North Loop</strong>
+                    <span>Fast-moving loft inventory and better walkability than the photos can explain.</span>
+                  </div>
+                  <div class="ql-map-chip ql-map-chip-b">
+                    <strong>Linden Hills</strong>
+                    <span>More breathable blocks, stronger natural light, and calmer showings.</span>
+                  </div>
+                  <div class="ql-map-chip ql-map-chip-c">
+                    <strong>Longfellow</strong>
+                    <span>Useful balance between charm, daily function, and price discipline.</span>
+                  </div>
+                  <div class="ql-map-chip ql-map-chip-d">
+                    <strong>Kingfield</strong>
+                    <span>Good for buyers who want older details without giving up neighborhood rhythm.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="ql-scene" id="scene-agent" data-ql-scene>
+            <div class="ql-scene-shell">
+              <div class="ql-copy" id="ql-contact">
+                <p class="ql-mini-title">Agent</p>
+                <h2>One advisor, no performance of urgency.</h2>
+                <p class="ql-lead">
+                  Elena Hart works with a deliberately small client load so buyers and sellers can
+                  think clearly, move quickly when needed, and avoid the overproduced feel of a big
+                  team pipeline.
+                </p>
+                <p class="ql-quote">
+                  “The point is not to create more motion. The point is to create the right amount
+                  of confidence.”
+                </p>
+                <ul class="ql-contact-list">
+                  <li>
+                    <a href="mailto:elena@quietlinerealty.com">
+                      <span class="ql-contact-label">Email</span>
+                      <span class="ql-contact-value">elena@quietlinerealty.com</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="tel:6125550184">
+                      <span class="ql-contact-label">Call</span>
+                      <span class="ql-contact-value">(612) 555-0184</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://maps.google.com/?q=North+Loop+Minneapolis" target="_blank" rel="noreferrer">
+                      <span class="ql-contact-label">Office</span>
+                      <span class="ql-contact-value">North Loop, Minneapolis</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="mailto:elena@quietlinerealty.com?subject=Consultation%20Request">
+                      <span class="ql-contact-label">Next step</span>
+                      <span class="ql-contact-value">Book a 20-minute consultation</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="ql-visual ql-agent-visual">
+                <div class="ql-portrait">
+                  <span class="ql-signature">Elena Hart</span>
+                </div>
+                <ul class="ql-agent-notes">
+                  <li>
+                    <strong class="ql-agent-note-title">For buyers</strong>
+                    <span>Shortlists, showing notes, offer reads, and sober advice when a home is not worth stretching for.</span>
+                  </li>
+                  <li>
+                    <strong class="ql-agent-note-title">For sellers</strong>
+                    <span>Preparation planning, launch pacing, pricing discipline, and clean negotiation support.</span>
+                  </li>
+                  <li>
+                    <strong class="ql-agent-note-title">Availability</strong>
+                    <span>Open for two new buyer clients and one listing consult this month.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <div class="ql-track" aria-hidden="true"></div>
+    </div>
+
+    <footer class="ql-footer">
+      <p>Fictional realtor website demo by True Page Web Design.</p>
+      <a href="/examples/index.html">Back to examples</a>
+    </footer>
+  </body>
+</html>

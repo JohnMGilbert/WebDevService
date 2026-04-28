@@ -8,10 +8,13 @@
   const useDatabase = Boolean(database?.isConfigured);
 
   const plans = {
-    "local-launch": { title: "Local Launch", price: "Starting at $750" },
-    "growth-website": { title: "Growth Website", price: "Starting at $1,400" },
-    "care-plan": { title: "Care Plan", price: "From $62.50/mo" },
+    "local-launch": { title: "Local Launch", price: "Starting at $1,500" },
+    "growth-website": { title: "Growth Website", price: "Starting at $2,800" },
+    "care-plan": { title: "Care Plan", price: "From $125/mo" },
+    "website-partner": { title: "Website Partner Plan", price: "$0 down, $200/mo for 24 months" },
   };
+
+  const isMonthlySupportPlan = (planId) => ["care-plan", "website-partner"].includes(planId);
 
   const today = () => new Date().toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
   const now = () => Date.now();
@@ -62,12 +65,12 @@
       return "Plan needed";
     }
 
-    return client.paymentStatus || (client.plan === "care-plan" ? "Monthly active" : "Project billing");
+    return client.paymentStatus || (isMonthlySupportPlan(client.plan) ? "Monthly active" : "Project billing");
   };
 
   const ticketCoverage = (client) =>
-    client.plan === "care-plan" && client.planStatus === "active"
-      ? { label: "Ticket covered by Care Plan", className: "is-covered" }
+    isMonthlySupportPlan(client.plan) && client.planStatus === "active"
+      ? { label: `Ticket covered by ${plans[client.plan]?.title || "active support plan"}`, className: "is-covered" }
       : { label: "Ticket not covered", className: "is-not-covered" };
 
   const ticketDetailUrl = (clientId, ticketId) =>
@@ -127,8 +130,8 @@
 
     return {
       ...client,
-      paymentStatus: client.plan === "care-plan" ? "Monthly active" : "Paid/current",
-      nextPayment: client.plan === "care-plan" ? client.nextPayment || "Next monthly billing cycle" : "No balance due",
+      paymentStatus: isMonthlySupportPlan(client.plan) ? "Monthly active" : "Paid/current",
+      nextPayment: isMonthlySupportPlan(client.plan) ? client.nextPayment || "Next monthly billing cycle" : "No balance due",
       lastPaymentUpdate: today(),
     };
   };
@@ -145,8 +148,8 @@
       plan: request.plan,
       planStatus: "active",
       planEnrolledAt: today(),
-      nextPayment: request.plan === "care-plan" ? "Monthly" : "Project billing",
-      paymentStatus: request.plan === "care-plan" ? "Monthly active" : "Paid/current",
+      nextPayment: isMonthlySupportPlan(request.plan) ? "Monthly" : "Project billing",
+      paymentStatus: isMonthlySupportPlan(request.plan) ? "Monthly active" : "Paid/current",
       lastPaymentUpdate: today(),
       planRequests: (client.planRequests || []).map((item) =>
         item.id === requestId ? { ...item, status: "Fulfilled" } : item
@@ -668,7 +671,7 @@
             return;
           }
 
-          await database.markPlanPaidCurrent(client.planId, client.plan === "care-plan" ? "Monthly active" : "Paid/current");
+          await database.markPlanPaidCurrent(client.planId, isMonthlySupportPlan(client.plan) ? "Monthly active" : "Paid/current");
           selectedClientId = client.id;
           await loadDatabaseClients();
           render();
@@ -992,7 +995,7 @@
               return;
             }
 
-            await database.markPlanPaidCurrent(client.planId, client.plan === "care-plan" ? "Monthly active" : "Paid/current");
+            await database.markPlanPaidCurrent(client.planId, isMonthlySupportPlan(client.plan) ? "Monthly active" : "Paid/current");
             await loadDatabaseClients();
             render();
             return;
