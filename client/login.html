@@ -8,24 +8,39 @@
       name="description"
       content="Client login and account creation for True Page Web Design clients."
     />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <link rel="canonical" href="https://truepagewebdesign.com/client/login.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/assets/true-page-logo.svg" />
     <link rel="stylesheet" href="/styles/main.css" />
+    <script src="/scripts/style-switcher.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="/config/supabase-config.js" defer></script>
     <script src="/config/supabase-client.js" defer></script>
     <script src="/scripts/client-portal.js" defer></script>
   </head>
   <body class="client-page client-auth-page" data-client-view="auth">
-    <header class="client-shell-header">
-      <a class="client-brand" href="/index.html#top" aria-label="True Page Web Design home">
-        <span class="brand-mark"><img src="/assets/true-page-logo.svg" alt="" /></span>
-        <span>True Page Web Design</span>
+    <header class="site-header">
+      <a class="brand" href="/index.html#top" aria-label="True Page Web Design home">
+        <img class="brand-wordmark" src="/assets/true-page-wordmark-fixed-900.png" alt="True Page Web Design" width="900" height="329" />
       </a>
-      <nav class="client-shell-nav" aria-label="Client navigation">
+      <nav class="nav" aria-label="Client navigation">
         <a href="/index.html#plans">Plans</a>
         <a href="/examples/index.html">Examples</a>
         <a href="/index.html#contact">Contact</a>
       </nav>
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <span aria-hidden="true">&nbsp;</span>
+        <span aria-hidden="true">&nbsp;</span>
+        <span aria-hidden="true">&nbsp;</span>
+      </button>
     </header>
 
     <main class="client-auth-main">

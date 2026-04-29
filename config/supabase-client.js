@@ -47,6 +47,8 @@
   };
   const isMonthlySupportPlan = (planId) => ["care-plan", "website-partner"].includes(planId);
 
+  const cleanText = (value) => (typeof value === "string" ? value.trim() : "");
+
   const upsertProfile = async (profile) => {
     const supabaseClient = requireClient();
     const user = await getUser();
@@ -468,6 +470,34 @@
       }
 
       return { currentPlan, request };
+    },
+
+    async submitContactLead(lead) {
+      const supabaseClient = requireClient();
+      const payload = {
+        name: cleanText(lead.name),
+        email: cleanText(lead.email).toLowerCase(),
+        business: cleanText(lead.business),
+        phone: cleanText(lead.phone),
+        message: cleanText(lead.message),
+        source_page_path: cleanText(lead.sourcePagePath),
+        source_page_title: cleanText(lead.sourcePageTitle),
+        utm_source: cleanText(lead.utmSource),
+        utm_medium: cleanText(lead.utmMedium),
+        utm_campaign: cleanText(lead.utmCampaign),
+        utm_term: cleanText(lead.utmTerm),
+        utm_content: cleanText(lead.utmContent),
+        referrer: cleanText(lead.referrer),
+        user_agent: cleanText(lead.userAgent),
+      };
+
+      const { data, error } = await supabaseClient.from("contact_leads").insert(payload).select().single();
+
+      if (error) {
+        throw error;
+      }
+
+      return data;
     },
 
     mapClientWorkspace(workspace) {
