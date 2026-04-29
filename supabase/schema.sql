@@ -58,6 +58,26 @@ create table if not exists public.plan_requests (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.contact_leads (
+  id uuid primary key default gen_random_uuid(),
+  name text not null default '',
+  email text not null default '',
+  business text not null default '',
+  phone text not null default '',
+  message text not null default '',
+  source_page_path text not null default '',
+  source_page_title text not null default '',
+  utm_source text not null default '',
+  utm_medium text not null default '',
+  utm_campaign text not null default '',
+  utm_term text not null default '',
+  utm_content text not null default '',
+  referrer text not null default '',
+  user_agent text not null default '',
+  lifecycle_status text not null default 'new' check (lifecycle_status in ('new', 'contacted', 'qualified', 'archived')),
+  created_at timestamptz not null default now()
+);
+
 alter table public.client_plans drop constraint if exists client_plans_plan_check;
 alter table public.client_plans
   add constraint client_plans_plan_check
@@ -167,6 +187,10 @@ alter table public.profiles enable row level security;
 alter table public.client_plans enable row level security;
 alter table public.tickets enable row level security;
 alter table public.plan_requests enable row level security;
+alter table public.contact_leads enable row level security;
+
+grant insert on table public.contact_leads to anon, authenticated;
+grant select, update on table public.contact_leads to authenticated;
 
 grant execute on function public.cancel_current_plan() to authenticated;
 
@@ -242,6 +266,25 @@ with check ((select auth.uid()) = client_id);
 drop policy if exists "Admins can update plan requests" on public.plan_requests;
 create policy "Admins can update plan requests"
 on public.plan_requests for update
+to authenticated
+using (public.is_admin())
+with check (public.is_admin());
+
+drop policy if exists "Anyone can submit contact leads" on public.contact_leads;
+create policy "Anyone can submit contact leads"
+on public.contact_leads for insert
+to anon, authenticated
+with check (true);
+
+drop policy if exists "Admins can view contact leads" on public.contact_leads;
+create policy "Admins can view contact leads"
+on public.contact_leads for select
+to authenticated
+using (public.is_admin());
+
+drop policy if exists "Admins can update contact leads" on public.contact_leads;
+create policy "Admins can update contact leads"
+on public.contact_leads for update
 to authenticated
 using (public.is_admin())
 with check (public.is_admin());

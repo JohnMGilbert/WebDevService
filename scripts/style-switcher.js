@@ -3,13 +3,11 @@ const lockedStyle = "slate";
 document.documentElement.dataset.siteStyle = lockedStyle;
 
 window.addEventListener("DOMContentLoaded", () => {
-  const headerScrollRange = 140;
-
   const syncHeaderScrollState = () => {
-    const progress = Math.min(window.scrollY / headerScrollRange, 1);
+    const progress = window.scrollY > 0 ? 1 : 0;
 
     document.querySelectorAll(".site-header").forEach((header) => {
-      header.style.setProperty("--header-scroll-progress", progress.toFixed(3));
+      header.style.setProperty("--header-scroll-progress", String(progress));
     });
   };
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-site-style="slate">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,15 +8,83 @@
       name="description"
       content="True Page Web Design is a Las Cruces, New Mexico web designer creating custom websites for local businesses that want a polished site, better SEO, and more leads."
     />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#111111" />
+    <link rel="canonical" href="https://truepagewebdesign.com/" />
+    <meta property="og:title" content="Las Cruces Web Designer | True Page Web Design" />
+    <meta
+      property="og:description"
+      content="Custom website design, redesigns, local SEO basics, and ongoing website support for small businesses in Las Cruces and Southern New Mexico."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://truepagewebdesign.com/" />
+    <meta
+      property="og:image"
+      content="https://truepagewebdesign.com/assets/hero-webdev-illustration.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Las Cruces Web Designer | True Page Web Design" />
+    <meta
+      name="twitter:description"
+      content="Custom website design, redesigns, local SEO basics, and ongoing website support for small businesses in Las Cruces and Southern New Mexico."
+    />
+    <meta
+      name="twitter:image"
+      content="https://truepagewebdesign.com/assets/hero-webdev-illustration.jpg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/assets/hero-webdev-illustration.jpg" />
     <link rel="icon" type="image/svg+xml" href="/assets/true-page-logo.svg" />
     <link rel="stylesheet" href="/styles/main.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "name": "True Page Web Design",
+            "url": "https://truepagewebdesign.com/",
+            "image": "https://truepagewebdesign.com/assets/hero-webdev-illustration.jpg",
+            "description": "True Page Web Design creates custom websites, redesigns, local SEO-ready page structures, and ongoing website support for small businesses.",
+            "email": "truepagewebdesign@gmail.com",
+            "areaServed": [
+              "Las Cruces, NM",
+              "Mesilla, NM",
+              "Southern New Mexico"
+            ],
+            "serviceType": [
+              "Web design",
+              "Website redesign",
+              "Local SEO web design",
+              "Website support"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "name": "True Page Web Design",
+            "url": "https://truepagewebdesign.com/"
+          }
+        ]
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="/config/supabase-config.js" defer></script>
+    <script src="/config/supabase-client.js" defer></script>
     <script src="/scripts/style-switcher.js" defer></script>
     <script src="/scripts/plan-modals.js" defer></script>
+    <script src="/scripts/contact-form.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="True Page Web Design home">
-        <img class="brand-wordmark" src="/assets/true-page-wordmark-fixed.png" alt="True Page Web Design" />
+        <img
+          class="brand-wordmark"
+          src="/assets/true-page-wordmark-fixed-900.png"
+          alt="True Page Web Design"
+          width="900"
+          height="329"
+        />
       </a>
       <nav class="nav" aria-label="Main navigation">
         <a href="#services">Services</a>
@@ -25,7 +93,7 @@
         <a href="#work">Work</a>
         <a href="#process">Process</a>
         <a href="#contact">Contact</a>
-        <a href="/client/login.html">Client Login</a>
+        <a class="nav-login-link" href="/client/login.html">Client Login</a>
       </nav>
       <button
         class="nav-toggle"
@@ -44,13 +112,17 @@
       <section class="hero" aria-labelledby="hero-title">
         <img
           class="hero-image"
-          src="/assets/hero-webdev-illustration.png"
+          src="/assets/hero-webdev-illustration.jpg"
           alt="Illustrated web development workspace with code, website layouts, and responsive design mockups"
+          width="1823"
+          height="863"
+          fetchpriority="high"
+          decoding="async"
         />
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <p class="eyebrow">Las Cruces web design for service businesses</p>
-          <h1 id="hero-title">Professional websites built to earn trust.</h1>
+          <h1 id="hero-title">Build Trust Through Your Website</h1>
           <p>
             I design and build clear, mobile-friendly websites for small businesses. 
             Work with me to create a 100% custom site to help your business grow.
@@ -88,30 +160,34 @@
           <a class="button primary button-project-cta services-plan-link" href="#plans"><span>See service plans</span></a>
         </div>
         <div class="services-grid">
-          <article class="service-card">
+          <a class="service-card service-card-link" href="/web-design-las-cruces.html">
             <h3>Business Websites</h3>
             <p>Modern brochure sites, service pages, landing pages, and launch-ready homepages.</p>
-          </article>
-          <article class="service-card">
+          </a>
+          <a class="service-card service-card-link" href="/website-redesign-services.html">
             <h3>Redesigns</h3>
             <p>Sharper messaging, cleaner layouts, faster loading, and a better mobile experience.</p>
-          </article>
-          <article class="service-card">
-            <h3>Care Plans</h3>
-            <p>Updates, fixes, performance checks, and practical support after your site goes live.</p>
-          </article>
-          <article class="service-card">
+          </a>
+          <a class="service-card service-card-link" href="/website-care-plans.html">
+            <h3>Personal Websites</h3>
+            <p>Advertise yourself, show off your skills, let people get to know you and what you are offering.</p>
+          </a>
+          <a class="service-card service-card-link" href="/custom-website-features.html">
             <h3>Custom Features</h3>
             <p>Booking flows, forms, CMS setup, integrations, dashboards, and lightweight web apps.</p>
-          </article>
+          </a>
         </div>
       </section>
 
       <section class="feature-band" id="work">
         <div class="feature-media">
           <img
-            src="/assets/feature-webdev-illustration.png"
+            src="/assets/feature-webdev-illustration.jpg"
             alt="Illustrated web design review with layouts, responsive mockups, and development elements"
+            width="1713"
+            height="918"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <div class="feature-copy">
@@ -128,6 +204,7 @@
             <li>Contact forms, analytics, maps, and social links wired in</li>
             <li>Launch support, handoff notes, and room to grow</li>
           </ul>
+          <a class="button secondary" href="/examples/index.html">Browse example websites</a>
         </div>
       </section>
 
@@ -228,6 +305,7 @@
             <span class="plan-label">Starter</span>
             <h3>Local Launch</h3>
             <p class="plan-price">Starting at $1,500</p>
+            <p class="plan-price-note">+ $25/mo hosting fee</p>
             <p>For a new business or solo operator that needs a professional web presence fast.</p>
             <ul>
               <li>One polished homepage</li>
@@ -243,6 +321,7 @@
             <span class="plan-label">Most useful</span>
             <h3>Growth Website</h3>
             <p class="plan-price">Starting at $2,800</p>
+            <p class="plan-price-note">+ $25/mo hosting fee</p>
             <p>For service businesses that need more than a brochure and want a stronger path to leads.</p>
             <ul>
               <li>Five core pages</li>
@@ -265,6 +344,7 @@
               <li>Broken-link review</li>
               <li>Small design edits</li>
               <li>Priority support</li>
+              <li>Hosting fee included</li>
             </ul>
             <button class="button primary" type="button" data-plan-modal-open="care-plan">View care plan details</button>
           </article>
@@ -280,6 +360,7 @@
               <li>Any type of website</li>
               <li>Unlimited updates</li>
               <li>Priority support included</li>
+              <li>Hosting fee included</li>
             </ul>
             <button class="button primary" type="button" data-plan-modal-open="website-partner">View partner plan details</button>
           </article>
@@ -465,10 +546,14 @@
             your current site. I will reply with a practical next step.
           </p>
         </div>
-        <form class="contact-form" action="mailto:truepagewebdesign@gmail.com" method="post" enctype="text/plain">
+        <form class="contact-form" data-contact-form>
           <label>
             Name
             <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Business
+            <input type="text" name="business" autocomplete="organization" />
           </label>
           <label>
             Email
@@ -478,8 +563,46 @@
             Project details
             <textarea name="message" rows="5" required></textarea>
           </label>
+          <label class="visually-hidden" aria-hidden="true">
+            Website
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </label>
           <button class="button primary" type="submit">Send project details</button>
+          <p class="contact-form-status" role="status" aria-live="polite" data-contact-form-status></p>
         </form>
+      </section>
+
+      <section class="split-section">
+        <div class="section-copy">
+          <p class="eyebrow">Search resources</p>
+          <h2>Useful pages for local business owners comparing website options.</h2>
+          <p>
+            These pages answer the questions people usually ask before they reach out: what a site
+            should include, what it tends to cost, and how the right page structure helps locally.
+          </p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Website Cost Guide</h3>
+            <p>Practical pricing context for small business websites in Las Cruces.</p>
+            <a class="button secondary" href="/website-cost-las-cruces.html">Read the pricing guide</a>
+          </article>
+          <article class="service-card">
+            <h3>Contractor Website Checklist</h3>
+            <p>A breakdown of the pages, proof, and quote paths contractor sites usually need.</p>
+            <a class="button secondary" href="/contractor-website-checklist.html">Read the checklist</a>
+          </article>
+          <article class="service-card">
+            <h3>Contractor Web Design</h3>
+            <p>A service page focused on quote-first websites for Las Cruces contractors.</p>
+            <a class="button secondary" href="/las-cruces-contractor-web-design.html">See contractor web design</a>
+          </article>
+          <article class="service-card">
+            <h3>Mesilla Web Design</h3>
+            <p>A local page for smaller owner-led businesses that need a stronger first impression.</p>
+            <a class="button secondary" href="/mesilla-small-business-web-design.html">View Mesilla page</a>
+          </article>
+        </div>
       </section>
 
       <section class="plans-faq" aria-labelledby="faq-title">
@@ -541,6 +664,10 @@
     <footer class="site-footer">
       <p>True Page Web Design</p>
       <a href="mailto:truepagewebdesign@gmail.com">truepagewebdesign@gmail.com</a>
+      <a href="/examples/index.html">Examples</a>
+      <a href="/web-design-las-cruces.html">Web Design</a>
+      <a href="/local-seo-web-design.html">Local SEO</a>
+      <a href="/website-cost-las-cruces.html">Website Cost Guide</a>
       <a href="/client/login.html">Client Login</a>
     </footer>
   </body>
