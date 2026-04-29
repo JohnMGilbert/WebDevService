@@ -344,18 +344,43 @@ a {
 }
 
 .eyebrow {
+  --badge-text: var(--ink);
+  --badge-border: rgba(17, 17, 17, 0.82);
+  --badge-glow: rgba(255, 255, 255, 0.44);
+  --badge-bg:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.08)),
+    linear-gradient(120deg, #ffe98d 0%, #ffd766 42%, #fff1b8 100%);
   display: inline-flex;
   margin: 0 0 16px;
   padding: 7px 10px;
-  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--badge-text);
   font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
-  background: var(--gold);
-  border: 2px solid var(--ink);
+  background: var(--badge-bg);
+  border: 2px solid var(--badge-border);
   border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.eyebrow::after,
+.plan-label::after {
+  content: "";
+  position: absolute;
+  inset: -40% auto -40% -32%;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, var(--badge-glow), transparent);
+  transform: rotate(18deg);
+  opacity: 0.9;
+  pointer-events: none;
+  animation: badge-shine 4.8s ease-in-out infinite;
 }
 
 h1,
@@ -441,6 +466,65 @@ h3 {
   box-shadow: 4px 4px 0 var(--ink);
 }
 
+.button-project-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color 0.3s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    background-color 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.button-project-cta::before,
+.button-project-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transform: skew(15deg);
+  transition: width 0.5s ease;
+  z-index: -1;
+}
+
+.button-project-cta::before {
+  left: -12px;
+  background: var(--green);
+}
+
+.button-project-cta::after {
+  right: -12px;
+  background: var(--green-dark);
+}
+
+.button-project-cta span {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.button-project-cta:hover,
+.button-project-cta:focus-visible {
+  color: var(--paper);
+  border-color: var(--green-dark);
+  background: var(--cyan);
+}
+
+.button-project-cta:hover::before,
+.button-project-cta:hover::after,
+.button-project-cta:focus-visible::before,
+.button-project-cta:focus-visible::after {
+  width: 58%;
+}
+
+.button-project-cta:hover span,
+.button-project-cta:focus-visible span {
+  color: var(--paper);
+}
+
 .button.secondary {
   color: var(--ink);
   background: var(--paper);
@@ -448,6 +532,65 @@ h3 {
 
 .button.secondary:hover {
   background: var(--rose);
+}
+
+.button-secondary-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color 0.3s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease,
+    background-color 0.5s ease,
+    border-color 0.5s ease;
+}
+
+.button-secondary-cta::before,
+.button-secondary-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transform: skew(15deg);
+  transition: width 0.5s ease;
+  z-index: -1;
+}
+
+.button-secondary-cta::before {
+  left: -12px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.button-secondary-cta::after {
+  right: -12px;
+  background: var(--quiet);
+}
+
+.button-secondary-cta span {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.button-secondary-cta:hover,
+.button-secondary-cta:focus-visible {
+  color: var(--ink);
+  border-color: var(--ink);
+  background: var(--paper);
+}
+
+.button-secondary-cta:hover::before,
+.button-secondary-cta:hover::after,
+.button-secondary-cta:focus-visible::before,
+.button-secondary-cta:focus-visible::after {
+  width: 58%;
+}
+
+.button-secondary-cta:hover span,
+.button-secondary-cta:focus-visible span {
+  color: var(--ink);
 }
 
 .stats-section {
@@ -994,7 +1137,7 @@ textarea:focus {
 
 .plans-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
 
@@ -1046,14 +1189,46 @@ textarea:focus {
 }
 
 .plan-label {
+  --badge-text: var(--paper);
+  --badge-border: rgba(17, 17, 17, 0.82);
+  --badge-glow: rgba(255, 255, 255, 0.26);
+  --badge-bg:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02)),
+    linear-gradient(120deg, #111111 0%, #213445 52%, #3f657f 100%);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   width: max-content;
   padding: 6px 10px;
-  color: var(--paper);
-  background: var(--ink);
+  color: var(--badge-text);
+  background: var(--badge-bg);
+  border: 2px solid var(--badge-border);
   border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 10px 24px rgba(17, 17, 17, 0.08);
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+@keyframes badge-shine {
+  0%,
+  18% {
+    left: -32%;
+    opacity: 0;
+  }
+
+  30%,
+  62% {
+    opacity: 0.9;
+  }
+
+  82%,
+  100% {
+    left: 112%;
+    opacity: 0;
+  }
 }
 
 .plan-price {
@@ -1259,7 +1434,7 @@ textarea:focus {
 }
 
 .addons-grid article,
-.faq-grid article {
+.faq-grid details {
   min-height: 188px;
   display: grid;
   align-content: start;
@@ -1272,7 +1447,7 @@ textarea:focus {
 }
 
 .addons-grid h3,
-.faq-grid h3 {
+.faq-grid summary {
   color: var(--ink);
 }
 
@@ -1280,6 +1455,55 @@ textarea:focus {
 .faq-grid p {
   margin: 0;
   color: var(--muted);
+}
+
+.faq-grid details {
+  min-height: 0;
+}
+
+.faq-grid summary {
+  position: relative;
+  display: block;
+  padding-right: 34px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.2;
+  list-style: none;
+}
+
+.faq-grid summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-grid summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.faq-grid details[open] summary::after {
+  content: "−";
+}
+
+.faq-grid details p {
+  padding-top: 2px;
+}
+
+.faq-grid details:hover,
+.faq-grid details:focus-within {
+  border-color: var(--cyan);
+}
+
+.faq-grid summary:focus-visible {
+  outline: none;
 }
 
 .plans-faq .section-heading {
@@ -2342,7 +2566,7 @@ html[data-site-style="studio"] .process-grid article,
 html[data-site-style="studio"] .example-summary,
 html[data-site-style="studio"] .plan-card,
 html[data-site-style="studio"] .addons-grid article,
-html[data-site-style="studio"] .faq-grid article,
+html[data-site-style="studio"] .faq-grid details,
 html[data-site-style="studio"] .stat,
 html[data-site-style="studio"] .plans-strip div {
   border-color: rgba(23, 32, 42, 0.3);
@@ -2527,7 +2751,7 @@ html[data-site-style="night"] .process-grid article,
 html[data-site-style="night"] .example-summary,
 html[data-site-style="night"] .plan-card,
 html[data-site-style="night"] .addons-grid article,
-html[data-site-style="night"] .faq-grid article,
+html[data-site-style="night"] .faq-grid details,
 html[data-site-style="night"] .stat,
 html[data-site-style="night"] .plans-strip div,
 html[data-site-style="night"] input,
@@ -2706,7 +2930,7 @@ html[data-site-style="southwest"] .process-grid article,
 html[data-site-style="southwest"] .example-summary,
 html[data-site-style="southwest"] .plan-card,
 html[data-site-style="southwest"] .addons-grid article,
-html[data-site-style="southwest"] .faq-grid article,
+html[data-site-style="southwest"] .faq-grid details,
 html[data-site-style="southwest"] .stat,
 html[data-site-style="southwest"] .plans-strip div,
 html[data-site-style="southwest"] input,
@@ -2945,7 +3169,7 @@ html[data-site-style="slate"] .process-grid article,
 html[data-site-style="slate"] .example-summary,
 html[data-site-style="slate"] .plan-card,
 html[data-site-style="slate"] .addons-grid article,
-html[data-site-style="slate"] .faq-grid article,
+html[data-site-style="slate"] .faq-grid details,
 html[data-site-style="slate"] .stat,
 html[data-site-style="slate"] .plans-strip div,
 html[data-site-style="slate"] input,
@@ -3139,19 +3363,17 @@ html[data-site-style="slate"] .plans-page .site-header {
 
 @media (max-width: 920px) {
   .site-header {
-    --header-scroll-progress: 0 !important;
-    position: absolute;
-    top: 12px;
-    left: clamp(14px, 3vw, 36px);
-    right: clamp(14px, 3vw, 36px);
-    padding: 12px;
-    border-radius: var(--header-floating-radius);
-    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    --header-floating-top: 12px;
+    --header-floating-side: clamp(10px, 3vw, 20px);
+    --header-floating-padding-y: 11px;
+    --header-floating-padding-x: 11px;
+    --header-stuck-padding-y: 13px;
+    --header-stuck-padding-x: clamp(14px, 4vw, 22px);
+    position: fixed;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto auto;
     align-items: start;
     gap: 10px;
-    will-change: auto;
   }
 
   .nav {
