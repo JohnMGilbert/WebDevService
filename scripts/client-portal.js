@@ -7,7 +7,7 @@
   const plans = {
     "local-launch": {
       title: "Local Launch",
-      price: "Starting at $1,500",
+      price: "Starting at $500",
       shortDescription: "A focused one-page website for a clean, credible local launch.",
       description: "Starter website build with launch support and basic local SEO setup.",
       response: "Project responses are handled during the active build window.",
@@ -19,7 +19,7 @@
     },
     "growth-website": {
       title: "Growth Website",
-      price: "Starting at $2,800",
+      price: "Starting at $1,500",
       shortDescription: "A stronger multi-page website built around leads and trust.",
       description: "Multi-page website build with lead paths, service structure, and proof sections.",
       response: "Project responses are handled during the active build window.",

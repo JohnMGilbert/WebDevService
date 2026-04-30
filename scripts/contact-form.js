@@ -1,7 +1,8 @@
 (() => {
   const database = window.truePageDatabase;
   const forms = Array.from(document.querySelectorAll("[data-contact-form]"));
-  const contactEmail = "truepagewebdesign@gmail.com";
+  const contactEmail = "jmgilbert23@gmail.com";
+  const formSubmitEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(contactEmail)}`;
 
   if (!forms.length) {
     return;
@@ -28,26 +29,46 @@
     };
   };
 
-  const buildMailto = (payload) => {
-    const subject = `Website project inquiry from ${String(payload.name).trim() || "a website lead"}`;
-    const body = [
-      `Name: ${payload.name || ""}`,
-      `Business: ${payload.business || ""}`,
-      `Email: ${payload.email || ""}`,
-      "",
-      "Project details:",
-      payload.message || "",
-      "",
-      `Source page: ${payload.sourcePageTitle || ""} (${payload.sourcePagePath || ""})`,
-      `Referrer: ${payload.referrer || ""}`,
-      `UTM source: ${payload.utmSource || ""}`,
-      `UTM medium: ${payload.utmMedium || ""}`,
-      `UTM campaign: ${payload.utmCampaign || ""}`,
-      `UTM term: ${payload.utmTerm || ""}`,
-      `UTM content: ${payload.utmContent || ""}`,
-    ].join("\n");
+  const sendViaFormSubmit = async (payload) => {
+    const submission = new FormData();
 
-    return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    submission.append("name", payload.name || "");
+    submission.append("business", payload.business || "");
+    submission.append("email", payload.email || "");
+    submission.append("message", payload.message || "");
+    submission.append("source_page_title", payload.sourcePageTitle || "");
+    submission.append("source_page_path", payload.sourcePagePath || "");
+    submission.append("source_page_url", payload.sourcePageUrl || "");
+    submission.append("referrer", payload.referrer || "");
+    submission.append("utm_source", payload.utmSource || "");
+    submission.append("utm_medium", payload.utmMedium || "");
+    submission.append("utm_campaign", payload.utmCampaign || "");
+    submission.append("utm_term", payload.utmTerm || "");
+    submission.append("utm_content", payload.utmContent || "");
+    submission.append("_subject", `Website project inquiry from ${String(payload.name).trim() || "a website lead"}`);
+    submission.append("_replyto", payload.email || "");
+    submission.append("_template", "table");
+    submission.append("_url", payload.sourcePageUrl || "");
+
+    const response = await fetch(formSubmitEndpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: submission,
+    });
+
+    let responseBody = null;
+
+    try {
+      responseBody = await response.json();
+    } catch (error) {
+      responseBody = null;
+    }
+
+    if (!response.ok || responseBody?.success === false) {
+      throw new Error(responseBody?.message || "The form could not be sent.");
+    }
   };
 
   forms.forEach((form) => {
@@ -61,7 +82,7 @@
 
       if (honeypot?.value) {
         form.reset();
-        setStatus(status, "Thanks. Opening your email app now.", "success");
+        setStatus(status, "Thanks. Your message was received.", "success");
         return;
       }
 
@@ -73,6 +94,7 @@
         message: formData.get("message") || "",
         sourcePagePath: window.location.pathname,
         sourcePageTitle: document.title,
+        sourcePageUrl: window.location.href,
         referrer: document.referrer || "",
         userAgent: navigator.userAgent || "",
         ...getUtmParams(),
@@ -83,8 +105,6 @@
         return;
       }
 
-      const mailtoUrl = buildMailto(payload);
-
       const originalLabel = submitButton?.textContent || "";
 
       if (submitButton) {
@@ -93,16 +113,23 @@
       }
 
       try {
+        const tasks = [sendViaFormSubmit(payload)];
+
         if (database?.isConfigured && typeof database.submitContactLead === "function") {
-          await database.submitContactLead(payload);
+          tasks.push(
+            database.submitContactLead(payload).catch((error) => {
+              console.error("Lead tracking was unavailable.", error);
+            })
+          );
         }
 
+        await Promise.all(tasks);
+
         form.reset();
-        setStatus(status, "Opening your email app with your project details.", "success");
-        window.location.href = mailtoUrl;
+        setStatus(status, "Thanks. Your message was sent successfully.", "success");
       } catch (error) {
-        setStatus(status, "Opening your email app. Lead tracking was unavailable.", "error");
-        window.location.href = mailtoUrl;
+        console.error("Contact form submission failed.", error);
+        setStatus(status, "Your message could not be sent right now. Please try again in a moment.", "error");
       } finally {
         if (submitButton) {
           submitButton.disabled = false;

@@ -8,8 +8,8 @@
   const useDatabase = Boolean(database?.isConfigured);
 
   const plans = {
-    "local-launch": { title: "Local Launch", price: "Starting at $1,500" },
-    "growth-website": { title: "Growth Website", price: "Starting at $2,800" },
+    "local-launch": { title: "Local Launch", price: "Starting at $500" },
+    "growth-website": { title: "Growth Website", price: "Starting at $1,500" },
     "care-plan": { title: "Care Plan", price: "From $125/mo" },
     "website-partner": { title: "Website Partner Plan", price: "$0 down, $200/mo for 24 months" },
   };
