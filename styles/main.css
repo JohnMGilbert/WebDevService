@@ -930,22 +930,27 @@ h3 {
   list-style: none;
 }
 
+.feature-examples-link {
+  width: max-content;
+  margin-top: 22px;
+}
+
 .check-list li {
   position: relative;
-  padding-left: 36px;
+  padding-left: 24px;
 }
 
 .check-list li::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.46em;
-  width: 18px;
-  height: 18px;
-  background:
-    linear-gradient(135deg, var(--gold) 0 50%, var(--cyan) 50%);
-  border: 2px solid var(--paper);
-  border-radius: 4px;
+  top: 0.58em;
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(255, 209, 102, 0.14);
 }
 
 .section-heading {
@@ -3555,6 +3560,7 @@ html[data-site-style="slate"] .plan-card li::before {
   background: var(--cyan);
   border-color: rgba(255, 255, 255, 0.82);
   border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(62, 116, 191, 0.12);
 }
 
 html[data-site-style="slate"] .process-grid span {
