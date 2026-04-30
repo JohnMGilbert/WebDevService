@@ -2,7 +2,8 @@
   const database = window.truePageDatabase;
   const forms = Array.from(document.querySelectorAll("[data-contact-form]"));
   const contactEmail = "jmgilbert23@gmail.com";
-  const formSubmitEndpoint = `https://formsubmit.co/ajax/${encodeURIComponent(contactEmail)}`;
+  const formSubmitFormId = "d941cdfa2f8630bd54304d5ef36b0edf";
+  const formSubmitEndpoint = `https://formsubmit.co/ajax/${formSubmitFormId}`;
 
   if (!forms.length) {
     return;
