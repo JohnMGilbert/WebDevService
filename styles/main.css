@@ -11289,6 +11289,22 @@ body.tomlen-site-page::after {
   border-color: #ffd089;
 }
 
+/* Carly Photography demo */
+.carly-photography-summary {
+  background:
+    linear-gradient(135deg, rgba(166, 83, 59, 0.2), transparent 54%),
+    linear-gradient(315deg, rgba(111, 126, 106, 0.18), transparent 46%),
+    #fff8f2;
+}
+
+.carly-photography-summary span {
+  background: #a6533b;
+}
+
+.carly-photography-summary h2 {
+  max-width: 10ch;
+}
+
 .wl-page {
   --wl-navy: #10263c;
   --wl-steel: #1d466b;
