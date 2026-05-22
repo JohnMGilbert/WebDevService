@@ -10,6 +10,7 @@ This repo now has the starter files needed to move the client portal from browse
 - `utils/supabase/server.ts`, `utils/supabase/client.ts`, `utils/supabase/middleware.ts`, `middleware.ts`, and `app/page.tsx` are the Supabase-provided Next helper setup.
 - `.env.local.example` documents the required Next environment variables.
 - `.gitignore` ignores `.env.local` and private/local secret variants. The browser-safe `/config/supabase-config.js` can stay committed when it only contains the public project URL and publishable key.
+- `/scripts/analytics.js` records privacy-light page views into `site_analytics_events` so the owner dashboard can show traffic summaries.
 
 ## Manual Steps
 
@@ -72,6 +73,21 @@ Currently wired to Supabase:
 - admin ticket status updates
 - admin paid/current updates
 - admin ticket detail screenshot preview/download through signed URLs
+- public page-view analytics with admin-only dashboard summaries
+
+## Analytics
+
+GitHub Pages does not provide full visitor analytics for this static site. The included tracker sends one page-view event to Supabase for public pages and skips local development, `/admin`, `/client`, and browsers with Do Not Track enabled.
+
+After running `supabase/schema.sql`, publish the site and visit a public page. Analytics will appear in `/admin/dashboard.html#analytics` for admin users.
+
+The tracker stores:
+
+- page path, title, referrer, and UTM parameters
+- anonymous visitor/session IDs in browser storage
+- browser language, timezone, screen size, viewport size, and user agent
+
+It does not collect names, emails, IP addresses, or keystrokes.
 
 ## Security Notes
 
@@ -79,3 +95,4 @@ Currently wired to Supabase:
 - Never expose the Supabase `service_role` key in HTML or frontend JavaScript.
 - Screenshot files are private by default. The helper creates short-lived signed URLs for viewing/downloading.
 - A real production admin dashboard is safest behind server-side admin checks. The included RLS role setup is good enough to start prototyping.
+- Public analytics inserts can be abused because the anon key is available to browsers. Treat the analytics table as directional traffic data, not billing-grade measurement.

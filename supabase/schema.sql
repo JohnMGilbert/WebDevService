@@ -78,6 +78,30 @@ create table if not exists public.contact_leads (
   created_at timestamptz not null default now()
 );
 
+create table if not exists public.site_analytics_events (
+  id uuid primary key default gen_random_uuid(),
+  visitor_id text not null default '',
+  session_id text not null default '',
+  page_path text not null default '',
+  page_title text not null default '',
+  page_url text not null default '',
+  referrer text not null default '',
+  referrer_host text not null default '',
+  utm_source text not null default '',
+  utm_medium text not null default '',
+  utm_campaign text not null default '',
+  utm_term text not null default '',
+  utm_content text not null default '',
+  user_agent text not null default '',
+  language text not null default '',
+  timezone text not null default '',
+  viewport_width integer,
+  viewport_height integer,
+  screen_width integer,
+  screen_height integer,
+  created_at timestamptz not null default now()
+);
+
 alter table public.client_plans drop constraint if exists client_plans_plan_check;
 alter table public.client_plans
   add constraint client_plans_plan_check
@@ -188,9 +212,12 @@ alter table public.client_plans enable row level security;
 alter table public.tickets enable row level security;
 alter table public.plan_requests enable row level security;
 alter table public.contact_leads enable row level security;
+alter table public.site_analytics_events enable row level security;
 
 grant insert on table public.contact_leads to anon, authenticated;
 grant select, update on table public.contact_leads to authenticated;
+grant insert on table public.site_analytics_events to anon, authenticated;
+grant select on table public.site_analytics_events to authenticated;
 
 grant execute on function public.cancel_current_plan() to authenticated;
 
@@ -288,6 +315,18 @@ on public.contact_leads for update
 to authenticated
 using (public.is_admin())
 with check (public.is_admin());
+
+drop policy if exists "Anyone can submit site analytics events" on public.site_analytics_events;
+create policy "Anyone can submit site analytics events"
+on public.site_analytics_events for insert
+to anon, authenticated
+with check (true);
+
+drop policy if exists "Admins can view site analytics events" on public.site_analytics_events;
+create policy "Admins can view site analytics events"
+on public.site_analytics_events for select
+to authenticated
+using (public.is_admin());
 
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values (

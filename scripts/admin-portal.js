@@ -366,17 +366,20 @@
     }
 
     let clients = useDatabase ? [] : seedAdminDemoClients();
+    let analyticsEvents = [];
     let selectedClientId = clients[0]?.id || "";
 
     const clientList = document.querySelector("[data-admin-client-list]");
     const ticketList = document.querySelector("[data-admin-ticket-list]");
     const paymentList = document.querySelector("[data-admin-payment-list]");
+    const analyticsContent = document.querySelector("[data-admin-analytics-content]");
     const selectedPanel = document.querySelector("[data-admin-selected-client]");
     const selectedName = document.querySelector("[data-admin-selected-name]");
     const searchInput = document.querySelector("[data-admin-client-search]");
     const planFilter = document.querySelector("[data-admin-plan-filter]");
     const ticketFilter = document.querySelector("[data-admin-ticket-filter]");
     const ticketClientFilter = document.querySelector("[data-admin-ticket-client-filter]");
+    const analyticsWindow = document.querySelector("[data-admin-analytics-window]");
 
     const loadDatabaseClients = async () => {
       if (!useDatabase) {
@@ -388,6 +391,15 @@
       if (!clients.some((client) => client.id === selectedClientId)) {
         selectedClientId = clients[0]?.id || "";
       }
+    };
+
+    const loadDatabaseAnalytics = async () => {
+      if (!useDatabase) {
+        analyticsEvents = [];
+        return;
+      }
+
+      analyticsEvents = await database.listSiteAnalyticsEvents(Number(analyticsWindow?.value || 30));
     };
 
     const saveClient = (updatedClient) => {
@@ -467,6 +479,32 @@
       );
     };
 
+    const countBy = (items, key, fallback = "Direct / none") => {
+      const counts = new Map();
+
+      items.forEach((item) => {
+        const rawValue = typeof key === "function" ? key(item) : item[key];
+        const value = rawValue || fallback;
+        counts.set(value, (counts.get(value) || 0) + 1);
+      });
+
+      return [...counts.entries()]
+        .map(([label, count]) => ({ label, count }))
+        .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
+    };
+
+    const uniqueCount = (items, key) => new Set(items.map((item) => item[key]).filter(Boolean)).size;
+
+    const dateKey = (value) => {
+      const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) {
+        return "Unknown";
+      }
+
+      return date.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    };
+
     const renderClients = () => {
       const visibleClients = filteredClients();
 
@@ -528,6 +566,63 @@
           }
         )
         .join("");
+    };
+
+    const renderAnalyticsList = (items) =>
+      items.length
+        ? `<ol class="admin-analytics-list">${items
+            .slice(0, 6)
+            .map((item) => `<li><span>${escapeHtml(item.label)}</span><strong>${item.count}</strong></li>`)
+            .join("")}</ol>`
+        : '<p class="client-empty-state">No data yet.</p>';
+
+    const renderAnalytics = () => {
+      if (!analyticsContent) {
+        return;
+      }
+
+      if (!useDatabase) {
+        analyticsContent.innerHTML = '<p class="client-empty-state">Supabase analytics are disabled in local demo mode.</p>';
+        return;
+      }
+
+      if (!analyticsEvents.length) {
+        analyticsContent.innerHTML =
+          '<p class="client-empty-state">No analytics events in this date window yet. Live page views will appear here after the Supabase schema is updated and the site is published.</p>';
+        return;
+      }
+
+      const topPages = countBy(analyticsEvents, (event) => event.page_path?.split("?")[0] || "/");
+      const topReferrers = countBy(analyticsEvents, "referrer_host");
+      const campaignSources = countBy(analyticsEvents, "utm_source", "No UTM source").filter((item) => item.label !== "No UTM source");
+      const recentDays = countBy(analyticsEvents, (event) => dateKey(event.created_at), "Unknown day").slice(0, 7).reverse();
+
+      analyticsContent.innerHTML = `
+        <div class="admin-analytics-summary">
+          <article><span>Page views</span><strong>${analyticsEvents.length}</strong></article>
+          <article><span>Visitors</span><strong>${uniqueCount(analyticsEvents, "visitor_id")}</strong></article>
+          <article><span>Sessions</span><strong>${uniqueCount(analyticsEvents, "session_id")}</strong></article>
+          <article><span>Referrers</span><strong>${topReferrers.filter((item) => item.label !== "Direct / none").length}</strong></article>
+        </div>
+        <div class="admin-analytics-grid">
+          <section>
+            <h3>Top pages</h3>
+            ${renderAnalyticsList(topPages)}
+          </section>
+          <section>
+            <h3>Referrers</h3>
+            ${renderAnalyticsList(topReferrers)}
+          </section>
+          <section>
+            <h3>UTM sources</h3>
+            ${renderAnalyticsList(campaignSources)}
+          </section>
+          <section>
+            <h3>Recent days</h3>
+            ${renderAnalyticsList(recentDays)}
+          </section>
+        </div>
+      `;
     };
 
     const renderSelectedClient = () => {
@@ -632,6 +727,7 @@
       renderTickets();
       renderSelectedClient();
       renderPayments();
+      renderAnalytics();
     };
 
     document.querySelector("[data-admin-logout]")?.addEventListener("click", async () => {
@@ -647,6 +743,13 @@
     planFilter.addEventListener("change", renderClients);
     ticketFilter.addEventListener("change", renderTickets);
     ticketClientFilter.addEventListener("change", renderTickets);
+    analyticsWindow?.addEventListener("change", async () => {
+      if (useDatabase) {
+        await loadDatabaseAnalytics();
+      }
+
+      renderAnalytics();
+    });
 
     document.addEventListener("click", async (event) => {
       const selectButton = event.target.closest("[data-admin-select-client]");
@@ -776,6 +879,7 @@
     if (useDatabase) {
       try {
         await loadDatabaseClients();
+        await loadDatabaseAnalytics();
       } catch (error) {
         ticketList.innerHTML = `<p class="client-empty-state">${escapeHtml(error.message || "Could not load Supabase admin data.")}</p>`;
       }

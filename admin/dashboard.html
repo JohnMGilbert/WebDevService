@@ -27,6 +27,7 @@
         <a href="#clients">Clients</a>
         <a href="#tickets">Tickets</a>
         <a href="#payments">Payments</a>
+        <a href="#analytics">Analytics</a>
         <button type="button" data-admin-logout>Logout</button>
       </nav>
     </header>
@@ -67,6 +68,26 @@
           <span>Payment follow-up</span>
           <strong data-admin-payment-followups>0</strong>
         </article>
+      </section>
+
+      <section class="admin-panel admin-analytics-panel" id="analytics">
+        <div class="admin-panel-heading">
+          <div>
+            <p class="client-eyebrow">Analytics</p>
+            <h2>Site traffic.</h2>
+          </div>
+          <label class="admin-compact-filter">
+            Window
+            <select data-admin-analytics-window>
+              <option value="7">7 days</option>
+              <option value="30" selected>30 days</option>
+              <option value="90">90 days</option>
+            </select>
+          </label>
+        </div>
+        <div class="admin-analytics-content" data-admin-analytics-content>
+          <p class="client-empty-state">Analytics will appear after the tracker records live page views.</p>
+        </div>
       </section>
 
       <section class="admin-grid">
