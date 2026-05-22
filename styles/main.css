@@ -7908,6 +7908,102 @@ body.foundry-page::before {
   font-size: 2.25rem;
 }
 
+.admin-analytics-panel {
+  max-width: 1440px;
+  margin: 0 auto 22px;
+}
+
+.admin-analytics-panel .admin-compact-filter {
+  min-width: 150px;
+}
+
+.admin-analytics-content,
+.admin-analytics-grid,
+.admin-analytics-summary,
+.admin-analytics-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-analytics-summary {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.admin-analytics-summary article {
+  min-height: 108px;
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  padding: 16px;
+  background: rgba(17, 138, 178, 0.05);
+  border: 1px solid rgba(17, 138, 178, 0.14);
+  border-radius: 8px;
+}
+
+.admin-analytics-summary span,
+.admin-analytics-list span {
+  color: var(--client-cyan);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.admin-analytics-summary strong {
+  color: var(--admin-ink);
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.admin-analytics-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.admin-analytics-grid section {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 16px;
+  background: rgba(23, 32, 42, 0.04);
+  border: 1px solid rgba(23, 32, 42, 0.08);
+  border-radius: 8px;
+}
+
+.admin-analytics-grid h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.admin-analytics-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-analytics-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--client-muted-line);
+}
+
+.admin-analytics-list li:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.admin-analytics-list span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-transform: none;
+}
+
+.admin-analytics-list strong {
+  color: var(--admin-ink);
+}
+
 .admin-grid {
   display: grid;
   grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr) minmax(310px, 0.86fr);
@@ -8295,6 +8391,7 @@ body.foundry-page::before {
 @media (max-width: 1180px) {
   .admin-grid,
   .admin-hero,
+  .admin-analytics-grid,
   .admin-ticket-detail-grid {
     grid-template-columns: 1fr;
   }
@@ -8320,6 +8417,7 @@ body.foundry-page::before {
   }
 
   .admin-stat-grid,
+  .admin-analytics-summary,
   .admin-filter-row,
   .admin-ticket-filter-group,
   .admin-ticket-card,

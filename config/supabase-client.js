@@ -500,6 +500,56 @@
       return data;
     },
 
+    async trackPageView(event) {
+      const supabaseClient = requireClient();
+      const payload = {
+        visitor_id: cleanText(event.visitorId).slice(0, 80),
+        session_id: cleanText(event.sessionId).slice(0, 80),
+        page_path: cleanText(event.pagePath).slice(0, 500),
+        page_title: cleanText(event.pageTitle).slice(0, 300),
+        page_url: cleanText(event.pageUrl).slice(0, 1000),
+        referrer: cleanText(event.referrer).slice(0, 1000),
+        referrer_host: cleanText(event.referrerHost).slice(0, 300),
+        utm_source: cleanText(event.utmSource).slice(0, 200),
+        utm_medium: cleanText(event.utmMedium).slice(0, 200),
+        utm_campaign: cleanText(event.utmCampaign).slice(0, 300),
+        utm_term: cleanText(event.utmTerm).slice(0, 300),
+        utm_content: cleanText(event.utmContent).slice(0, 300),
+        user_agent: cleanText(event.userAgent).slice(0, 500),
+        language: cleanText(event.language).slice(0, 80),
+        timezone: cleanText(event.timezone).slice(0, 120),
+        viewport_width: Number.isFinite(event.viewportWidth) ? event.viewportWidth : null,
+        viewport_height: Number.isFinite(event.viewportHeight) ? event.viewportHeight : null,
+        screen_width: Number.isFinite(event.screenWidth) ? event.screenWidth : null,
+        screen_height: Number.isFinite(event.screenHeight) ? event.screenHeight : null,
+      };
+
+      const { error } = await supabaseClient.from("site_analytics_events").insert(payload);
+
+      if (error) {
+        throw error;
+      }
+
+      return true;
+    },
+
+    async listSiteAnalyticsEvents(days = 30) {
+      const supabaseClient = requireClient();
+      const since = new Date(Date.now() - Math.max(1, days) * 24 * 60 * 60 * 1000).toISOString();
+      const { data, error } = await supabaseClient
+        .from("site_analytics_events")
+        .select("*")
+        .gte("created_at", since)
+        .order("created_at", { ascending: false })
+        .limit(2000);
+
+      if (error) {
+        throw error;
+      }
+
+      return data;
+    },
+
     mapClientWorkspace(workspace) {
       if (!workspace?.profile) {
         return null;
