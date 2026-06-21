@@ -1,0 +1,511 @@
+/* northline bookkeeping example styles */
+.nl-page{
+  --nl-ink: #10171d;
+  --nl-ink-soft: #50606c;
+  --nl-paper: #f3f7f8;
+  --nl-line: #cfd8dd;
+  --nl-side: #121b23;
+  --nl-accent: #72d5bf;
+  --nl-accent-dark: #1d7a74;
+  margin: 0;
+  color: var(--nl-ink);
+  font-family: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  background:
+    linear-gradient(180deg, #fbfcfd 0%, var(--nl-paper) 24%, var(--nl-paper) 100%);
+}
+
+.nl-page::before{
+  content: none;
+}
+
+.nl-shell{
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.nl-side{
+  position: sticky;
+  top: 0;
+  align-self: start;
+  min-height: 100vh;
+  display: grid;
+  align-content: start;
+  gap: 28px;
+  padding: 32px 28px;
+  color: rgba(255, 255, 255, 0.88);
+  background: var(--nl-side);
+}
+
+.nl-brand{
+  color: #f4fbfb;
+  text-decoration: none;
+}
+
+.nl-brand span,
+.nl-brand small,
+.nl-kicker,
+.nl-button,
+.nl-step-number,
+.nl-step-meta,
+.nl-report-head span,
+.nl-report-row span{
+  font-family: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+}
+
+.nl-brand span{
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.nl-brand small{
+  display: block;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nl-side-copy{
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.nl-nav{
+  display: grid;
+}
+
+.nl-nav a{
+  padding: 12px 0;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nl-nav a:last-child{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nl-nav a:hover{
+  color: var(--nl-accent);
+}
+
+.nl-side-meta{
+  display: grid;
+  gap: 16px;
+}
+
+.nl-side-meta span{
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nl-side-meta strong{
+  display: block;
+  margin-top: 4px;
+  color: #f4fbfb;
+  font-weight: 600;
+}
+
+.nl-main{
+  padding: 36px 40px 48px;
+}
+
+.nl-section{
+  padding: 24px 0 34px;
+  border-top: 1px solid var(--nl-line);
+}
+
+.nl-section:first-child{
+  padding-top: 0;
+  border-top: 0;
+}
+
+.nl-intro{
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.nl-kicker{
+  margin: 0 0 12px;
+  color: var(--nl-accent-dark);
+  font-size: 0.84rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nl-intro h1,
+.nl-section-head h2,
+.nl-service h3,
+.nl-step h3{
+  margin: 0;
+  font-family: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+}
+
+.nl-intro h1{
+  max-width: 12ch;
+  font-size: clamp(3rem, 5vw, 4.7rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+}
+
+.nl-intro-lead,
+.nl-copy,
+.nl-service p,
+.nl-step p,
+.nl-note-list li,
+.nl-report-card strong,
+.nl-metric-row span{
+  color: var(--nl-ink-soft);
+}
+
+.nl-intro-lead{
+  max-width: 38rem;
+  margin: 18px 0 0;
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.nl-intro-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.nl-button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 16px;
+  color: var(--nl-ink);
+  font-size: 0.86rem;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: 1px solid var(--nl-ink);
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.nl-button:hover{
+  color: var(--nl-accent-dark);
+  border-color: var(--nl-accent-dark);
+}
+
+.nl-button-primary{
+  color: #f7fbfc;
+  background: var(--nl-ink);
+}
+
+.nl-button-primary:hover{
+  color: #f7fbfc;
+  background: var(--nl-accent-dark);
+  border-color: var(--nl-accent-dark);
+}
+
+.nl-stat-panel{
+  display: grid;
+}
+
+.nl-metric-row{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid var(--nl-line);
+}
+
+.nl-metric-row:first-child{
+  padding-top: 0;
+  border-top: 0;
+}
+
+.nl-metric-row strong{
+  display: block;
+  margin-bottom: 4px;
+  color: var(--nl-ink);
+  font-family: "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.46rem;
+  text-transform: uppercase;
+}
+
+.nl-metric-row em{
+  color: var(--nl-accent-dark);
+  font-style: normal;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.nl-section-head{
+  margin-bottom: 16px;
+}
+
+.nl-section-head h2{
+  max-width: 22ch;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 0.96;
+  letter-spacing: 0.03em;
+}
+
+.nl-service-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+  border-top: 1px solid var(--nl-line);
+}
+
+.nl-service{
+  padding: 18px 0;
+  border-bottom: 1px solid var(--nl-line);
+}
+
+.nl-service h3{
+  font-size: 1.18rem;
+  letter-spacing: 0.04em;
+}
+
+.nl-service p{
+  margin: 8px 0 0;
+}
+
+.nl-reports .nl-section-head h2{
+  max-width: 18ch;
+}
+
+.nl-report-layout{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 30px;
+  align-items: start;
+}
+
+.nl-copy{
+  max-width: 40rem;
+  margin: 0;
+  line-height: 1.72;
+}
+
+.nl-note-list{
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding-left: 18px;
+}
+
+.nl-report-card{
+  padding: 18px 20px 20px;
+  background: #e8eff1;
+  border-left: 4px solid var(--nl-ink);
+}
+
+.nl-report-head{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(16, 23, 29, 0.12);
+}
+
+.nl-report-head span{
+  color: var(--nl-accent-dark);
+  font-size: 0.84rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nl-report-head strong,
+.nl-report-row strong{
+  color: var(--nl-ink);
+}
+
+.nl-report-row{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(16, 23, 29, 0.12);
+}
+
+.nl-report-row span{
+  color: var(--nl-ink-soft);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nl-bars{
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  height: 80px;
+  padding-top: 18px;
+}
+
+.nl-bar{
+  width: 26px;
+  background: var(--nl-ink);
+}
+
+.nl-bar-a{
+  height: 42px;
+}
+
+.nl-bar-b{
+  height: 68px;
+  background: var(--nl-accent-dark);
+}
+
+.nl-bar-c{
+  height: 54px;
+  background: #7f93a1;
+}
+
+.nl-steps{
+  display: grid;
+  border-top: 1px solid var(--nl-line);
+}
+
+.nl-step{
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: start;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--nl-line);
+}
+
+.nl-step-number{
+  color: var(--nl-accent-dark);
+  font-size: 2.1rem;
+  letter-spacing: 0.04em;
+}
+
+.nl-step h3{
+  font-size: 1.18rem;
+  letter-spacing: 0.04em;
+}
+
+.nl-step p{
+  margin: 6px 0 0;
+}
+
+.nl-step-meta{
+  margin: 0;
+  color: var(--nl-ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.nl-contact-layout{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 28px;
+  align-items: start;
+}
+
+.nl-contact-block{
+  display: grid;
+  gap: 18px;
+}
+
+.nl-contact-block .nl-note-list{
+  margin-top: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.nl-contact-block .nl-note-list strong{
+  color: var(--nl-ink);
+}
+
+.nl-footer{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 12px;
+  border-top: 1px solid var(--nl-line);
+  color: var(--nl-ink-soft);
+}
+
+.nl-footer p{
+  margin: 0;
+}
+
+.nl-footer a{
+  color: var(--nl-ink);
+  text-decoration: none;
+}
+
+.nl-footer a:hover{
+  color: var(--nl-accent-dark);
+}
+
+.nl-footer .tp-signature-mark{
+  background: rgba(16, 23, 29, 0.05);
+  border-color: rgba(16, 23, 29, 0.1);
+}
+
+
+@media (max-width: 1040px) {
+.nl-shell{
+    grid-template-columns: 1fr;
+  }
+.nl-side{
+    position: static;
+    min-height: auto;
+  }
+.nl-main{
+    padding-top: 28px;
+  }
+.nl-intro,
+.nl-report-layout,
+.nl-contact-layout{
+    grid-template-columns: 1fr;
+  }
+.nl-step{
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+.nl-step-meta{
+    grid-column: 2;
+  }
+}
+
+
+@media (max-width: 720px) {
+.nl-main{
+    padding: 24px 20px 40px;
+  }
+.nl-side{
+    padding: 24px 20px;
+  }
+.nl-service-grid{
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+.nl-intro h1{
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 780px) {
+.nl-footer{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
