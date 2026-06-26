@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">True Page logo</title>
+  <desc id="desc">A TP monogram shaped like a clean website page with a folded corner.</desc>
+  <rect width="128" height="128" rx="18" fill="#111111"/>
+  <path d="M30 18h52l16 16v76H30z" fill="#ffffff"/>
+  <path d="M82 18v18h16z" fill="#f6e54d"/>
+  <path d="M44 46h42v10H70v38H60V56H44z" fill="#111111"/>
+  <path d="M76 66h10c6 0 10-3 10-9s-4-9-10-9H70v46h10V76h6c13 0 22-7 22-19s-9-19-22-19H62v10h22c8 0 12 3 12 9s-4 9-12 9h-8z" fill="#00c2ff"/>
+  <path d="M30 104h68v6H30z" fill="#ff4f79"/>
+</svg>

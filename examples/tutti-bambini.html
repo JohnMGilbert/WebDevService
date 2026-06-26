@@ -3,27 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutti Bambini Children's Store Website</title>
+    <title>Tutti Bambini Children&apos;s Store Website Demo</title>
     <meta
       name="description"
-      content="A nonprofit children's community shop website demo for Tutti Bambini in Las Cruces, New Mexico."
+      content="A colorful nonprofit children&apos;s community shop website demo for Tutti Bambini in Las Cruces, New Mexico."
     />
     <meta name="robots" content="noindex, follow" />
     <link rel="canonical" href="https://truepagewebdesign.com/examples/tutti-bambini.html" />
-    <link rel="preload" as="image" href="/assets/tutti-bambini/logo.jpeg" />
+    <link rel="preload" as="image" href="/assets/tutti-bambini/logo.png" />
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/examples/tutti-bambini.css" />
     <script src="/scripts/analytics.js" defer></script>
+    <script type="module" src="/scripts/tutti-bambini.js"></script>
   </head>
-  <body class="tb-page">
-    <header class="tb-header">
+  <body>
+<div class="tb-page" data-content-api="https://script.google.com/macros/s/AKfycbxFgVTZQ5yED2lrP8uR4id25iCZ-mpYGDxPu1ZEJVJ8QboQHTQElItTe8r1NhVASTMd/exec">
+<header class="tb-header">
       <a class="tb-brand" href="#top" aria-label="Tutti Bambini home">
-        <img
-          src="/assets/tutti-bambini/logo.jpeg"
-          alt=""
-          width="940"
-          height="788"
-        />
+        <img src="/assets/tutti-bambini/logo.png" width="940" height="788" alt="Logo">
         <span>
           <strong>Tutti Bambini</strong>
           <small>where kids go to shop</small>
@@ -41,15 +38,19 @@
       <a class="tb-phone" href="tel:5755569752">575-556-9752</a>
     </header>
 
-    <main id="top">
+<main id="top">
       <section class="tb-hero" aria-labelledby="tb-title">
         <div class="tb-hero-inner">
+          <div class="tb-logo-stage" aria-label="Tutti Bambini logo">
+            <img class="tb-hero-logo" src="/assets/tutti-bambini/logo.png" alt="Tutti Bambini where kids go to shop" width="940" height="788" fetchpriority="high" decoding="async">
+          </div>
           <div class="tb-hero-copy">
             <p class="tb-kicker">Las Cruces children's community shop</p>
-            <h1 id="tb-title">Tutti Bambini</h1>
+            <!-- <h1 id="tb-title">Tutti Bambini</h1> -->
             <p class="tb-lead">
-              A nonprofit shop helping children challenged by poverty and special needs
-              access clothing, shoes, toys, and everyday essentials.
+              A bright nonprofit children's store helping children challenged by poverty and special
+              needs access clothing, shoes, toys, and everyday essentials in a space that feels
+              warm, safe, and welcoming.
             </p>
             <div class="tb-actions" aria-label="Primary actions">
               <a class="tb-button tb-button-primary" href="#visit">Plan a visit</a>
@@ -57,17 +58,7 @@
             </div>
           </div>
 
-          <div class="tb-logo-stage" aria-label="Tutti Bambini logo">
-            <img
-              class="tb-hero-logo"
-              src="/assets/tutti-bambini/logo.jpeg"
-              alt="Tutti Bambini where kids go to shop"
-              width="940"
-              height="788"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </div>
+
         </div>
       </section>
 
@@ -88,9 +79,19 @@
           <p>Shop phone</p>
         </div>
         <div>
-          <span>Find us</span>
-          <strong><a href="https://www.facebook.com/tuttibambinilc">Facebook</a></strong>
-          <p>Tutti Bambini Las Cruces</p>
+          <span>Reach</span>
+          <strong>25 partner agencies</strong>
+          <p>Referring families for support</p>
+        </div>
+      </section>
+
+      <section class="tb-section tb-dynamic-section tb-events" id="events-section" hidden>
+        <div class="tb-inner">
+          <p class="tb-kicker">Happening soon</p>
+          <h2>Upcoming Events</h2>
+          <div class="tb-dynamic-body">
+            <div class="tb-content-list" id="events-list"></div>
+          </div>
         </div>
       </section>
 
@@ -110,14 +111,7 @@
           </div>
 
           <figure class="tb-photo-block">
-            <img
-              src="/assets/tutti-bambini/brochure-1.png"
-              alt="Tutti Bambini brochure with store photos, children, and mission information"
-              width="2000"
-              height="1545"
-              loading="lazy"
-              decoding="async"
-            />
+            <img src="/assets/tutti-bambini/Tutti_3images.png" alt="Tutti Bambini brochure with store photos, children, and mission information" width="2000" height="1545" loading="lazy" decoding="async">
           </figure>
         </div>
       </section>
@@ -128,8 +122,9 @@
             <p class="tb-kicker">Donations welcome</p>
             <h2 id="tb-donate-title">What children need most</h2>
             <p class="tb-copy">
-              New and gently used children's items are welcome. Cash donations help Tutti Bambini
-              keep supporting children, partner programs, and seasonal needs.
+              With 39% of children in Doña Ana County living in poverty, new and gently used
+              children's items matter. Cash donations help Tutti Bambini keep the voucher program
+              going, support partner programs, and respond to growing seasonal needs.
             </p>
           </div>
 
@@ -147,16 +142,17 @@
       <section class="tb-section tb-mission" id="mission" aria-labelledby="tb-mission-title">
         <div class="tb-inner">
           <p class="tb-kicker">Mission</p>
-          <h2 id="tb-mission-title">Helping children challenged by poverty and special needs.</h2>
+          <h2 id="tb-mission-title">Helping children challenged by poverty and special needs with clothing, dignity, and choice.</h2>
           <div class="tb-mission-grid">
             <p class="tb-copy">
-              The shop opened in 2013 with a simple purpose: help families get seasonally
-              appropriate, properly fitting clothing and give children a place where they are seen,
-              welcomed, and cared for.
+              For more than 10 years, Tutti Bambini has helped local children and families access
+              seasonally appropriate, properly fitting clothing in a place that feels warm, secure,
+              and welcoming.
             </p>
             <p class="tb-copy">
-              Tutti Bambini supports children's reading, science programs, Dress-A-Child efforts,
-              Christmas wishes, and other local services that meet practical needs for kids.
+              Today, 25 nonprofit partners can refer families to the voucher program, and the shop
+              is now averaging more than $3,000 every month in free clothing for children across
+              the community.
             </p>
           </div>
 
@@ -200,25 +196,29 @@
         </div>
       </section>
 
+      <section class="tb-section tb-dynamic-section tb-news" id="blog-section" hidden>
+        <div class="tb-inner">
+          <p class="tb-kicker">Latest news</p>
+          <h2>Latest News</h2>
+          <div class="tb-dynamic-body">
+            <div class="tb-content-list" id="blog-list"></div>
+          </div>
+        </div>
+      </section>
+
       <section class="tb-section tb-volunteer" aria-labelledby="tb-volunteer-title">
         <div class="tb-inner tb-split tb-split-reverse">
           <figure class="tb-photo-block">
-            <img
-              src="/assets/tutti-bambini/brochure-2.png"
-              alt="Tutti Bambini brochure with volunteer, partner, and donation information"
-              width="2000"
-              height="1545"
-              loading="lazy"
-              decoding="async"
-            />
+            <img src="/assets/tutti-bambini/Tutti_3imagesV2.png" alt="Tutti Bambini brochure with volunteer, partner, and donation information" width="2000" height="1545" loading="lazy" decoding="async">
           </figure>
 
           <div>
             <p class="tb-kicker">Volunteers are the heart</p>
-            <h2 id="tb-volunteer-title">A cheerful place to give time.</h2>
+            <h2 id="tb-volunteer-title">A cheerful place to give time and change a child's day.</h2>
             <p class="tb-copy">
-              Volunteers help sort donations, welcome families, organize clothing, and keep the
-              shop ready for the next child who walks through the door.
+              Volunteers help create the kind of shop where children can choose what they need,
+              build confidence, and head back to school with clothing that helps them participate
+              comfortably.
             </p>
             <a class="tb-button tb-button-primary" href="tel:5755569752">Call to volunteer</a>
           </div>
@@ -232,14 +232,20 @@
             <h2 id="tb-about-title">Built by people who keep showing up for children.</h2>
             <p class="tb-copy">
               Founder Sister Beth Daddio has spent years improving the lives of children and
-              families in Las Cruces. She also helped found Jardin de los Ninos, the daycare and
-              education program for homeless and near-homeless children.
+              families in Las Cruces. Her loving heart and dedication have helped thousands of
+              children in the greater Las Cruces area, and she also helped found Jardin de los
+              Ninos for homeless and near-homeless children.
             </p>
             <p class="tb-copy">
-              In 2023, the Las Cruces Sun-News chose Sister Beth as its Distinguished Resident,
-              recognizing work that often happens quietly and steadily behind the scenes.
+              The need is real: 1 in 6 children in the United States has very limited access to
+              clothing, and 85% of Tutti Bambini's partner agencies say they would not be able to
+              provide no-cost clothing resources without support like this.
             </p>
             <p class="tb-director">Sister Beth Daddio, Director of Development</p>
+          </div>
+
+          <div>
+            <img class="SisterBethPortrait" src="/assets/tutti-bambini/SisterBethPortrait.jpg"/>
           </div>
 
           <div class="tb-board">
@@ -278,12 +284,11 @@
           </div>
 
           <address class="tb-contact-list">
-            <a
-              href="https://www.google.com/maps/search/?api=1&amp;query=300%20El%20Molino%20Blvd%2C%20Las%20Cruces%2C%20NM%2088005"
-            >
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=300%20El%20Molino%20Blvd%2C%20Las%20Cruces%2C%20NM%2088005">
               300 El Molino Blvd, Las Cruces, NM 88005
             </a>
             <a href="tel:5755569752">(575) 556-9752</a>
+            <a href="tel:5756401997">Sister Beth: (575) 640-1997</a>
             <a href="mailto:daddiosister@yahoo.com">daddiosister@yahoo.com</a>
             <a href="https://www.facebook.com/tuttibambinilc">facebook.com/tuttibambinilc</a>
           </address>
@@ -293,15 +298,16 @@
 
     <footer class="tb-footer">
       <div class="tp-signature">
-        <a class="tp-signature-link" href="/index.html">
-          <img class="tp-signature-mark" src="/assets/true-page-logo.svg" alt="" width="30" height="30" />
+        <a class="tp-signature-link" href="https://truepagewebdesign.com/">
+          <img class="tp-signature-mark" src="/assets/tutti-bambini/true-page-logo.svg" alt="" width="30" height="30">
           <span class="tp-signature-copy">
             <span class="tp-signature-label">Designed by</span>
             <span class="tp-signature-name">True Page Web Design</span>
           </span>
         </a>
       </div>
-      <a href="/examples/index.html">Back to examples</a>
     </footer>
+</div>
+
   </body>
 </html>
